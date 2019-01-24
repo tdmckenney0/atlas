@@ -4,15 +4,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Category Entity
+ * Node Entity
  *
  * @property int $id
+ * @property int $parent_id
  * @property string $name
  * @property string $description
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ *
+ * @property \App\Model\Entity\ParentNode $parent_node
+ * @property \App\Model\Entity\ChildNode[] $child_nodes
  */
-class Category extends Entity
+class Node extends Entity
 {
 
     /**
@@ -25,9 +29,12 @@ class Category extends Entity
      * @var array
      */
     protected $_accessible = [
+        'parent_id' => true,
         'name' => true,
         'description' => true,
         'created' => true,
-        'modified' => true
+        'modified' => true,
+        'parent_node' => true,
+        'child_nodes' => true
     ];
 }
