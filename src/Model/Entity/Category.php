@@ -6,8 +6,11 @@ use Cake\ORM\Entity;
 /**
  * Category Entity
  *
- * @property int $Id
+ * @property int $id
  * @property string $name
+ * @property string $description
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
  */
 class Category extends Entity
 {
@@ -22,7 +25,9 @@ class Category extends Entity
      * @var array
      */
     protected $_accessible = [
-        'Id' => true,
-        'name' => true
+        'name' => true,
+        'description' => true,
+        'created' => true,
+        'modified' => true
     ];
 }

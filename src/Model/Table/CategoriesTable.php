@@ -17,6 +17,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Category patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Category[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Category findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class CategoriesTable extends Table
 {
@@ -33,6 +35,9 @@ class CategoriesTable extends Table
 
         $this->setTable('categories');
         $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
+
+        $this->addBehavior('Timestamp');
     }
 
     /**
@@ -44,14 +49,19 @@ class CategoriesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('Id')
-            ->requirePresence('Id', 'create')
-            ->allowEmptyString('Id', false);
+            ->integer('id')
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->scalar('name')
+            ->maxLength('name', 255)
             ->requirePresence('name', 'create')
             ->allowEmptyString('name', false);
+
+        $validator
+            ->scalar('description')
+            ->requirePresence('description', 'create')
+            ->allowEmptyString('description', false);
 
         return $validator;
     }
