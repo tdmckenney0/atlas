@@ -1,7 +1,7 @@
 {
-    "name": "cakephp/app",
-    "description": "CakePHP skeleton app",
-    "homepage": "https://cakephp.org",
+    "name": "storymaker",
+    "description": "Xenolith Storymaker",
+    "homepage": "https://xenolith-games.com",
     "type": "project",
     "license": "MIT",
     "require": {
