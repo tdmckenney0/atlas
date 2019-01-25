@@ -19,7 +19,7 @@
     <fieldset>
         <legend><?= __('Add Node') ?></legend>
         <?php
-            echo $this->Form->control('parent_id', ['options' => $parentNodes]);
+            echo $this->Form->control('parent_id', ['options' => $parentNodes, 'empty' => " - Top Level - "]);
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('objects._ids', ['options' => $objects]);
