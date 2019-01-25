@@ -10,6 +10,8 @@
         <li><?= $this->Html->link(__('List Nodes'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Parent Nodes'), ['controller' => 'Nodes', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Parent Node'), ['controller' => 'Nodes', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Objects'), ['controller' => 'Objects', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Object'), ['controller' => 'Objects', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="nodes form large-9 medium-8 columns content">
@@ -20,6 +22,7 @@
             echo $this->Form->control('parent_id', ['options' => $parentNodes]);
             echo $this->Form->control('name');
             echo $this->Form->control('description');
+            echo $this->Form->control('objects._ids', ['options' => $objects]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

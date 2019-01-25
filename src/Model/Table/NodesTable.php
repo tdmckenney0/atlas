@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\NodesTable|\Cake\ORM\Association\BelongsTo $ParentNodes
  * @property \App\Model\Table\NodesTable|\Cake\ORM\Association\HasMany $ChildNodes
+ * @property \App\Model\Table\ObjectsTable|\Cake\ORM\Association\BelongsToMany $Objects
  *
  * @method \App\Model\Entity\Node get($primaryKey, $options = [])
  * @method \App\Model\Entity\Node newEntity($data = null, array $options = [])
@@ -49,6 +50,11 @@ class NodesTable extends Table
         $this->hasMany('ChildNodes', [
             'className' => 'Nodes',
             'foreignKey' => 'parent_id'
+        ]);
+        $this->belongsToMany('Objects', [
+            'foreignKey' => 'node_id',
+            'targetForeignKey' => 'object_id',
+            'joinTable' => 'nodes_objects'
         ]);
     }
 

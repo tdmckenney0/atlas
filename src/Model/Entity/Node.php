@@ -15,6 +15,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\ParentNode $parent_node
  * @property \App\Model\Entity\ChildNode[] $child_nodes
+ * @property \App\Model\Entity\Object[] $objects
  */
 class Node extends Entity
 {
@@ -35,6 +36,7 @@ class Node extends Entity
         'created' => true,
         'modified' => true,
         'parent_node' => true,
-        'child_nodes' => true
+        'child_nodes' => true,
+        'objects' => true
     ];
 }

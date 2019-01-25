@@ -38,7 +38,7 @@ class NodesController extends AppController
     public function view($id = null)
     {
         $node = $this->Nodes->get($id, [
-            'contain' => ['ParentNodes', 'ChildNodes']
+            'contain' => ['ParentNodes', 'Objects', 'ChildNodes']
         ]);
 
         $this->set('node', $node);
@@ -62,7 +62,8 @@ class NodesController extends AppController
             $this->Flash->error(__('The node could not be saved. Please, try again.'));
         }
         $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
-        $this->set(compact('node', 'parentNodes'));
+        $objects = $this->Nodes->Objects->find('list', ['limit' => 200]);
+        $this->set(compact('node', 'parentNodes', 'objects'));
     }
 
     /**
@@ -75,7 +76,7 @@ class NodesController extends AppController
     public function edit($id = null)
     {
         $node = $this->Nodes->get($id, [
-            'contain' => []
+            'contain' => ['Objects']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $node = $this->Nodes->patchEntity($node, $this->request->getData());
@@ -87,7 +88,8 @@ class NodesController extends AppController
             $this->Flash->error(__('The node could not be saved. Please, try again.'));
         }
         $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
-        $this->set(compact('node', 'parentNodes'));
+        $objects = $this->Nodes->Objects->find('list', ['limit' => 200]);
+        $this->set(compact('node', 'parentNodes', 'objects'));
     }
 
     /**

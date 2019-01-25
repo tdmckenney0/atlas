@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\NodesTable;
+use App\Model\Table\ObjectsTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\NodesTable Test Case
+ * App\Model\Table\ObjectsTable Test Case
  */
-class NodesTableTest extends TestCase
+class ObjectsTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\NodesTable
+     * @var \App\Model\Table\ObjectsTable
      */
-    public $Nodes;
+    public $Objects;
 
     /**
      * Fixtures
@@ -24,8 +24,8 @@ class NodesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Nodes',
-        'app.Objects'
+        'app.Objects',
+        'app.Nodes'
     ];
 
     /**
@@ -36,8 +36,8 @@ class NodesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('Nodes') ? [] : ['className' => NodesTable::class];
-        $this->Nodes = TableRegistry::getTableLocator()->get('Nodes', $config);
+        $config = TableRegistry::getTableLocator()->exists('Objects') ? [] : ['className' => ObjectsTable::class];
+        $this->Objects = TableRegistry::getTableLocator()->get('Objects', $config);
     }
 
     /**
@@ -47,7 +47,7 @@ class NodesTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Nodes);
+        unset($this->Objects);
 
         parent::tearDown();
     }

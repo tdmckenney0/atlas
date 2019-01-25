@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateCategories extends AbstractMigration
+class CreateObjects extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,23 +12,31 @@ class CreateCategories extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('categories');
+        $table = $this->table('objects', ['id' => false, 'primary_key' => ['id']]);
+        $table->addColumn('id', 'uuid', [
+            'default' => null,
+            'null' => false,
+        ]);
         $table->addColumn('name', 'string', [
             'default' => null,
             'limit' => 255,
             'null' => false,
         ]);
-        $table->addColumn('description', 'text', [
+        $table->addColumn('file_extension', 'string', [
             'default' => null,
+            'limit' =>  15,
             'null' => false,
         ]);
-        $table->addColumn('created', 'datetime', [
+        $table->addColumn('mime_type', 'string', [
             'default' => null,
+            'limit' => 255,
             'null' => false,
         ]);
-        $table->addColumn('modified', 'datetime', [
-            'default' => null,
-            'null' => false,
+        $table->addIndex([
+            'id',
+        ], [
+            'name' => 'UNIQUE_ID',
+            'unique' => true,
         ]);
         $table->create();
     }
