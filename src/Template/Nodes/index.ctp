@@ -4,14 +4,16 @@
  * @var \App\Model\Entity\Node[]|\Cake\Collection\CollectionInterface $nodes
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Node'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Objects'), ['controller' => 'Objects', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Object'), ['controller' => 'Objects', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Nodes</a>
+    </li>
+    <li class="nav-item"><?= $this->Html->link(__('New Node'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('List Objects'), ['controller' => 'Objects', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('New Object'), ['controller' => 'Objects', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+</ul>
+
 <div class="nodes index large-9 medium-8 columns content">
     <h3><?= __('Nodes') ?></h3>
     <table cellpadding="0" cellspacing="0" class="table table-striped table-hover table-responsive">

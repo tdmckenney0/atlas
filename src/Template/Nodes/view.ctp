@@ -4,35 +4,29 @@
  * @var \App\Model\Entity\Node $node
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Nodes'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Node'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Parent Nodes'), ['controller' => 'Nodes', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Parent Node'), ['controller' => 'Nodes', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Child Nodes'), ['controller' => 'Nodes', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Child Node'), ['controller' => 'Nodes', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Objects'), ['controller' => 'Objects', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Object'), ['controller' => 'Objects', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">View Nodes</a>
+    </li>
+    <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id)], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Html->link(__('List Nodes'), ['action' => 'index'], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Html->link(__('New Node'), ['action' => 'add'], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Html->link(__('List Parent Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Html->link(__('New Parent Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Html->link(__('List Child Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Html->link(__('New Child Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Html->link(__('List Objects'), ['controller' => 'Objects', 'action' => 'index'], ['class' => 'nav-link']) ?> </li>
+    <li class="nav-item"><?= $this->Html->link(__('New Object'), ['controller' => 'Objects', 'action' => 'add'], ['class' => 'nav-link']) ?> </li>
+</ul>
+
 <div class="nodes view large-9 medium-8 columns content">
-    <h3><?= h($node->name) ?></h3>
+    <h1><?= h($node->name) ?></h1>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Parent Node') ?></th>
             <td><?= $node->has('parent_node') ? $this->Html->link($node->parent_node->name, ['controller' => 'Nodes', 'action' => 'view', $node->parent_node->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Name') ?></th>
-            <td><?= h($node->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($node->id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
