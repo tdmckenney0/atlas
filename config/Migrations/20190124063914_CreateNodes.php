@@ -16,7 +16,7 @@ class CreateNodes extends AbstractMigration
         $table->addColumn('parent_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('name', 'string', [
             'default' => null,
