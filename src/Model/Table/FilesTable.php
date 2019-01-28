@@ -7,20 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Objects Model
+ * Files Model
  *
  * @property \App\Model\Table\NodesTable|\Cake\ORM\Association\BelongsToMany $Nodes
  *
- * @method \App\Model\Entity\Object get($primaryKey, $options = [])
- * @method \App\Model\Entity\Object newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Object[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Object|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Object|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Object patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Object[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Object findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\File get($primaryKey, $options = [])
+ * @method \App\Model\Entity\File newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\File[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\File|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\File|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\File patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\File[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\File findOrCreate($search, callable $callback = null, $options = [])
  */
-class ObjectsTable extends Table
+class FilesTable extends Table
 {
 
     /**
@@ -33,14 +33,14 @@ class ObjectsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('objects');
+        $this->setTable('files');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->belongsToMany('Nodes', [
-            'foreignKey' => 'object_id',
+            'foreignKey' => 'file_id',
             'targetForeignKey' => 'node_id',
-            'joinTable' => 'nodes_objects'
+            'joinTable' => 'nodes_files'
         ]);
     }
 
@@ -79,10 +79,10 @@ class ObjectsTable extends Table
     }
 
     /**
-     * Returns a rules checker object that will be used for validating
+     * Returns a rules checker file that will be used for validating
      * application integrity.
      *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @param \Cake\ORM\RulesChecker $rules The rules file to be modified.
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules)

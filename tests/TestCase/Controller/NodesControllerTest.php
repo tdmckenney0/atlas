@@ -19,8 +19,8 @@ class NodesControllerTest extends TestCase
      */
     public $fixtures = [
         'app.Nodes',
-        'app.Objects',
-        'app.NodesObjects'
+        'app.Files',
+        'app.NodesFiles'
     ];
 
     /**

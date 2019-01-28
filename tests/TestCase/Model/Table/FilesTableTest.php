@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\ObjectsTable;
+use App\Model\Table\FilesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\ObjectsTable Test Case
+ * App\Model\Table\FilesTable Test Case
  */
-class ObjectsTableTest extends TestCase
+class FilesTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\ObjectsTable
+     * @var \App\Model\Table\FilesTable
      */
-    public $Objects;
+    public $Files;
 
     /**
      * Fixtures
@@ -24,7 +24,7 @@ class ObjectsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Objects',
+        'app.Files',
         'app.Nodes'
     ];
 
@@ -36,8 +36,8 @@ class ObjectsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('Objects') ? [] : ['className' => ObjectsTable::class];
-        $this->Objects = TableRegistry::getTableLocator()->get('Objects', $config);
+        $config = TableRegistry::getTableLocator()->exists('Files') ? [] : ['className' => FilesTable::class];
+        $this->Files = TableRegistry::getTableLocator()->get('Files', $config);
     }
 
     /**
@@ -47,7 +47,7 @@ class ObjectsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Objects);
+        unset($this->Files);
 
         parent::tearDown();
     }

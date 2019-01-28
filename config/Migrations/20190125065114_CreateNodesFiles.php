@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateNodesObjects extends AbstractMigration
+class CreateNodesFiles extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,13 +12,13 @@ class CreateNodesObjects extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('nodes_objects');
+        $table = $this->table('nodes_files');
         $table->addColumn('node_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('object_id', 'uuid', [
+        $table->addColumn('file_id', 'uuid', [
             'default' => null,
             'null' => false,
         ]);
@@ -32,7 +32,7 @@ class CreateNodesObjects extends AbstractMigration
         ]);
         $table->addIndex([
             'node_id',
-            'object_id',
+            'file_id',
         ], [
             'name' => 'UNIQUE_NODE_OBJECT',
             'unique' => true,

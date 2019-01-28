@@ -1,43 +1,43 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Object $object
+ * @var \App\Model\Entity\File $file
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Object'), ['action' => 'edit', $object->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Object'), ['action' => 'delete', $object->id], ['confirm' => __('Are you sure you want to delete # {0}?', $object->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Objects'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Object'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Edit File'), ['action' => 'edit', $file->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete File'), ['action' => 'delete', $file->id], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id)]) ?> </li>
+        <li><?= $this->Html->link(__('List Files'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New File'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Node'), ['controller' => 'Nodes', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
-<div class="objects view large-9 medium-8 columns content">
-    <h3><?= h($object->name) ?></h3>
+<div class="files view large-9 medium-8 columns content">
+    <h3><?= h($file->name) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($object->id) ?></td>
+            <td><?= h($file->id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Name') ?></th>
-            <td><?= h($object->name) ?></td>
+            <td><?= h($file->name) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('File Extension') ?></th>
-            <td><?= h($object->file_extension) ?></td>
+            <td><?= h($file->file_extension) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Mime Type') ?></th>
-            <td><?= h($object->mime_type) ?></td>
+            <td><?= h($file->mime_type) ?></td>
         </tr>
     </table>
     <div class="related">
         <h4><?= __('Related Nodes') ?></h4>
-        <?php if (!empty($object->nodes)): ?>
+        <?php if (!empty($file->nodes)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -48,7 +48,7 @@
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($object->nodes as $nodes): ?>
+            <?php foreach ($file->nodes as $nodes): ?>
             <tr>
                 <td><?= h($nodes->id) ?></td>
                 <td><?= h($nodes->parent_id) ?></td>

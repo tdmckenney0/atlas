@@ -25,7 +25,7 @@ class NodesTableTest extends TestCase
      */
     public $fixtures = [
         'app.Nodes',
-        'app.Objects'
+        'app.Files'
     ];
 
     /**

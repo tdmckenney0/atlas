@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\NodesTable|\Cake\ORM\Association\BelongsTo $ParentNodes
  * @property \App\Model\Table\NodesTable|\Cake\ORM\Association\HasMany $ChildNodes
- * @property \App\Model\Table\ObjectsTable|\Cake\ORM\Association\BelongsToMany $Objects
+ * @property \App\Model\Table\FilesTable|\Cake\ORM\Association\BelongsToMany $Files
  *
  * @method \App\Model\Entity\Node get($primaryKey, $options = [])
  * @method \App\Model\Entity\Node newEntity($data = null, array $options = [])
@@ -51,10 +51,10 @@ class NodesTable extends Table
             'className' => 'Nodes',
             'foreignKey' => 'parent_id'
         ]);
-        $this->belongsToMany('Objects', [
+        $this->belongsToMany('Files', [
             'foreignKey' => 'node_id',
-            'targetForeignKey' => 'object_id',
-            'joinTable' => 'nodes_objects'
+            'targetForeignKey' => 'file_id',
+            'joinTable' => 'nodes_files'
         ]);
     }
 
@@ -85,10 +85,10 @@ class NodesTable extends Table
     }
 
     /**
-     * Returns a rules checker object that will be used for validating
+     * Returns a rules checker file that will be used for validating
      * application integrity.
      *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @param \Cake\ORM\RulesChecker $rules The rules file to be modified.
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules)

@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateObjects extends AbstractMigration
+class CreateFiles extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,7 +12,7 @@ class CreateObjects extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('objects', ['id' => false, 'primary_key' => ['id']]);
+        $table = $this->table('files', ['id' => false, 'primary_key' => ['id']]);
         $table->addColumn('id', 'uuid', [
             'default' => null,
             'null' => false,

@@ -34,7 +34,7 @@ class TableOfContentsCell extends Cell
     public function display()
     {
         $this->loadModel('Nodes');
-        $nodes = $this->Nodes->find('threaded', ['contain' => ['Objects']])->toArray();
+        $nodes = $this->Nodes->find('threaded', ['contain' => ['Files']])->toArray();
         $this->set('nodes', $nodes);
     }
 }

@@ -46,7 +46,7 @@ class Installer
     /**
      * Does some routine installation tasks so people don't have to.
      *
-     * @param \Composer\Script\Event $event The composer event object.
+     * @param \Composer\Script\Event $event The composer event file.
      * @throws \Exception Exception raised by validator.
      * @return void
      */

@@ -8,7 +8,7 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\NodesTable $Nodes
  *
- * @method \App\Model\Entity\Node[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\Node[]|\Cake\Datasource\ResultSetInterface paginate($file = null, array $settings = [])
  */
 class NodesController extends AppController
 {
@@ -38,7 +38,7 @@ class NodesController extends AppController
     public function view($id = null)
     {
         $node = $this->Nodes->get($id, [
-            'contain' => ['ParentNodes', 'Objects', 'ChildNodes']
+            'contain' => ['ParentNodes', 'Files', 'ChildNodes']
         ]);
 
         $this->set('node', $node);
@@ -62,8 +62,8 @@ class NodesController extends AppController
             $this->Flash->error(__('The node could not be saved. Please, try again.'));
         }
         $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
-        $objects = $this->Nodes->Objects->find('list', ['limit' => 200]);
-        $this->set(compact('node', 'parentNodes', 'objects'));
+        $files = $this->Nodes->Files->find('list', ['limit' => 200]);
+        $this->set(compact('node', 'parentNodes', 'files'));
     }
 
     /**
@@ -76,7 +76,7 @@ class NodesController extends AppController
     public function edit($id = null)
     {
         $node = $this->Nodes->get($id, [
-            'contain' => ['Objects']
+            'contain' => ['Files']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $node = $this->Nodes->patchEntity($node, $this->request->getData());
@@ -88,8 +88,8 @@ class NodesController extends AppController
             $this->Flash->error(__('The node could not be saved. Please, try again.'));
         }
         $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
-        $objects = $this->Nodes->Objects->find('list', ['limit' => 200]);
-        $this->set(compact('node', 'parentNodes', 'objects'));
+        $files = $this->Nodes->Files->find('list', ['limit' => 200]);
+        $this->set(compact('node', 'parentNodes', 'files'));
     }
 
     /**

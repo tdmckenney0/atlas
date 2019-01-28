@@ -13,14 +13,14 @@ class TableOfContentsCellTest extends TestCase
     /**
      * Request mock
      *
-     * @var \Cake\Http\ServerRequest|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Cake\Http\ServerRequest|\PHPUnit_Framework_MockFile_MockFile
      */
     public $request;
 
     /**
      * Response mock
      *
-     * @var \Cake\Http\Response|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Cake\Http\Response|\PHPUnit_Framework_MockFile_MockFile
      */
     public $response;
 

@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Object Entity
+ * File Entity
  *
  * @property string $id
  * @property string $name
@@ -13,7 +13,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Node[] $nodes
  */
-class Object extends Entity
+class File extends Entity
 {
 
     /**

@@ -15,7 +15,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\ParentNode $parent_node
  * @property \App\Model\Entity\ChildNode[] $child_nodes
- * @property \App\Model\Entity\Object[] $objects
+ * @property \App\Model\Entity\File[] $files
  */
 class Node extends Entity
 {
@@ -37,6 +37,6 @@ class Node extends Entity
         'modified' => true,
         'parent_node' => true,
         'child_nodes' => true,
-        'objects' => true
+        'files' => true
     ];
 }
