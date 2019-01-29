@@ -69,4 +69,28 @@
         <?php endif; ?>
     </div>
 
+    <div class="comments">
+        <h4><?= __('Comments') ?></h4>
+        <?php foreach($node->node_comments as $comment): ?>
+            <div class="card border-info">
+                <div class="card-header border-info"><?php echo h($comment->user->email); ?></div>
+                <div class="card-body text-info">
+                    <?php echo h($comment->body); ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <?php foreach($node->node_comments as $comment): ?>
+            <div class="card border-success ml-5 mt-3">
+                <div class="card-header border-success"><?php echo h($comment->user->email); ?></div>
+                <div class="card-body text-success">
+                    <p class="card-text"><?php echo h($comment->body); ?></p>
+                    <div class="btn-group btn-group-sm float-right">
+                        <a href="#" class="btn btn-sm card-link btn-primary">Reply</a>
+                        <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>

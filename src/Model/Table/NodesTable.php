@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Nodes Model
  *
  * @property \App\Model\Table\NodesTable|\Cake\ORM\Association\BelongsTo $ParentNodes
+ * @property |\Cake\ORM\Association\HasMany $NodeComments
  * @property \App\Model\Table\NodesTable|\Cake\ORM\Association\HasMany $ChildNodes
  * @property \App\Model\Table\FilesTable|\Cake\ORM\Association\BelongsToMany $Files
  *
@@ -48,6 +49,9 @@ class NodesTable extends Table
         $this->belongsTo('ParentNodes', [
             'className' => 'Nodes',
             'foreignKey' => 'parent_id'
+        ]);
+        $this->hasMany('NodeComments', [
+            'foreignKey' => 'node_id'
         ]);
         $this->hasMany('ChildNodes', [
             'className' => 'Nodes',
