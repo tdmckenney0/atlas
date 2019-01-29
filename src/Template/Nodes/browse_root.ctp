@@ -9,16 +9,11 @@
     <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Browse</a>
     </li>
-    <li class="nav-item"><?= $this->Html->link(__('New Node'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('Upload File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
 </ul>
 
-<nav aria-label="breadcrumb" class="mt-3">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
-    </ol>
-</nav>
+<?php echo $this->cell('Breadcrumb'); ?>
 
 <div class="nodes">
     <table cellpadding="0" cellspacing="0" class="table table-sm table-striped table-hover">

@@ -9,9 +9,8 @@
     <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Browse</a>
     </li>
-    <li class="nav-item"><?= $this->Html->link(__('View {0}', $node->name), ['action' => 'view', $node->id], ['class' => 'nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('New Node'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('Upload File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
 </ul>
 
 <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
@@ -27,14 +26,6 @@
             </tr>
         </thead>
         <tbody>
-
-             <tr>
-                <td>↩ <?= $this->Html->link('..', ['action' => 'browse', $node->parent_id], ['class' => 'font-weight-bolder']) ?></td>
-                <td><?php echo !empty($node->parent_node->created) ? h($node->parent_node->created) : '-'; ?></td>
-                <td><?php echo !empty($node->parent_node->modified) ? h($node->parent_node->modified) : '-'; ?></td>
-                <td class="btn btn-group">&nbsp;</td>
-            </tr>
-
             <?php foreach ($node->child_nodes as $child): ?>
                 <tr>
                     <td>📁 <?= $this->Html->link($child->name, ['action' => 'browse', $child->id], ['class' => 'font-weight-bolder']) ?></td>

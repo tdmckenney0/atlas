@@ -33,9 +33,11 @@ class BreadcrumbCell extends Cell
      */
     public function display($id = null)
     {
-        $this->loadModel('Nodes');
-        $nodes = $this->Nodes->find('path', ['for' => $id]);
-        $this->set('nodes', $nodes);
-        $this->set('last_node', $nodes->last());
+        if(!empty($id)) {
+            $this->loadModel('Nodes');
+            $nodes = $this->Nodes->find('path', ['for' => $id]);
+            $this->set('nodes', $nodes);
+            $this->set('last_node', $nodes->last());
+        }
     }
 }
