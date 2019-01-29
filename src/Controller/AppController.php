@@ -65,6 +65,8 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
+        $this->loadComponent('Security');
+
         $this->Auth->allow(['display']);
 
         /*
