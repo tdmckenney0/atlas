@@ -11,6 +11,6 @@ at-cake() {
 
 at-mysql() {
     pushd $DIR;
-    docker exec -it storymaker_mysql_1 mysql $*;
+    docker exec -it atlas_mysql_1 mysql $*;
     popd;
 }
