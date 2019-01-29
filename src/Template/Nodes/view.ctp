@@ -7,14 +7,7 @@
 
 <div class="nodes view large-9 medium-8 columns content">
 
-    <?php if($node->has('parent_node')): ?>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><?= $this->Html->link($node->parent_node->name, ['controller' => 'Nodes', 'action' => 'view', $node->parent_node->id]) ?></li>
-                <li class="breadcrumb-item active" aria-current="page"><?= h($node->name) ?></li>
-            </ol>
-        </nav>
-    <?php endif; ?>
+    <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
     <h1 class="display-3"><?= h($node->name) ?></h1>
 
