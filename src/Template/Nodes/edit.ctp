@@ -25,7 +25,7 @@
     <fieldset>
         <legend><?= __('Edit Node') ?></legend>
         <?php
-            echo $this->Form->control('parent_id', ['options' => $parentNodes]);
+            echo $this->Form->control('parent_id', ['options' => $parentNodes, 'empty' => ' - None - ']);
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('files._ids', ['options' => $files]);

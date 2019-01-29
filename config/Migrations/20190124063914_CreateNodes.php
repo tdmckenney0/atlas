@@ -17,6 +17,15 @@ class CreateNodes extends AbstractMigration
             'default' => null,
             'limit' => 11,
             'null' => true,
+            'signed' => false
+        ]);
+        $table->addColumn('lft', 'integer', [
+            'limit' => 11,
+            'signed' => true
+        ]);
+        $table->addColumn('rght', 'integer', [
+            'limit' => 11,
+            'signed' => true
         ]);
         $table->addColumn('name', 'string', [
             'default' => null,

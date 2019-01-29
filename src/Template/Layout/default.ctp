@@ -49,7 +49,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary" data-topbar role="navigation">
-        <a class="navbar-brand" href="#">Atlas</a>
+        <?php echo $this->Html->link(__('Atlas'), ['controller' => 'nodes', 'action' => 'browse'], ['class' => 'navbar-brand']); ?>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -82,8 +82,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             -->
         </div>
     </nav>
-    <?= $this->Flash->render() ?>
+
     <div class="container mt-3">
+        <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </div>
     <footer>

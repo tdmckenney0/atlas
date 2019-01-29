@@ -23,6 +23,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Node findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @mixin \Cake\ORM\Behavior\TreeBehavior
  */
 class NodesTable extends Table
 {
@@ -42,6 +43,7 @@ class NodesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Tree');
 
         $this->belongsTo('ParentNodes', [
             'className' => 'Nodes',
@@ -85,10 +87,10 @@ class NodesTable extends Table
     }
 
     /**
-     * Returns a rules checker file that will be used for validating
+     * Returns a rules checker object that will be used for validating
      * application integrity.
      *
-     * @param \Cake\ORM\RulesChecker $rules The rules file to be modified.
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules)

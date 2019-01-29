@@ -13,6 +13,24 @@ use App\Controller\AppController;
 class NodesController extends AppController
 {
 
+    public function browse($id = null)
+    {
+        if(!empty($id)) {
+            $node = $this->Nodes->find('all', ['conditions' => ['Nodes.id' => $id]])
+                ->contain(['ParentNodes', 'Files', 'ChildNodes'])
+                ->first();
+
+            $this->set('node', $node);
+            $this->render('browse');
+        } else { // Root
+            $nodes = $this->Nodes->find('all', ['conditions' => ['Nodes.parent_id IS' => null]])
+                ->contain(['ParentNodes', 'Files'])
+                ->toArray();
+
+            $this->set('nodes', $nodes);
+            $this->render('browse_root');
+        }
+    }
     /**
      * Index method
      *

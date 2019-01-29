@@ -7,14 +7,16 @@ use Cake\ORM\Entity;
  * Node Entity
  *
  * @property int $id
- * @property int $parent_id
+ * @property int|null $parent_id
+ * @property int $lft
+ * @property int $rght
  * @property string $name
  * @property string $description
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\ParentNode $parent_node
- * @property \App\Model\Entity\ChildNode[] $child_nodes
+ * @property \App\Model\Entity\Node $parent_node
+ * @property \App\Model\Entity\Node[] $child_nodes
  * @property \App\Model\Entity\File[] $files
  */
 class Node extends Entity
@@ -31,6 +33,8 @@ class Node extends Entity
      */
     protected $_accessible = [
         'parent_id' => true,
+        'lft' => true,
+        'rght' => true,
         'name' => true,
         'description' => true,
         'created' => true,
