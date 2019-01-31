@@ -7,6 +7,15 @@
 
 <div class="nodes view large-9 medium-8 columns content">
 
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
+        </li>
+        <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'nav-link']) ?></li>
+        <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+        <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'nav-link text-danger']) ?></li>
+    </ul>
+
     <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
     <h1 class="display-3"><?= h($node->name) ?></h1>
@@ -18,19 +27,10 @@
         <?= $this->Text->autoParagraph(h($node->description)); ?>
     </div>
 
-    <nav class="nav nav-pills nav-fill bg-light rounded">
-        <?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'nav-item btn btn-warning m-2']) ?>
-        <?= $this->Html->link(__('New Node'), ['action' => 'add'], ['class' => 'nav-item btn btn-outline-primary m-2']) ?>
-        <?= $this->Html->link(__('New Child Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'nav-item btn btn-outline-secondary m-2']) ?>
-        <?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-item btn btn-outline-secondary m-2']) ?>
-        <?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'nav-item btn btn-danger m-2']) ?>
-    </nav>
-
     <?php if (!empty($node->files)): ?>
 
     <h3><?= __('Files') ?></h4>
         <div class="card-columns">
-            <?php for($i = 0; $i < 10; $i++): ?>
             <?php foreach ($node->files as $files): ?>
                 <div class="card">
                     <div class="card-header font-weight-bold"><?php echo $files->name; ?></div>
@@ -49,7 +49,6 @@
                     </div>
                 </div>
             <?php endforeach; ?>
-            <?php endfor; ?>
         </div>
     <?php endif; ?>
 

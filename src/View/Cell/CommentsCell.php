@@ -35,11 +35,12 @@ class CommentsCell extends Cell
     {
         if(!empty($node_id)) {
             $this->loadModel('NodeComments');
+            $nodeComment = $this->NodeComments->newEntity();
             $comments = $this->NodeComments->find('threaded', [
                 'conditions' => ['node_id' => $node_id],
                 'contain' => ['Users']
             ]);
-            $this->set('comments', $comments);
+            $this->set(compact('comments', 'nodeComment', 'node_id'));
         }
     }
 }
