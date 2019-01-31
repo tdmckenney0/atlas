@@ -49,11 +49,23 @@ class NodeCommentsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(int $node_id, int $parent_id = null)
     {
         $nodeComment = $this->NodeComments->newEntity();
         if ($this->request->is('post')) {
+
+            $parentNode = $this->NodeComments->Nodes->get($node_id);
+            $parentComment = $this->NodeComments->findById($parent_id);
+
             $nodeComment = $this->NodeComments->patchEntity($nodeComment, $this->request->getData());
+
+            $nodeComment->user_id = $this->Auth->user('id');
+            $nodeComment->node_id = $parentNode->id;
+
+            if(!empty($parentComment->id)) {
+                $nodeComment->parent_id = $parentComment->id;
+            }
+
             if ($this->NodeComments->save($nodeComment)) {
                 $this->Flash->success(__('The node comment has been saved.'));
 
@@ -61,10 +73,7 @@ class NodeCommentsController extends AppController
             }
             $this->Flash->error(__('The node comment could not be saved. Please, try again.'));
         }
-        $users = $this->NodeComments->Users->find('list', ['limit' => 200]);
-        $nodes = $this->NodeComments->Nodes->find('list', ['limit' => 200]);
-        $parentNodeComments = $this->NodeComments->ParentNodeComments->find('list', ['limit' => 200]);
-        $this->set(compact('nodeComment', 'users', 'nodes', 'parentNodeComments'));
+        $this->set(compact('nodeComment'));
     }
 
     /**

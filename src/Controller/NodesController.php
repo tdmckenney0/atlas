@@ -56,7 +56,7 @@ class NodesController extends AppController
     public function view($id = null)
     {
         $node = $this->Nodes->get($id, [
-            'contain' => ['ParentNodes', 'Files', 'ChildNodes', 'NodeComments' => ['Users']]
+            'contain' => ['ParentNodes', 'Files', 'ChildNodes']
         ]);
 
         $this->set('node', $node);
