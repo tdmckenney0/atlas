@@ -63,7 +63,8 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
             'viewClassMap' => [
-                'docx' => 'Markdown'
+                'docx' => 'Markdown',
+                'pdf' => 'Markdown'
             ]
         ]);
 
