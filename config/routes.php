@@ -69,7 +69,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-    $routes->setExtensions(['json', 'pdf']);
+    $routes->setExtensions(['json', 'pdf', 'docx']);
 
     /**
      * Connect catchall routes for all controllers.

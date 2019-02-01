@@ -4,7 +4,7 @@ namespace App\View;
 
 use Cake\View\View;
 
-class PdfView extends View
+class MarkdownView extends View
 {
     /**
      * Log Path
@@ -16,14 +16,8 @@ class PdfView extends View
      *
      * @var string
      */
-    protected $subDir = 'pdf';
+    protected $subDir = 'markdown';
 
-    /**
-     * Response type.
-     *
-     * @var string
-     */
-    protected $_responseType = 'pdf';
     /**
      * The name of the layout file to render the view inside of. The name
      * specified is the filename of the layout in /src/Template/Layout without
@@ -31,12 +25,13 @@ class PdfView extends View
      *
      * @var string
      */
-    public $layout = 'pdf';
+    public $layout = 'markdown';
 
     public function render($view = null, $layout = null)
     {
         $body = parent::render($view, $layout);
-        $file = TMP . DS . time() . rand() . '.pdf';
+        $ext = $this->request->getParam('_ext');
+        $file = TMP . DS . time() . rand() . '.' . $ext;
         $pipes = [];
 
         touch($file);
@@ -56,6 +51,8 @@ class PdfView extends View
             $rendered = file_get_contents($file);
 
             unlink($file);
+
+            $this->response->withType($ext);
 
             return $rendered;
         }

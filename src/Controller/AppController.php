@@ -62,7 +62,11 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
+            'viewClassMap' => [
+                'docx' => 'Markdown'
+            ]
         ]);
+
         $this->loadComponent('Flash');
 
         $this->loadComponent('Security');
