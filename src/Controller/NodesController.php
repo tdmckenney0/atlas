@@ -60,6 +60,7 @@ class NodesController extends AppController
         ]);
 
         $this->set('node', $node);
+        $this->set('_serialize', 'node');
     }
 
     /**

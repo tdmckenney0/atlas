@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y \
       libicu-dev \
       libpq-dev \
       pandoc \
+      texlive-latex-base \
+      texlive-fonts-recommended \
       libmcrypt-dev \
       mysql-client \
       git \
