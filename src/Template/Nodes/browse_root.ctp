@@ -5,7 +5,7 @@
  */
 ?>
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-pills">
     <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Browse</a>
     </li>
@@ -13,10 +13,12 @@
     <li class="nav-item"><?= $this->Html->link(__('Upload File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
 </ul>
 
+<hr />
+
 <?php echo $this->cell('Breadcrumb'); ?>
 
 <div class="nodes">
-    <table cellpadding="0" cellspacing="0" class="table table-sm table-striped table-hover">
+    <table cellpadding="0" cellspacing="0" class="table table-sm table-striped table-hover responsive">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
@@ -32,8 +34,8 @@
                 <td><?= h($node->created) ?></td>
                 <td><?= h($node->modified) ?></td>
                 <td class="btn btn-group">
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $node->id], ['class' => 'btn btn-sm btn-warning']) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'btn btn-sm btn-danger']) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $node->id], ['class' => 'btn  btn-warning']) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'btn  btn-danger']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

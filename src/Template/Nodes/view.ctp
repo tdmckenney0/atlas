@@ -7,14 +7,16 @@
 
 <div class="nodes view large-9 medium-8 columns content">
 
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-pills flex-column flex-sm-row">
         <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
+            <a class="flex-sm-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
         </li>
-        <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'nav-link text-danger']) ?></li>
+        <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'flex-sm-fill text-sm-center nav-link']) ?></li>
+        <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'flex-sm-fill text-sm-center nav-link']) ?></li>
+        <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'flex-sm-fill text-sm-center nav-link text-danger border border-danger']) ?></li>
     </ul>
+
+    <hr />
 
     <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
@@ -24,7 +26,7 @@
     <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
 
     <div class="text-justify">
-        <?= $this->Text->autoParagraph(h($node->description)); ?>
+        <?php echo $this->cell('Markdown', [$node->description]); ?>
     </div>
 
     <?php if (!empty($node->files)): ?>

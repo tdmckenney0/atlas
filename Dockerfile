@@ -5,6 +5,7 @@ FROM php:7.1.5-apache
 RUN apt-get update && apt-get install -y \
       libicu-dev \
       libpq-dev \
+      pandoc \
       libmcrypt-dev \
       mysql-client \
       git \

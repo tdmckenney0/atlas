@@ -6,7 +6,7 @@
         <div class="card-footer">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <?= $this->Html->link(__('Reply'), ['controller' => 'NodeComments', 'action' => 'reply', $comment->id], ['class' => 'nav-link border border-primary']) ?>
+                    <?= $this->Html->link(__('Reply'), ['controller' => 'NodeComments', 'action' => 'add', $comment->node_id, $comment->id], ['class' => 'nav-link border border-primary']) ?>
                 </li>
                 <li class="nav-item">
                     <?= $this->Html->link(__('Edit'), ['controller' => 'NodeComments', 'action' => 'edit', $comment->id], ['class' => 'nav-link text-secondary']) ?>

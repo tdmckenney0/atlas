@@ -55,7 +55,7 @@ class NodeCommentsController extends AppController
         if ($this->request->is('post')) {
 
             $parentNode = $this->NodeComments->Nodes->get($node_id);
-            $parentComment = $this->NodeComments->findById($parent_id);
+            $parentComment = $this->NodeComments->findById($parent_id)->first();
 
             $nodeComment = $this->NodeComments->patchEntity($nodeComment, $this->request->getData());
 
@@ -69,7 +69,7 @@ class NodeCommentsController extends AppController
             if ($this->NodeComments->save($nodeComment)) {
                 $this->Flash->success(__('The node comment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $nodeComment->node_id]);
             }
             $this->Flash->error(__('The node comment could not be saved. Please, try again.'));
         }
@@ -93,7 +93,7 @@ class NodeCommentsController extends AppController
             if ($this->NodeComments->save($nodeComment)) {
                 $this->Flash->success(__('The node comment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $nodeComment->node_id]);
             }
             $this->Flash->error(__('The node comment could not be saved. Please, try again.'));
         }
@@ -116,6 +116,7 @@ class NodeCommentsController extends AppController
         $nodeComment = $this->NodeComments->get($id);
         if ($this->NodeComments->delete($nodeComment)) {
             $this->Flash->success(__('The node comment has been deleted.'));
+            return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $nodeComment->node_id]);
         } else {
             $this->Flash->error(__('The node comment could not be deleted. Please, try again.'));
         }
