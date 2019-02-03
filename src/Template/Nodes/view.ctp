@@ -7,14 +7,14 @@
 
 <div class="nodes view large-9 medium-8 columns content">
 
-    <ul class="nav nav-pills flex-column flex-sm-row">
+    <ul class="nav nav-pills flex-column flex-lg-row">
         <li class="nav-item">
-            <a class="flex-sm-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
+            <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
         </li>
-        <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'flex-sm-fill text-sm-center nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['action' => 'add', $node->id], ['class' => 'flex-sm-fill text-sm-center nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => 'flex-sm-fill text-sm-center nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'flex-sm-fill text-sm-center nav-link text-danger border border-danger']) ?></li>
+        <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+        <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['action' => 'add', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+        <li class="nav-item"><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+        <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'flex-lg-fill text-sm-center nav-link text-danger border border-danger']) ?></li>
     </ul>
 
     <hr />

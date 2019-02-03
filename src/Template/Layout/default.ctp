@@ -50,8 +50,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="container-fluid h-100">
-        <div class="row h-100">
+    <div class="container-fluid">
+        <div class="row vh-100">
             <aside class="col-sm-12 col-md-3 p-0 bg-primary overflow-hidden">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-md-column flex-row align-items-start py-2">
                     <a class="navbar-brand" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'index']); ?>">
@@ -69,15 +69,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     </div>
                 </nav>
             </aside>
-            <main class="col py-3 mx-md-5">
+            <main class="col py-3 mx-md-5 vh-100">
                 <?= $this->Flash->render() ?>
                 <?= $this->fetch('content') ?>
+                <footer class="mt-3">
+                    <p class="text-center text-muted"><?php echo __('Atlas by Xenolith Games'); ?></p>
+                </footer>
             </main>
+
         </div>
     </div>
-
-    <footer>
-        <p class="text-center text-muted"><?php echo __('Atlas by Xenolith Games'); ?></p>
-    </footer>
 </body>
 </html>

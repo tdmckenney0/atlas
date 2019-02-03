@@ -46,7 +46,7 @@
                 <div class="media p-3 border-bottom">
                     <i class="mr-3 fas fa-folder " style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
                     <div class="media-body">
-                        <h5 class="mt-0"><?= $this->Html->link($node->name, ['action' => 'view', $node->id]) ?></h5>
+                        <h5 class="mt-0"><?= $this->Html->link($node->name, ['controller' => 'Nodes', 'action' => 'view', $node->id]) ?></h5>
                         <div class="text-muted"><?php echo h(substr($node->description, 0, 128)); ?>...</div>
                     </div>
                 </div>
