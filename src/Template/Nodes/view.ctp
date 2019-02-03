@@ -38,7 +38,7 @@
                     <i class="mr-3 fas fa-folder " style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
                     <div class="media-body">
                         <h5 class="mt-0"><?= $this->Html->link($child->name, ['action' => 'view', $child->id]) ?></h5>
-                        <div class="text-muted"><?php echo h(substr($child->description, 0, 128)); ?>...</div>
+                        <div class="text-muted"><?php echo h(substr($child->description, 0, 200)); ?>...</div>
                     </div>
                 </div>
             <?php endforeach; ?>
