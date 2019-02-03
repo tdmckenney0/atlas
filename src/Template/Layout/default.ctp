@@ -49,7 +49,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary" data-topbar role="navigation">
-        <?php echo $this->Html->link(__('Atlas'), ['controller' => 'nodes', 'action' => 'browse'], ['class' => 'navbar-brand']); ?>
+        <a class="navbar-brand" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'browse']); ?>">
+            <?php echo $this->Html->image('xenolith_icon_clear.png', [
+                'width' => 30,
+                'height' => 30
+            ]); ?>
+            &nbsp;&nbsp;<?php echo __('Atlas'); ?>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
