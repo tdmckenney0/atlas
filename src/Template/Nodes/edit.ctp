@@ -17,7 +17,7 @@
 
 <hr />
 
-<?php echo $this->cell('Breadcrumb', [$node->id]); ?>
+<?php echo $this->cell('Breadcrumb', [$node->id, __('Edit')]); ?>
 
 <div class="nodes form large-9 medium-8 columns content">
     <?= $this->Form->create($node) ?>

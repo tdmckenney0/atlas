@@ -26,6 +26,7 @@ class NodesController extends AppController
         $nodes = $this->paginate($this->Nodes);
 
         $this->set(compact('nodes'));
+        $this->set('_serialize', 'nodes');
     }
 
     /**
@@ -50,8 +51,12 @@ class NodesController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(int $parent_id = null)
     {
+        if(!empty($parent_id)) {
+            $parent = $this->Nodes->get($parent_id);
+            $parent_id = $parent->id;
+        }
         $node = $this->Nodes->newEntity();
         if ($this->request->is('post')) {
             $node = $this->Nodes->patchEntity($node, $this->request->getData());
@@ -64,7 +69,7 @@ class NodesController extends AppController
         }
         $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
         $files = $this->Nodes->Files->find('list', ['limit' => 200]);
-        $this->set(compact('node', 'parentNodes', 'files'));
+        $this->set(compact('node', 'parentNodes', 'files', 'parent_id'));
     }
 
     /**

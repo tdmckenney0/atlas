@@ -4,21 +4,26 @@
  * @var \App\Model\Entity\Node $node
  */
 ?>
-<ul class="nav nav-pills flex-column flex-sm-row">
-    <li class="nav-item"><?= $this->Html->link(__('Overview'), ['action' => 'view', $node->id], ['class' => 'flex-sm-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'flex-sm-fill text-sm-center nav-link']) ?></li>
+<ul class="nav nav-pills">
+    <li class="nav-item"><?= $this->Html->link(__('List Nodes'), ['action' => 'index'], ['class' => 'nav-link']) ?></li>
     <li class="nav-item">
-        <a class="flex-sm-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Edit Node</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">New Node</a>
     </li>
+
+    <li class="nav-item"><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
 </ul>
 
 <hr />
+
+<?php echo $this->cell('Breadcrumb', [$parent_id, __('Add')]); ?>
+
 <div class="nodes form large-9 medium-8 columns content">
     <?= $this->Form->create($node) ?>
     <fieldset>
         <legend><?= __('Add Node') ?></legend>
         <?php
-            echo $this->Form->control('parent_id', ['options' => $parentNodes, 'empty' => " - Top Level - "]);
+            echo $this->Form->control('parent_id', ['options' => $parentNodes, 'value' => $parent_id, 'empty' => " - Top Level - "]);
             echo $this->Form->control('name');
             echo $this->Form->control('description', ['required' => false]);
             echo $this->Form->control('files._ids', ['options' => $files]);
