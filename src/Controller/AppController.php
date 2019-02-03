@@ -64,7 +64,8 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
             'viewClassMap' => [
                 'docx' => 'Markdown',
-                'pdf' => 'Markdown'
+                'pdf' => 'Markdown',
+                'epub' => 'Markdown'
             ]
         ]);
 
