@@ -1,6 +1,6 @@
 <?php if (!empty($nodes)): ?>
     <?php foreach($nodes as $node): ?>
-        <li class="nav-item">
+        <li class="nav-item py-1">
             <?php if(!empty($node->children) || !empty($node->files)): ?>
                 <a class="nav-link pl-0 text-nowrap text-light" data-toggle="collapse" href="#item-<?php echo $node->id; ?>"><i class="fas fa-folder"></i>&nbsp;<?php echo __($node->name); ?></a>
                 <div id="item-<?php echo $node->id; ?>" class="collapse">
@@ -11,7 +11,7 @@
 
                         <?php if(!empty($node->files)): ?>
                             <?php foreach($node->files as $file): ?>
-                                <li class="nav-item font-italic">
+                                <li class="nav-item font-italic py-1">
                                     <a class="nav-link pl-0 text-nowrap text-light" href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id]); ?>"><i class="fas fa-file-alt"></i>&nbsp;<?php echo h($file->name); ?></a>
                                 </li>
                             <?php endforeach; ?>

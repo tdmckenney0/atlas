@@ -20,24 +20,20 @@
 
 <div class="file">
     <h1><?= h($file->name) ?></h1>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($file->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Name') ?></th>
-            <td><?= h($file->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('File Extension') ?></th>
-            <td><?= h($file->file_extension) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Mime Type') ?></th>
-            <td><?= h($file->mime_type) ?></td>
-        </tr>
-    </table>
+
+    <div id="carouselExampleSlidesOnly" class="carousel slide py-3" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <?php echo $this->Html->image('xenolith_icon_clear.png', ['class' => 'd-block w-50']); ?>
+            </div>
+            <div class="carousel-item">
+                <?php echo $this->Html->image('xenolith_icon_clear.png', ['class' => 'd-block w-50']); ?>
+            </div>
+            <div class="carousel-item">
+                <?php echo $this->Html->image('xenolith_icon_clear.png', ['class' => 'd-block w-50']); ?>
+            </div>
+        </div>
+    </div>
 
     <?php if (!empty($file->nodes)): ?>
         <h2><?php echo __('Nodes'); ?></h2>
