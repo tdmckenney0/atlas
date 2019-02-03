@@ -1,5 +1,5 @@
-<div class="comments">
-    <h3><?= __('Comments') ?></h3>
+<div class="comments mt-3">
+    <h2><?= __('Comments') ?></h2>
     <?php echo $this->element('comments', ['comments' => $comments]); ?>
 
     <div class="nodeComments mt-3">

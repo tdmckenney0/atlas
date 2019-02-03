@@ -14,44 +14,31 @@
     <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
 </ul>
 
+<hr />
+
+<?php echo $this->cell('Breadcrumb'); ?>
+
 <div class="nodes">
-    <h3><?= __('Nodes') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table table-striped table-hover table-responsive">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('parent_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($nodes as $node): ?>
-            <tr>
-                <td><?= $this->Number->format($node->id) ?></td>
-                <td><?= $node->has('parent_node') ? $this->Html->link($node->parent_node->name, ['controller' => 'Nodes', 'action' => 'view', $node->parent_node->id]) : '' ?></td>
-                <td><?= h($node->name) ?></td>
-                <td><?= h($node->created) ?></td>
-                <td><?= h($node->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $node->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $node->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
+    <div class="card">
+        <?php foreach ($nodes as $node): ?>
+            <div class="media p-3 border-bottom">
+                <i class="mr-3 fas fa-folder " style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
+                <div class="media-body">
+                    <h5 class="mt-0"><?= $this->Html->link($node->name, ['action' => 'view', $node->id]) ?></h5>
+                    <div class="text-muted"><?php echo h(substr($node->description, 0, 128)); ?>...</div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <nav class="paginator mt-3">
+        <ul class="pagination justify-content-center">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>
             <?= $this->Paginator->next(__('next') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+        <p class="text-center text-muted"><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+    </nav>
 </div>

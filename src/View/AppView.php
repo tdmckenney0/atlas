@@ -39,5 +39,9 @@ class AppView extends View
         $this->loadHelper('Form', [
             'templates' => 'form_helper_tags',
         ]);
+
+        $this->loadHelper('Paginator', [
+            'templates' => 'paginator_templates',
+        ]);
     }
 }

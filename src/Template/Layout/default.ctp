@@ -35,6 +35,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <script type="text/javascript">
     $(function() {
         $('textarea').each(function(e) {
@@ -49,7 +51,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary" data-topbar role="navigation">
-        <a class="navbar-brand" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'browse']); ?>">
+        <a class="navbar-brand" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'index']); ?>">
             <?php echo $this->Html->image('xenolith_icon_clear.png', [
                 'width' => 30,
                 'height' => 30
@@ -60,32 +62,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <?php echo $this->cell('TableOfContents'); ?>
+            <?php echo $this->cell('TableOfContents'); ?>
 
-
-
-                <!--
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <!-- <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            -->
+            </form> -->
         </div>
     </nav>
 
@@ -94,6 +76,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+        <p class="text-center text-muted"><?php echo __('Atlas by Xenolith Games'); ?></p>
     </footer>
 </body>
 </html>

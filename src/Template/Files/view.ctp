@@ -15,6 +15,20 @@
         <li><?= $this->Html->link(__('New Node'), ['controller' => 'Nodes', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
+
+<ul class="nav nav-pills">
+    <li class="nav-item"><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('New Node'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Files</a>
+    </li>
+    <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+</ul>
+
+<hr />
+
+<?php echo $this->cell('Breadcrumb'); ?>
+
 <div class="files view large-9 medium-8 columns content">
     <h3><?= h($file->name) ?></h3>
     <table class="vertical-table">

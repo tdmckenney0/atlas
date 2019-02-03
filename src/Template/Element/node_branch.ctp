@@ -2,17 +2,17 @@
     <?php foreach($nodes as $node): ?>
         <li class="nav-item">
             <?php if(!empty($node->children) || !empty($node->files)): ?>
-                <a class="nav-link font-weight-bolder" data-toggle="collapse" href="#item-<?php echo $node->id; ?>">📁 <?php echo __($node->name); ?></a>
+                <a class="nav-link text-light" data-toggle="collapse" href="#item-<?php echo $node->id; ?>"><i class="fas fa-folder"></i>&nbsp;<?php echo __($node->name); ?></a>
                 <div id="item-<?php echo $node->id; ?>" class="collapse">
                     <ul class="nav flex-column ml-4">
-                        <?php echo $this->Html->link(__("🔍 Overview"), ['controller' => 'nodes', 'action' => 'view', $node->id], ['class' => 'nav-link']); ?>
+                        <?php echo $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-alt']) . '&nbsp;' . __("Overview"), ['controller' => 'nodes', 'action' => 'view', $node->id], ['class' => 'nav-link text-light', 'escape' => false]); ?>
 
                         <?php if(!empty($node->children)) echo $this->element('node_branch', ['nodes' => $node->children]); ?>
 
                         <?php if(!empty($node->files)): ?>
                             <?php foreach($node->files as $file): ?>
                                 <li class="nav-item font-italic">
-                                    <?php echo $this->Html->link('🔩 ' . $file->name, ['controller' => 'files', 'action' => 'view', $file->id], ['class' => 'nav-link']); ?>
+                                    <a class="nav-link text-light" href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id]); ?>"><i class="fas fa-file-alt"></i>&nbsp;<?php echo h($file->name); ?></a>
                                 </li>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -20,7 +20,7 @@
                 </div>
 
             <?php else: ?>
-                <?php echo $this->Html->link('🔍 ' . $node->name, ['controller' => 'nodes', 'action' => 'view', $node->id], ['class' => 'nav-link']); ?>
+                <a class="nav-link text-light" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'view', $node->id]); ?>"><i class="fas fa-file-alt"></i>&nbsp;<?php echo h($node->name); ?></a>
             <?php endif; ?>
         </li>
     <?php endforeach; ?>
