@@ -50,31 +50,32 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" data-topbar role="navigation">
-        <a class="navbar-brand" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'index']); ?>">
-            <?php echo $this->Html->image('xenolith_icon_clear.png', [
-                'width' => 30,
-                'height' => 30
-            ]); ?>
-            &nbsp;&nbsp;<?php echo __('Atlas'); ?>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <?php echo $this->cell('TableOfContents'); ?>
-
-            <!-- <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form> -->
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <aside class="col-sm-12 col-md-3 p-0 bg-primary overflow-hidden">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-md-column flex-row align-items-start py-2">
+                    <a class="navbar-brand" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'index']); ?>">
+                        <?php echo $this->Html->image('xenolith_icon_clear.png', [
+                            'width' => 30,
+                            'height' => 30
+                        ]); ?>
+                        &nbsp;&nbsp;<?php echo __('Atlas'); ?>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <?php echo $this->cell('TableOfContents'); ?>
+                    </div>
+                </nav>
+            </aside>
+            <main class="col py-3 mx-md-5">
+                <?= $this->Flash->render() ?>
+                <?= $this->fetch('content') ?>
+            </main>
         </div>
-    </nav>
-
-    <div class="container mt-3">
-        <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
     </div>
+
     <footer>
         <p class="text-center text-muted"><?php echo __('Atlas by Xenolith Games'); ?></p>
     </footer>
