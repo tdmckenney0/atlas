@@ -33,8 +33,11 @@ class TableOfContentsCell extends Cell
      */
     public function display()
     {
-        $this->loadModel('Nodes');
-        $nodes = $this->Nodes->find('threaded', ['contain' => ['Files']])->toArray();
-        $this->set('nodes', $nodes);
+        $user = $this->request->session()->read('Auth.User.id');
+        if(!empty($user)) {
+            $this->loadModel('Nodes');
+            $nodes = $this->Nodes->find('threaded', ['contain' => ['Files']])->toArray();
+            $this->set(compact('nodes'));
+        }
     }
 }
