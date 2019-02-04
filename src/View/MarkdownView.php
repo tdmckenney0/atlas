@@ -10,6 +10,7 @@ class MarkdownView extends View
      * Log Path
      */
     const LOG_PATH = LOGS . DS . 'pandoc.log';
+    const PANDOC_COMMAND = 'PATH=/usr/bin: pandoc -f markdown -o %s'; //
 
     /**
      * JSON views are located in the 'json' sub directory for controllers' views.
@@ -31,30 +32,33 @@ class MarkdownView extends View
     {
         $body = parent::render($view, $layout);
         $ext = $this->request->getParam('_ext');
-        $file = TMP . DS . time() . rand() . '.' . $ext;
+        $file = TMP . time() . rand() . '.' . $ext;
         $pipes = [];
 
-        touch($file);
-
-        $res = proc_open('pandoc -f markdown -o ' . $file, [
+        $res = proc_open(sprintf(self::PANDOC_COMMAND, $file), [
             ["pipe", "r"],
+            ["pipe", "w"],
             ["file", self::LOG_PATH, 'a']
         ], $pipes, TMP);
 
         if(is_resource($res)) {
 
             fwrite($pipes[0], $body);
+
             fclose($pipes[0]);
+            fclose($pipes[1]);
 
             proc_close($res);
 
-            $rendered = file_get_contents($file);
+            if(file_exists($file)) {
+                $rendered = file_get_contents($file);
 
-            unlink($file);
+                unlink($file);
 
-            $this->response->withType($ext);
+                $this->response->withType($ext);
 
-            return $rendered;
+                return $rendered;
+            }
         }
     }
 }
