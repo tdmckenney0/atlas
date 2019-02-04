@@ -36,6 +36,10 @@ class File extends Entity
         'nodes' => true
     ];
 
+    public function isImage() {
+        return (strpos($this->mime_type, 'image/') !== false);
+    }
+
     protected function _getFile()
     {
         return new CakeFile(self::STORAGE . $this->id . '.' . $this->file_extension, false);
