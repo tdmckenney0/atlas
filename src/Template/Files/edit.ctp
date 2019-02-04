@@ -24,8 +24,6 @@
         <legend><?= __('Edit File') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('file_extension');
-            echo $this->Form->control('mime_type');
             echo $this->Form->control('nodes._ids', ['options' => $nodes]);
         ?>
     </fieldset>

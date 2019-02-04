@@ -13,13 +13,12 @@
     </ul>
 </nav>
 <div class="files form large-9 medium-8 columns content">
-    <?= $this->Form->create($file) ?>
+    <?= $this->Form->create($file, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Add File') ?></legend>
+        <?php $this->Form->unlockField('file'); ?>
         <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('file_extension');
-            echo $this->Form->control('mime_type');
+            echo $this->Form->control('file', ['type' => 'file']);
             echo $this->Form->control('nodes._ids', ['options' => $nodes]);
         ?>
     </fieldset>

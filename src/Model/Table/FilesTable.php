@@ -5,6 +5,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use Cake\Filesystem\File as CakeFile;
+use ArrayObject;
 
 /**
  * Files Model
@@ -22,6 +25,10 @@ use Cake\Validation\Validator;
  */
 class FilesTable extends Table
 {
+    /**
+     * Absolute path to file storage.
+     */
+    const STORAGE = (ROOT . DS . 'files' . DS);
 
     /**
      * Initialize method
@@ -53,8 +60,10 @@ class FilesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->uuid('id')
-            ->allowEmptyString('id', 'create')
+            ->alphaNumeric('id')
+            ->maxLength('id', 64)
+            ->allowEmptyString('id', false)
+            ->requirePresence('id', 'create')
             ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
@@ -90,5 +99,34 @@ class FilesTable extends Table
         $rules->add($rules->isUnique(['id']));
 
         return $rules;
+    }
+
+    /**
+     *
+     */
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+    {
+        if(!empty($data['file']) && is_uploaded_file($data['file']['tmp_name'])) {
+
+            $file = new CakeFile($data['file']['tmp_name'], false);
+
+            if($file->exists()) {
+
+                $exts = [];
+
+                preg_match('/\w*$/', $data['file']['name'], $exts);
+
+                $data['id'] = hash_file('sha256', $file->path);
+                $data['mime_type'] = $file->mime();
+                $data['name'] = $data['file']['name'];
+                $data['file_extension'] = (!empty($exts[0]) ? $exts[0] : 'dunno');
+
+                $filename = self::STORAGE . $data['id'] . '.' . $data['file_extension'];
+
+                $file->copy($filename, false);
+                $file->delete();
+                $file->close();
+            }
+        }
     }
 }

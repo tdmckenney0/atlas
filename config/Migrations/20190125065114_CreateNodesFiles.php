@@ -14,12 +14,11 @@ class CreateNodesFiles extends AbstractMigration
     {
         $table = $this->table('nodes_files');
         $table->addColumn('node_id', 'integer', [
-            'default' => null,
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('file_id', 'uuid', [
-            'default' => null,
+        $table->addColumn('file_id', 'char', [
+            'limit' => 64,
             'null' => false,
         ]);
         $table->addColumn('created', 'datetime', [

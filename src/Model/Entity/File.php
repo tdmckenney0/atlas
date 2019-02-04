@@ -26,6 +26,7 @@ class File extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'name' => true,
         'file_extension' => true,
         'mime_type' => true,

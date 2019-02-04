@@ -13,8 +13,8 @@ class CreateFiles extends AbstractMigration
     public function change()
     {
         $table = $this->table('files', ['id' => false, 'primary_key' => ['id']]);
-        $table->addColumn('id', 'uuid', [
-            'default' => null,
+        $table->addColumn('id', 'char', [
+            'limit' =>  64,
             'null' => false,
         ]);
         $table->addColumn('name', 'string', [
