@@ -42,6 +42,19 @@ class FilesController extends AppController
     }
 
     /**
+     * get method
+     *
+     * @param string|null $id File id.
+     * @return \Cake\Http\Response|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function get($id = null)
+    {
+        $file = $this->Files->get($id);
+        return $this->response->withFile($file->File->path);
+    }
+
+    /**
      * Add method
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.

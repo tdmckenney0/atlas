@@ -2,7 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-
+use Cake\Filesystem\File as CakeFile;
 /**
  * File Entity
  *
@@ -15,7 +15,10 @@ use Cake\ORM\Entity;
  */
 class File extends Entity
 {
-
+    /**
+     * Absolute path to file storage.
+     */
+    const STORAGE = (ROOT . DS . 'files' . DS);
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -32,4 +35,9 @@ class File extends Entity
         'mime_type' => true,
         'nodes' => true
     ];
+
+    protected function _getFile()
+    {
+        return new CakeFile(self::STORAGE . $this->id . '.' . $this->file_extension, false);
+    }
 }
