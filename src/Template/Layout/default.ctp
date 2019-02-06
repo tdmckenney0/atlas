@@ -77,5 +77,6 @@
 
         </div>
     </div>
+    <?php echo $this->element('thinking'); ?>
 </body>
 </html>

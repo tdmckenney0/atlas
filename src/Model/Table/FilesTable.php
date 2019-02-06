@@ -7,6 +7,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Filesystem\File as CakeFile;
+use App\Model\Entity\File;
 use ArrayObject;
 
 /**
@@ -128,5 +129,13 @@ class FilesTable extends Table
                 $file->close();
             }
         }
+    }
+
+    /**
+     *
+     */
+    public function beforeDelete(Event $event, File $entity, ArrayObject $options)
+    {
+        return $entity->File->delete();
     }
 }

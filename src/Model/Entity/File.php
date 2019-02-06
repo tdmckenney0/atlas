@@ -40,6 +40,10 @@ class File extends Entity
         return (strpos($this->mime_type, 'image/') !== false);
     }
 
+    public function isText() {
+        return (strpos($this->mime_type, 'text/') !== false);
+    }
+
     protected function _getFile()
     {
         return new CakeFile(self::STORAGE . $this->id . '.' . $this->file_extension, false);

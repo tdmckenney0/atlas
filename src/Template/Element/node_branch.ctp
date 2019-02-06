@@ -2,7 +2,7 @@
     <?php foreach($nodes as $node): ?>
         <li class="nav-item py-1">
             <?php if(!empty($node->children) || !empty($node->files)): ?>
-                <a class="nav-link pl-0 text-nowrap text-light" data-toggle="collapse" href="#item-<?php echo $node->id; ?>"><i class="fas fa-folder"></i>&nbsp;<?php echo __($node->name); ?></a>
+                <a class="nav-link pl-0 text-nowrap text-light dont-think" data-toggle="collapse" href="#item-<?php echo $node->id; ?>"><i class="fas fa-folder"></i>&nbsp;<?php echo __($node->name); ?></a>
                 <div id="item-<?php echo $node->id; ?>" class="collapse">
                     <ul class="nav flex-column ml-4">
                         <?php echo $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-alt']) . '&nbsp;' . __("Overview"), ['controller' => 'nodes', 'action' => 'view', $node->id], ['class' => 'nav-link pl-0 text-nowrap text-light', 'escape' => false]); ?>
