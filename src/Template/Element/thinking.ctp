@@ -2,7 +2,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><?php echo __('Thinking...'); ?></h5>
+        <?php $sayings = ['Trying to...', 'I got this...', 'One sec...', '#BigFacts...', 'mmmmk...', '"By the rings! Arbiter!"'];?>
+        <h5 class="modal-title"><?php echo (rand(0, 50) == 5 ? __($sayings[rand(0, count($sayings) - 1)])  : __('Thinking...')); ?></h5>
       </div>
       <div class="modal-body">
         <div class="progress">

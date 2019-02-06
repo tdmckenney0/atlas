@@ -19,6 +19,12 @@ class File extends Entity
      * Absolute path to file storage.
      */
     const STORAGE = (ROOT . DS . 'files' . DS);
+
+    /**
+     * File Object.
+     */
+    private $File = null;
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -44,8 +50,28 @@ class File extends Entity
         return (strpos($this->mime_type, 'text/') !== false);
     }
 
+    public function isCSV() {
+        return $this->isText() && ($this->file_extension == 'csv');
+    }
+
+    public function readlineCSV(int $length = 0, string $delimiter = ",", string $enclosure = '"', string $escape = "\\") {
+        return fgetcsv($this->openFile()->handle, $length, $delimiter, $enclosure, $escape);
+    }
+
+    public function readline(int $length = 0) {
+        return fgets($this->openFile()->handle, $length);
+    }
+
+    protected function openFile() {
+        if(empty($this->File)) {
+            $this->File = new CakeFile(self::STORAGE . $this->id . '.' . $this->file_extension, false);
+            $this->File->open();
+        }
+        return $this->File;
+    }
+
     protected function _getFile()
     {
-        return new CakeFile(self::STORAGE . $this->id . '.' . $this->file_extension, false);
+        return $this->openFile();
     }
 }
