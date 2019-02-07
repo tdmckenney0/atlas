@@ -22,7 +22,7 @@
         <?php echo __('Atlas: Collaboration System'); ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon') ?>
+    <?= $this->Html->meta('icon', '/img/xenolith_icon_white.png') ?>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
@@ -43,6 +43,22 @@
     });
     </script>
 
+    <style type="text/css">
+
+        @font-face {
+            font-family: 'microgramma-bold';
+            src: url('/font/microgramma-bold.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1,h2,h3,legend, .mg-bold {
+            font-family: "microgramma-bold";
+            letter-spacing: 0.05em;
+        }
+
+    </style>
+
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -52,12 +68,10 @@
         <div class="row vh-100">
             <aside class="col-sm-12 col-md-3 p-0 bg-primary overflow-hidden">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-md-column flex-row align-items-start py-2">
-                    <a class="navbar-brand" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'index']); ?>">
-                        <?php echo $this->Html->image('xenolith_icon_clear.png', [
-                            'width' => 30,
+                    <a class="navbar-brand mg-bold" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'index']); ?>">
+                        <?php echo $this->Html->image('atlas_white.png', [
                             'height' => 30
                         ]); ?>
-                        &nbsp;&nbsp;<?php echo __('Atlas'); ?>
                     </a>
                     <button class="navbar-toggler dont-think" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
