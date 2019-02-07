@@ -21,7 +21,7 @@
 
     <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
-    <h1 class="display-3"><?= h($node->name) ?></h1>
+    <h1><?= h($node->name) ?></h1>
 
     <small class="text-muted"> <?= __('Created: ') . h($node->created) ?></small>
     <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
