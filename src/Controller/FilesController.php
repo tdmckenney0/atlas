@@ -59,8 +59,9 @@ class FilesController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(int $node_id = null)
     {
+        $node = $this->Files->Nodes->findById($node_id)->first();
         $file = $this->Files->newEntity();
         if ($this->request->is('post')) {
             $file = $this->Files->patchEntity($file, $this->request->getData());
@@ -72,7 +73,7 @@ class FilesController extends AppController
             $this->Flash->error(__('The file could not be saved. Please, try again.'));
         }
         $nodes = $this->Files->Nodes->find('list', ['limit' => 200]);
-        $this->set(compact('file', 'nodes'));
+        $this->set(compact('file', 'nodes', 'node'));
     }
 
     /**
@@ -87,6 +88,7 @@ class FilesController extends AppController
         $file = $this->Files->get($id, [
             'contain' => ['Nodes']
         ]);
+        $children = array_column($file->nodes, 'id');
         if ($this->request->is(['patch', 'post', 'put'])) {
             $file = $this->Files->patchEntity($file, $this->request->getData());
             if ($this->Files->save($file)) {
@@ -97,7 +99,7 @@ class FilesController extends AppController
             $this->Flash->error(__('The file could not be saved. Please, try again.'));
         }
         $nodes = $this->Files->Nodes->find('list', ['limit' => 200]);
-        $this->set(compact('file', 'nodes'));
+        $this->set(compact('file', 'nodes', 'children'));
     }
 
     /**

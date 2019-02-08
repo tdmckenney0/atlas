@@ -15,17 +15,33 @@
     <li class="nav-item"><?= $this->Form->postLink(__('Delete File'), ['action' => 'delete', $file->id], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id), 'class' => 'flex-lg-fill text-sm-center nav-link border border-danger text-danger']) ?></li>
 </ul>
 
-<?php echo $this->cell('Breadcrumb', [null, $file->name]); ?>
+<hr />
 
-<div class="file">
-    <?= $this->Form->create($file) ?>
-    <fieldset>
-        <legend><?= __('Edit File') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('nodes._ids', ['options' => $nodes]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+<?php echo $this->cell('Breadcrumb', [!empty($node->id) ? $node->id : null, __('Add File')]); ?>
+<div class="files overflow-hidden">
+    <?= $this->Form->create($file, ['type' => 'file']) ?>
+        <div class="overflow-hidden">
+            <h1 class="overflow-hidden"><?= __('Edit {0}', $file->name) ?></h1>
+        </div>
+
+        <?php $this->Form->unlockField('nodes._ids'); ?>
+
+        <?php echo $this->Form->control('name'); ?>
+
+        <h2 class="my-3"><?= __('Nodes') ?></h2>
+
+        <ul class="list-group my-3">
+            <?php foreach($nodes as $id => $name): ?>
+
+            <li class="list-group-item">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" name="nodes[_ids][]" class="custom-control-input" value="<?php echo $id; ?>" <?php echo (in_array($id, $children) ? 'checked="checked"' : ''); ?> id="node-<?php echo $id; ?>">
+                    <label class="custom-control-label" for="node-<?php echo $id; ?>"><?php echo $name; ?></label>
+                </div>
+            </li>
+            <? endforeach; ?>
+        </ul>
+
+        <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

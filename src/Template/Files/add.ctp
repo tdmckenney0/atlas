@@ -4,24 +4,43 @@
  * @var \App\Model\Entity\File $file
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Files'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Node'), ['controller' => 'Nodes', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="files form large-9 medium-8 columns content">
+<ul class="nav nav-pills flex-column flex-lg-row">
+    <li class="nav-item"><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+    <li class="nav-item"><?= $this->Html->link(__('List Files'), ['action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+    <li class="nav-item">
+        <a class="flex-lg-fill text-sm-center nav-link active dont-think" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo __('Add File'); ?></a>
+    </li>
+</ul>
+
+<hr />
+
+<?php echo $this->cell('Breadcrumb', [!empty($node->id) ? $node->id : null, __('Add File')]); ?>
+<div class="files">
     <?= $this->Form->create($file, ['type' => 'file']) ?>
-    <fieldset>
-        <legend><?= __('Add File') ?></legend>
+        <h1><?= __('Add File') ?></h1>
         <?php $this->Form->unlockField('file'); ?>
-        <?php
-            echo $this->Form->control('file', ['type' => 'file']);
-            echo $this->Form->control('nodes._ids', ['options' => $nodes]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+        <?php $this->Form->unlockField('nodes._ids'); ?>
+
+        <div class="custom-file my-3">
+            <input type="file" name="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+
+        <h2 class="my-3"><?= __('Add to Nodes') ?></h2>
+
+        <ul class="list-group my-3">
+            <?php foreach($nodes as $id => $name): ?>
+
+            <li class="list-group-item">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" name="nodes[_ids][]" class="custom-control-input" value="<?php echo $id; ?>" <?php echo (!empty($node->id) && $id == $node->id ? 'checked="checked"' : ''); ?> id="node-<?php echo $id; ?>">
+                    <label class="custom-control-label" for="node-<?php echo $id; ?>"><?php echo $name; ?></label>
+                </div>
+            </li>
+            <? endforeach; ?>
+        </ul>
+
+        <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
