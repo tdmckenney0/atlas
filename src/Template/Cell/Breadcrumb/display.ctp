@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb" class="mt-3">
+<nav aria-label="breadcrumb" class="overflow-hidden mt-3">
     <ol class="breadcrumb">
         <?php if(!empty($nodes) || !empty($last)): ?>
             <li class="breadcrumb-item active" aria-current="page"><?php echo $this->Html->link(__('Home'), ['controller' => 'nodes', 'action' => 'index']); ?></li>

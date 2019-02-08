@@ -13,6 +13,7 @@
         </li>
         <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
         <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['action' => 'add', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+        <li class="nav-item"><?= $this->Html->link(__('Add File'), ['controller' => 'Files', 'action' => 'add', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
         <li class="nav-item"><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
         <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'flex-lg-fill text-sm-center nav-link text-danger border border-danger']) ?></li>
     </ul>
@@ -21,7 +22,7 @@
 
     <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
-    <h1><?= h($node->name) ?></h1>
+    <h1 class="overflow-hidden"><?= h($node->name) ?></h1>
 
     <small class="text-muted"> <?= __('Created: ') . h($node->created) ?></small>
     <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
@@ -36,7 +37,7 @@
             <?php foreach ($node->child_nodes as $child): ?>
                 <div class="media p-3 border-bottom">
                     <i class="mr-3 fas fa-folder " style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                    <div class="media-body">
+                    <div class="media-body overflow-hidden">
                         <h5 class="mt-0"><?= $this->Html->link($child->name, ['action' => 'view', $child->id]) ?></h5>
                         <div class="text-muted"><?php echo h(substr($child->description, 0, 200)); ?>...</div>
                     </div>
@@ -46,7 +47,7 @@
             <?php foreach ($node->files as $file): ?>
                 <div class="media p-3 border-bottom">
                     <i class="mr-3 fas fa-file-alt" style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                    <div class="media-body">
+                    <div class="media-body overflow-hidden">
                         <h5 class="mt-0"><?= $this->Html->link($file->name, ['controller' => 'files', 'action' => 'view', $file->id]) ?></h5>
                         <div class="text-muted"><?php echo __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type); ?></div>
                     </div>

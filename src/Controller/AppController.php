@@ -54,6 +54,10 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login'
             ],
+            'loginRedirect' => [
+                'controller' => 'Nodes',
+                'action' => 'index'
+            ],
              //use isAuthorized in Controllers
             // 'authorize' => ['Controller'],
              // If unauthorized, return them to page they were just on

@@ -22,7 +22,7 @@
         <?php foreach ($files as $file): ?>
             <div class="media p-3 border-bottom">
                 <i class="mr-3 fas fa-file-alt" style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                <div class="media-body">
+                <div class="media-body overflow-hidden">
                     <h5 class="mt-0"><?= $this->Html->link($file->name, ['controller' => 'files', 'action' => 'view', $file->id]) ?></h5>
                     <div class="text-muted"><?php echo __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type); ?></div>
                 </div>

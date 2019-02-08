@@ -20,7 +20,7 @@
 <?php echo $this->cell('Breadcrumb', [null, $file->name]); ?>
 
 <div class="file">
-    <h1><?= h($file->name) ?></h1>
+    <h1 class="overflow-hidden"><?= h($file->name) ?></h1>
 
     <?php echo $this->cell('File', [$file->id]); ?>
 
@@ -30,7 +30,7 @@
             <?php foreach ($file->nodes as $node): ?>
                 <div class="media p-3 border-bottom">
                     <i class="mr-3 fas fa-folder " style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                    <div class="media-body">
+                    <div class="media-body overflow-hidden">
                         <h5 class="mt-0"><?= $this->Html->link($node->name, ['controller' => 'Nodes', 'action' => 'view', $node->id]) ?></h5>
                         <div class="text-muted"><?php echo h(substr($node->description, 0, 200)); ?>...</div>
                     </div>
