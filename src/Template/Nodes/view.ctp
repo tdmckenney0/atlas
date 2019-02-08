@@ -5,7 +5,7 @@
  */
 ?>
 
-<div class="nodes view large-9 medium-8 columns content">
+<div class="nodes">
 
     <ul class="nav nav-pills flex-column flex-lg-row">
         <li class="nav-item">

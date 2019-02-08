@@ -53,7 +53,7 @@
         }
 
         h1,h2,h3,legend, .mg-bold {
-            font-family: "microgramma-bold";
+            font-family: "microgramma-bold", system-ui, sans-serif;
             letter-spacing: 0.05em;
         }
 
@@ -65,30 +65,28 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row vh-100">
-            <aside class="col-sm-12 col-md-3 p-0 bg-primary overflow-hidden">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-md-column flex-row align-items-start py-2">
-                    <a class="navbar-brand mg-bold" href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'index']); ?>">
-                        <?php echo $this->Html->image('atlas_white.png', [
-                            'height' => 30
-                        ]); ?>
-                    </a>
-                    <button class="navbar-toggler dont-think" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <?php echo $this->cell('TableOfContents'); ?>
-                    </div>
-                </nav>
-            </aside>
-            <main class="col py-3 mx-md-5 vh-100">
-                <?= $this->Flash->render() ?>
-                <?= $this->fetch('content') ?>
-                <footer class="mt-3">
-                    <p class="text-center text-muted"><?php echo __('Atlas by Xenolith Games'); ?></p>
-                </footer>
-            </main>
-
+        <div class="vh-100">
+            <div class="row">
+                <aside class="col-sm-12 col-md-3 p-0 bg-primary overflow-hidden">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-md-column flex-row align-items-start py-2">
+                        <a class="navbar-brand" href="<?php echo $this->Url->build('/'); ?>">
+                            <?php echo $this->Html->image('atlas_white.png', [
+                                'height' => 30
+                            ]); ?>
+                        </a>
+                        <button class="navbar-toggler dont-think" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse w-auto" id="navbarSupportedContent">
+                            <?php echo $this->cell('TableOfContents'); ?>
+                        </div>
+                    </nav>
+                </aside>
+                <main class="col col-md-9 my-5">
+                    <?= $this->Flash->render() ?>
+                    <?= $this->fetch('content') ?>
+                </main>
+            </div>
         </div>
     </div>
     <?php echo $this->element('thinking'); ?>
