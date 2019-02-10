@@ -13,6 +13,9 @@ use App\Controller\AppController;
 class FilesController extends AppController
 {
 
+    public $paginate = [
+        'limit' => 10
+    ];
     /**
      * Index method
      *

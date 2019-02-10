@@ -48,27 +48,23 @@
         <div class="list-group">
             <?php if (!empty($node->child_nodes)): ?>
                 <?php foreach ($node->child_nodes as $child): ?>
-                    <a href="<?php echo $this->Url->build(['action' => 'view', $child->id]); ?>"  class="list-group-item list-group-item-action">
-                        <div class="media atlas-node">
-                            <i class="mr-3 fas fa-folder" style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                            <div class="media-body overflow-hidden">
-                                <h5 class="mt-0"><?= h($child->name) ?></h5>
-                                <div class="text-muted"><?php echo h(substr($child->description, 0, 200)); ?>...</div>
-                            </div>
-                        </div>
-                    </a>
+                    <?php echo $this->element('browser_item', [
+                        'url' => ['action' => 'view', $child->id],
+                        'title' => $child->name,
+                        'body' => substr($child->description, 0, 200),
+                        'icon' => 'fas fa-folder',
+                        'class' => ""
+                    ]); ?>
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <a href="<?php echo $this->Url->build(['action' => 'add', $node->id]); ?>" class="list-group-item list-group-item-action">
-                <div class="media text-primary atlas-node">
-                    <i class="mr-3 fas fa-folder-plus" style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                    <div class="media-body overflow-hidden">
-                        <h5 class="mt-0"><?= __('Add Node') ?></h5>
-                        <div class="text-muted"><?php echo __('Add a new Node to {0}', $node->name); ?></div>
-                    </div>
-                </div>
-            </a>
+            <?php echo $this->element('browser_item', [
+                'url' => ['action' => 'add', $node->id],
+                'title' => __('Add Node'),
+                'body' => __('Add a new Node to {0}', $node->name),
+                'icon' => 'fas fa-folder-plus',
+                'class' => "text-primary"
+            ]); ?>
         </div>
     </div>
 
@@ -77,28 +73,23 @@
         <div class="list-group">
             <?php if (!empty($node->files)): ?>
                 <?php foreach ($node->files as $file): ?>
-                    <a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id]); ?>"  class="list-group-item list-group-item-action">
-                        <div class="media atlas-file">
-                            <i class="mr-3 fas fa-file-alt" style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                            <div class="media-body overflow-hidden">
-                                <h5 class="mt-0"><?= h($file->name) ?></h5>
-                                <div class="text-muted"><?php echo __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type); ?></div>
-                            </div>
-                        </div>
-                    </a>
+                    <?php echo $this->element('browser_item', [
+                        'url' => ['controller' => 'files', 'action' => 'view', $file->id],
+                        'title' => $file->name,
+                        'body' => __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type),
+                        'icon' => 'fas fa-file-alt',
+                        'class' => ""
+                    ]); ?>
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <a href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'add', $node->id]); ?>"  class="list-group-item list-group-item-action atlas-file-add">
-                <div class="media text-primary">
-                    <i class="mr-3 fas fa-plus-circle" style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                    <div class="media-body overflow-hidden">
-                        <h5 class="mt-0"><?= __('Add File') ?></h5>
-                        <div class="text-muted"><?php echo __('Upload a new file to {0}', $node->name); ?></div>
-
-                    </div>
-                </div>
-            </a>
+            <?php echo $this->element('browser_item', [
+                'url' => ['controller' => 'Files', 'action' => 'add', $node->id],
+                'title' => __('Add File'),
+                'body' => __('Upload a new file to {0}', $node->name),
+                'icon' => 'fas fa-plus-circle',
+                'class' => "text-primary atlas-file-add"
+            ]); ?>
 
             <?php echo $this->Form->create(null, ['url' => ['controller' => 'Files', 'action' => 'add', $node->id], 'type' => 'file', 'class' => 'atlas-file-add-form d-none']) ?>
                 <?php $this->Form->unlockField('file'); ?>

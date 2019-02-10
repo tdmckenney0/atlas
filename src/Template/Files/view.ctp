@@ -26,15 +26,15 @@
 
     <?php if (!empty($file->nodes)): ?>
         <h2><?php echo __('Nodes'); ?></h2>
-        <div class="card">
+        <div class="list-group">
             <?php foreach ($file->nodes as $node): ?>
-                <div class="media p-3 border-bottom">
-                    <i class="mr-3 fas fa-folder " style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                    <div class="media-body overflow-hidden">
-                        <h5 class="mt-0"><?= $this->Html->link($node->name, ['controller' => 'Nodes', 'action' => 'view', $node->id]) ?></h5>
-                        <div class="text-muted"><?php echo h(substr($node->description, 0, 200)); ?>...</div>
-                    </div>
-                </div>
+                <?php echo $this->element('browser_item', [
+                    'url' => ['controller' => 'Nodes', 'action' => 'view', $node->id],
+                    'title' => $node->name,
+                    'body' => substr($node->description, 0, 200),
+                    'icon' => 'fas fa-folder',
+                    'class' => ""
+                ]); ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>

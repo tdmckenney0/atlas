@@ -9,9 +9,7 @@
     <li class="nav-item">
         <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Nodes</a>
     </li>
-    <li class="nav-item"><?= $this->Html->link(__('New Node'), ['action' => 'add'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
     <li class="nav-item"><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
 </ul>
 
 <hr />
@@ -19,16 +17,24 @@
 <?php echo $this->cell('Breadcrumb'); ?>
 
 <div class="nodes">
-    <div class="card">
+    <div class="list-group">
         <?php foreach ($nodes as $node): ?>
-            <div class="media p-3 border-bottom">
-                <i class="mr-3 fas fa-folder " style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                <div class="media-body">
-                    <h5 class="mt-0"><?= $this->Html->link($node->name, ['action' => 'view', $node->id]) ?></h5>
-                    <div class="text-muted"><?php echo h(substr($node->description, 0, 200)); ?>...</div>
-                </div>
-            </div>
+            <?php echo $this->element('browser_item', [
+                'url' => ['action' => 'view', $node->id],
+                'title' => $node->name,
+                'body' => substr($node->description, 0, 200),
+                'icon' => 'fas fa-folder',
+                'class' => ""
+            ]); ?>
         <?php endforeach; ?>
+
+        <?php echo $this->element('browser_item', [
+            'url' => ['action' => 'add'],
+            'title' => __('Add Node'),
+            'body' => __('Add a new top-level Node'),
+            'icon' => 'fas fa-folder-plus',
+            'class' => "text-primary"
+        ]); ?>
     </div>
 
     <nav class="paginator mt-3">

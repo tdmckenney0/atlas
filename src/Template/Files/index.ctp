@@ -4,13 +4,26 @@
  * @var \App\Model\Entity\File[]|\Cake\Collection\CollectionInterface $files
  */
 ?>
+
+<script type="text/javascript">
+    $(function() {
+        $('.atlas-file-add').unbind('click').click(function(event) {
+            event.preventDefault();
+            $('.atlas-file-add-form input[type="file"]').click();
+        });
+
+        $('.atlas-file-add-form input[type="file"]').change(function() {
+            if(atlas.think) atlas.think();
+            $(this).parent('form').submit();
+        });
+    });
+</script>
+
 <ul class="nav nav-pills flex-column flex-lg-row">
     <li class="nav-item"><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('New Node'), ['action' => 'add'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
     <li class="nav-item">
         <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Files</a>
     </li>
-    <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
 </ul>
 
 <hr />
@@ -18,16 +31,29 @@
 <?php echo $this->cell('Breadcrumb'); ?>
 
 <div class="files">
-    <div class="card">
+    <div class="list-group">
         <?php foreach ($files as $file): ?>
-            <div class="media p-3 border-bottom">
-                <i class="mr-3 fas fa-file-alt" style="font-size: 3rem; width: 3rem; height: 3rem;"></i>
-                <div class="media-body overflow-hidden">
-                    <h5 class="mt-0"><?= $this->Html->link($file->name, ['controller' => 'files', 'action' => 'view', $file->id]) ?></h5>
-                    <div class="text-muted"><?php echo __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type); ?></div>
-                </div>
-            </div>
+            <?php echo $this->element('browser_item', [
+                    'url' => ['controller' => 'files', 'action' => 'view', $file->id],
+                    'title' => $file->name,
+                    'body' => __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type),
+                    'icon' => 'fas fa-file-alt',
+                    'class' => ""
+                ]); ?>
         <?php endforeach; ?>
+
+        <?php echo $this->element('browser_item', [
+                'url' => ['controller' => 'Files', 'action' => 'add'],
+                'title' => __('Add File'),
+                'body' => __('Upload a new top-level file.'),
+                'icon' => 'fas fa-plus-circle',
+                'class' => "text-primary atlas-file-add"
+            ]); ?>
+
+        <?php echo $this->Form->create(null, ['url' => ['controller' => 'Files', 'action' => 'add'], 'type' => 'file', 'class' => 'atlas-file-add-form d-none']) ?>
+            <?php $this->Form->unlockField('file'); ?>
+            <input type="file" name="file" class="custom-file-input" id="customFile">
+        <?php echo $this->Form->end(); ?>
     </div>
 
     <nav class="paginator mt-3">
