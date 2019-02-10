@@ -35,13 +35,15 @@ class FilesController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($id = null, $node_id = null)
     {
         $file = $this->Files->get($id, [
             'contain' => ['Nodes']
         ]);
 
-        $this->set('file', $file);
+        $node = $this->Files->Nodes->findById($node_id)->first();
+
+        $this->set(compact('file', 'node'));
     }
 
     /**
@@ -89,23 +91,27 @@ class FilesController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($id = null, $node_id = null)
     {
         $file = $this->Files->get($id, [
             'contain' => ['Nodes']
         ]);
+        $node = $this->Files->Nodes->findById($node_id)->first();
         $children = array_column($file->nodes, 'id');
         if ($this->request->is(['patch', 'post', 'put'])) {
             $file = $this->Files->patchEntity($file, $this->request->getData());
             if ($this->Files->save($file)) {
                 $this->Flash->success(__('The file has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                if(!empty($node->id)) {
+                    return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $node->id]);
+                }
+                return $this->redirect(['action' => 'view', $file->id]);
             }
             $this->Flash->error(__('The file could not be saved. Please, try again.'));
         }
         $nodes = $this->Files->Nodes->find('list', ['limit' => 200]);
-        $this->set(compact('file', 'nodes', 'children'));
+        $this->set(compact('file', 'nodes', 'children', 'node'));
     }
 
     /**
@@ -115,16 +121,20 @@ class FilesController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($id = null, $node_id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $file = $this->Files->get($id);
+        $node = $this->Files->Nodes->findById($node_id)->first();
         if ($this->Files->delete($file)) {
             $this->Flash->success(__('The file has been deleted.'));
         } else {
             $this->Flash->error(__('The file could not be deleted. Please, try again.'));
         }
 
+        if(!empty($node->id)) {
+            return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $node->id]);
+        }
         return $this->redirect(['action' => 'index']);
     }
 }

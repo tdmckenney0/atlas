@@ -74,7 +74,7 @@
             <?php if (!empty($node->files)): ?>
                 <?php foreach ($node->files as $file): ?>
                     <?php echo $this->element('browser_item', [
-                        'url' => ['controller' => 'files', 'action' => 'view', $file->id],
+                        'url' => ['controller' => 'files', 'action' => 'view', $file->id, $node->id],
                         'title' => $file->name,
                         'body' => __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type),
                         'icon' => 'fas fa-file-alt',

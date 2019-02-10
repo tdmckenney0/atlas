@@ -18,17 +18,22 @@
 
 <?php echo $this->cell('Breadcrumb', [$parent_id, __('Add')]); ?>
 
+
+
 <div class="nodes form large-9 medium-8 columns content">
     <?= $this->Form->create($node) ?>
-    <fieldset>
-        <legend><?= __('Add Node') ?></legend>
+
+        <div class="overflow-hidden">
+            <h1 class="overflow-hidden"><?= __('Add Node') ?></h1>
+        </div>
+
         <?php
             echo $this->Form->control('parent_id', ['options' => $parentNodes, 'value' => $parent_id, 'empty' => " - Top Level - "]);
             echo $this->Form->control('name');
             echo $this->Form->control('description', ['required' => false]);
             echo $this->Form->control('files._ids', ['options' => $files]);
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+
+        <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
