@@ -39,7 +39,7 @@
                     <label class="custom-control-label" for="node-<?php echo $id; ?>"><?php echo $name; ?></label>
                 </div>
             </li>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </ul>
 
         <?= $this->Form->submit(__('Submit')) ?>
