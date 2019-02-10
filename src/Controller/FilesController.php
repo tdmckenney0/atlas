@@ -68,6 +68,9 @@ class FilesController extends AppController
             if ($this->Files->save($file)) {
                 $this->Flash->success(__('The file has been saved.'));
 
+                if(!empty($node->id)) {
+                    return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $node->id]);
+                }
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The file could not be saved. Please, try again.'));

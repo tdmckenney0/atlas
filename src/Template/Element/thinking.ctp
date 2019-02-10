@@ -14,12 +14,19 @@
   </div>
 </div>
 <script type="text/javascript">
-    $('a, button').not('.dont-think').click(function(e) {
+
+    if(!atlas) var atlas = {};
+
+    atlas.think = function() {
         $('#thinking').modal({
             keyboard: false,
             focus: true,
             show: true,
             backdrop: 'static'
         });
+    }
+
+    $('a, button, .think').not('.dont-think').click(function(e) {
+        atlas.think();
     });
 </script>

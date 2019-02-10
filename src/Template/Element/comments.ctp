@@ -2,7 +2,7 @@
 
     <div class="card mt-3">
         <div class="card-header font-weight-bold"><?php echo h($comment->user->email); ?></div>
-        <div class="card-body"><?php echo h($comment->body); ?></div>
+        <div class="card-body"><?php echo $this->cell('Markdown', [$comment->body]); ?></div>
         <div class="card-footer">
             <ul class="nav nav-pills">
                 <li class="nav-item">
