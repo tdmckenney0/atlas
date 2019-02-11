@@ -12,12 +12,14 @@ class CreateNodes extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('nodes');
-        $table->addColumn('parent_id', 'integer', [
+        $table = $this->table('nodes', ['id' => false, 'primary_key' => ['id']]);
+        $table->addColumn('id', 'uuid', [
             'default' => null,
-            'limit' => 11,
+            'null' => false,
+        ]);
+        $table->addColumn('parent_id', 'uuid', [
+            'default' => null,
             'null' => true,
-            'signed' => false
         ]);
         $table->addColumn('lft', 'integer', [
             'limit' => 11,
@@ -44,6 +46,9 @@ class CreateNodes extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        $table->addIndex(['parent_id']);
+        $table->addIndex(['lft']);
+        $table->addIndex(['rght']);
         $table->create();
     }
 }

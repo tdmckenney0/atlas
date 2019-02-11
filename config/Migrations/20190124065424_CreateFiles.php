@@ -22,6 +22,14 @@ class CreateFiles extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
+        $table->addColumn('created', 'datetime', [
+            'default' => null,
+            'null' => true,
+        ]);
+        $table->addColumn('modified', 'datetime', [
+            'default' => null,
+            'null' => true,
+        ]);
         $table->addColumn('file_extension', 'string', [
             'default' => null,
             'limit' =>  15,
@@ -32,12 +40,8 @@ class CreateFiles extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
-        $table->addIndex([
-            'id',
-        ], [
-            'name' => 'UNIQUE_ID',
-            'unique' => true,
-        ]);
+        $table->addIndex(['mime_type']);
+        $table->addIndex(['file_extension']);
         $table->create();
     }
 }

@@ -12,19 +12,22 @@ class CreateNodeComments extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('node_comments');
-        $table->addColumn('user_id', 'integer', [
-            'limit' => 11,
-            'null' => false,
-        ]);
-        $table->addColumn('node_id', 'integer', [
-            'limit' => 11,
-            'null' => false,
-        ]);
-        $table->addColumn('parent_id', 'integer', [
+        $table = $this->table('node_comments', ['id' => false, 'primary_key' => ['id']]);
+        $table->addColumn('id', 'uuid', [
             'default' => null,
-            'limit' => 11,
-            'null' => true,
+            'null' => false,
+        ]);
+        $table->addColumn('user_id', 'uuid', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('node_id', 'uuid', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('parent_id', 'uuid', [
+            'default' => null,
+            'null' => false,
         ]);
         $table->addColumn('lft', 'integer', [
             'signed' => true,
@@ -40,6 +43,11 @@ class CreateNodeComments extends AbstractMigration
             'default' => null,
             'null' => true,
         ]);
+        $table->addIndex(['user_id']);
+        $table->addIndex(['node_id']);
+        $table->addIndex(['parent_id']);
+        $table->addIndex(['lft']);
+        $table->addIndex(['rght']);
         $table->create();
     }
 }

@@ -13,8 +13,8 @@ class CreateNodesFiles extends AbstractMigration
     public function change()
     {
         $table = $this->table('nodes_files');
-        $table->addColumn('node_id', 'integer', [
-            'limit' => 11,
+        $table->addColumn('node_id', 'uuid', [
+            'default' => null,
             'null' => false,
         ]);
         $table->addColumn('file_id', 'char', [
@@ -33,9 +33,11 @@ class CreateNodesFiles extends AbstractMigration
             'node_id',
             'file_id',
         ], [
-            'name' => 'UNIQUE_NODE_OBJECT',
+            'name' => 'UNIQUE_NODE_FILE',
             'unique' => true,
         ]);
+        $table->addIndex(['node_id']);
+        $table->addIndex(['file_id']);
         $table->create();
     }
 }
