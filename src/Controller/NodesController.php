@@ -51,7 +51,7 @@ class NodesController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add(int $parent_id = null)
+    public function add($parent_id = null)
     {
         if(!empty($parent_id)) {
             $parent = $this->Nodes->get($parent_id);

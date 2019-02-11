@@ -64,7 +64,7 @@ class FilesController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add(int $node_id = null)
+    public function add($node_id = null)
     {
         $node = $this->Files->Nodes->findById($node_id)->first();
         $file = $this->Files->newEntity();

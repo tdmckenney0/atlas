@@ -71,7 +71,7 @@ class NodeCommentsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('id')
+            ->uuid('id')
             ->allowEmptyString('id', 'create');
 
         $validator

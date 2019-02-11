@@ -6,8 +6,8 @@ use Cake\ORM\Entity;
 /**
  * Node Entity
  *
- * @property int $id
- * @property int|null $parent_id
+ * @property string $id
+ * @property string|null $parent_id
  * @property int $lft
  * @property int $rght
  * @property string $name
@@ -15,8 +15,9 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\Node $parent_node
- * @property \App\Model\Entity\Node[] $child_nodes
+ * @property \App\Model\Entity\ParentNode $parent_node
+ * @property \App\Model\Entity\NodeComment[] $node_comments
+ * @property \App\Model\Entity\ChildNode[] $child_nodes
  * @property \App\Model\Entity\File[] $files
  */
 class Node extends Entity
@@ -40,6 +41,7 @@ class Node extends Entity
         'created' => true,
         'modified' => true,
         'parent_node' => true,
+        'node_comments' => true,
         'child_nodes' => true,
         'files' => true
     ];

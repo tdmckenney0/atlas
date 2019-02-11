@@ -8,6 +8,8 @@ use Cake\Filesystem\File as CakeFile;
  *
  * @property string $id
  * @property string $name
+ * @property \Cake\I18n\FrozenTime|null $created
+ * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $file_extension
  * @property string $mime_type
  *
@@ -15,7 +17,7 @@ use Cake\Filesystem\File as CakeFile;
  */
 class File extends Entity
 {
-    /**
+       /**
      * Absolute path to file storage.
      */
     const STORAGE = (ROOT . DS . 'files' . DS);
@@ -37,6 +39,8 @@ class File extends Entity
     protected $_accessible = [
         'id' => true,
         'name' => true,
+        'created' => true,
+        'modified' => true,
         'file_extension' => true,
         'mime_type' => true,
         'nodes' => true

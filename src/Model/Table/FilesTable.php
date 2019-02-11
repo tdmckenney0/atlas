@@ -23,6 +23,8 @@ use ArrayObject;
  * @method \App\Model\Entity\File patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\File[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\File findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class FilesTable extends Table
 {
@@ -44,6 +46,8 @@ class FilesTable extends Table
         $this->setTable('files');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
+
+        $this->addBehavior('Timestamp');
 
         $this->belongsToMany('Nodes', [
             'foreignKey' => 'file_id',

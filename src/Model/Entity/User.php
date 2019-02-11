@@ -7,11 +7,13 @@ use Cake\ORM\Entity;
 /**
  * User Entity
  *
- * @property int $id
+ * @property string $id
  * @property string $email
  * @property string $password
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ *
+ * @property \App\Model\Entity\NodeComment[] $node_comments
  */
 class User extends Entity
 {
@@ -29,7 +31,8 @@ class User extends Entity
         'email' => true,
         'password' => true,
         'created' => true,
-        'modified' => true
+        'modified' => true,
+        'node_comments' => true
     ];
 
     /**

@@ -49,7 +49,7 @@ class NodeCommentsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add(int $node_id, int $parent_id = null)
+    public function add($node_id, $parent_id = null)
     {
         $nodeComment = $this->NodeComments->newEntity();
         if ($this->request->is('post')) {
