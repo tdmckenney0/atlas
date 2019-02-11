@@ -38,7 +38,10 @@
     <script type="text/javascript">
     $(function() {
         $('textarea').each(function(e) {
-            this.simpleMde = new SimpleMDE({ element: $(this)[0] });
+            this.simpleMde = new SimpleMDE({
+                element: $(this).get(0),
+                spellChecker: false  // Helps with Mobile.
+            });
         });
     });
     </script>
