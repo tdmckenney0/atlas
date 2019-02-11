@@ -27,7 +27,7 @@ class CreateNodeComments extends AbstractMigration
         ]);
         $table->addColumn('parent_id', 'uuid', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('lft', 'integer', [
             'signed' => true,
