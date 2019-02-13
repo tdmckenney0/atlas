@@ -2,21 +2,9 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\NodeRevision $nodeRevision
+ * @var \App\Model\Entity\Node $node
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li> </li>
-        <li><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Node'), ['controller' => 'Nodes', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Parent Node Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Parent Node Revision'), ['controller' => 'NodeRevisions', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Child Node Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Child Node Revision'), ['controller' => 'NodeRevisions', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-
 <div class="nodes">
 
     <ul class="nav nav-pills flex-column flex-lg-row">
@@ -29,14 +17,14 @@
 
     <hr />
 
-    <?php echo $this->cell('Breadcrumb', [$nodeRevision->has('node') ? $nodeRevision->node->id : null, [
-        $this->Html->link(__('Revisions'), ['action' => 'index']),
-        $nodeRevision->id
+    <?php echo $this->cell('Breadcrumb', [$node->id, [
+        $this->Html->link(__('Revisions'), ['action' => 'index', $node->id]),
+        $nodeRevision->created
     ]]); ?>
 
     <h1 class="overflow-hidden"><?= h($nodeRevision->name) ?></h1>
 
-    <small class="text-muted"> <?= __('Created: ') . h($nodeRevision->created) ?></small>
+    <small class="text-muted"> <?= __('Created: {0}, by: {1}', $nodeRevision->created, $nodeRevision->has('user') ? $nodeRevision->user->email : __('Atlas')) ?></small>
 
     <div class="text-justify">
         <?php echo $this->cell('Markdown', [$nodeRevision->description]); ?>

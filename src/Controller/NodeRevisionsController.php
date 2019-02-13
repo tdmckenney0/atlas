@@ -13,19 +13,28 @@ use App\Controller\AppController;
 class NodeRevisionsController extends AppController
 {
 
+    public $paginate = [
+        'limit' => 10,
+        'order' => ['NodeRevisions.created' => 'DESC']
+    ];
+
     /**
      * Index method
      *
      * @return \Cake\Http\Response|void
      */
-    public function index()
+    public function index($node_id = null)
     {
+        $node = $this->NodeRevisions->Nodes->get($node_id);
+
         $this->paginate = [
-            'contain' => ['Nodes', 'ParentNodeRevisions']
+            'contain' => ['Users'],
+            'conditions' => ['NodeRevisions.node_id' => $node->id]
         ];
         $nodeRevisions = $this->paginate($this->NodeRevisions);
 
-        $this->set(compact('nodeRevisions'));
+        $this->set(compact('nodeRevisions', 'node'));
+        $this->set('_serialize', ['nodeRevisions']);
     }
 
     /**
@@ -38,10 +47,12 @@ class NodeRevisionsController extends AppController
     public function view($id = null)
     {
         $nodeRevision = $this->NodeRevisions->get($id, [
-            'contain' => ['Nodes', 'ParentNodeRevisions', 'ChildNodeRevisions']
+            'contain' => ['Users', 'ParentNodeRevisions', 'ChildNodeRevisions']
         ]);
+        $node = $this->NodeRevisions->Nodes->get($nodeRevision->node_id);
 
-        $this->set('nodeRevision', $nodeRevision);
+        $this->set(compact('nodeRevision', 'node'));
+        $this->set('_serialize', ['nodeRevision']);
     }
 
     /**
