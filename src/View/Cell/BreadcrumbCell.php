@@ -31,7 +31,7 @@ class BreadcrumbCell extends Cell
      *
      * @return void
      */
-    public function display($id = null, string $last = null)
+    public function display($id = null, $append = null)
     {
         if(!empty($id)) {
             $this->loadModel('Nodes');
@@ -39,6 +39,6 @@ class BreadcrumbCell extends Cell
             $this->set('nodes', $nodes);
             $this->set('last_node', $nodes->last());
         }
-        $this->set('last', $last);
+        $this->set('append', $append);
     }
 }

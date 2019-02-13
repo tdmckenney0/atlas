@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb" class="overflow-hidden mt-3">
     <ol class="breadcrumb">
-        <?php if(!empty($nodes) || !empty($last)): ?>
+        <?php if(!empty($nodes) || !empty($append)): ?>
             <li class="breadcrumb-item active" aria-current="page"><?php echo $this->Html->link(__('Home'), ['controller' => 'nodes', 'action' => 'index']); ?></li>
         <?php else: ?>
             <li class="breadcrumb-item active">Home</li>
@@ -9,7 +9,7 @@
 
         <?php if(!empty($nodes)): ?>
             <?php foreach($nodes as $node): ?>
-                <?php if($last_node === $node && empty($last)): ?>
+                <?php if($last_node === $node && empty($append)): ?>
                     <li class="breadcrumb-item active"><?php echo h($node->name); ?></li>
                 <?php else: ?>
                     <li class="breadcrumb-item"><?php echo $this->Html->link($node->name, ['controller' => 'nodes', 'action' => 'view', $node->id]); ?></li>
@@ -17,8 +17,14 @@
             <?php endforeach; ?>
         <?php endif; ?>
 
-        <?php if(!empty($last)): ?>
-            <li class="breadcrumb-item active"><?php echo h($last); ?></li>
+        <?php if(!empty($append)): ?>
+            <?php if(is_array($append)): ?>
+                <?php foreach($append as $v): ?>
+                    <li class="breadcrumb-item <?php echo ($v == end($append) ? 'active' : ''); ?>"><?php echo trim($v); ?></li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <li class="breadcrumb-item active"><?php echo h($append); ?></li>
+            <?php endif; ?>
         <?php endif; ?>
     </ol>
 </nav>

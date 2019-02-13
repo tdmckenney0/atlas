@@ -4,9 +4,10 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Node Entity
+ * NodeRevision Entity
  *
  * @property string $id
+ * @property string $node_id
  * @property string|null $parent_id
  * @property int $lft
  * @property int $rght
@@ -15,13 +16,11 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\ParentNode $parent_node
- * @property \App\Model\Entity\NodeComment[] $node_comments
- * @property \App\Model\Entity\NodeRevision[] $node_revisions
- * @property \App\Model\Entity\ChildNode[] $child_nodes
- * @property \App\Model\Entity\File[] $files
+ * @property \App\Model\Entity\Node $node
+ * @property \App\Model\Entity\ParentNodeRevision $parent_node_revision
+ * @property \App\Model\Entity\ChildNodeRevision[] $child_node_revisions
  */
-class Node extends Entity
+class NodeRevision extends Entity
 {
 
     /**
@@ -34,6 +33,8 @@ class Node extends Entity
      * @var array
      */
     protected $_accessible = [
+        'node_id' => true,
+        'user_id' => true,
         'parent_id' => true,
         'lft' => true,
         'rght' => true,
@@ -41,10 +42,8 @@ class Node extends Entity
         'description' => true,
         'created' => true,
         'modified' => true,
-        'parent_node' => true,
-        'node_comments' => true,
-        'node_revisions' => true,
-        'child_nodes' => true,
-        'files' => true
+        'node' => true,
+        'parent_node_revision' => true,
+        'child_node_revisions' => true
     ];
 }

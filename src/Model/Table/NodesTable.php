@@ -5,6 +5,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use App\Model\Entity\Node;
+use App\Model\Entity\NodeRevision;
 
 /**
  * Nodes Model
@@ -50,12 +53,16 @@ class NodesTable extends Table
             'className' => 'Nodes',
             'foreignKey' => 'parent_id'
         ]);
-        $this->hasMany('NodeComments', [
-            'foreignKey' => 'node_id'
-        ]);
         $this->hasMany('ChildNodes', [
             'className' => 'Nodes',
             'foreignKey' => 'parent_id'
+        ]);
+
+        $this->hasMany('NodeComments', [
+            'foreignKey' => 'node_id'
+        ]);
+        $this->hasMany('NodeRevisions', [
+            'foreignKey' => 'node_id'
         ]);
         $this->belongsToMany('Files', [
             'foreignKey' => 'node_id',
@@ -102,5 +109,14 @@ class NodesTable extends Table
         $rules->add($rules->existsIn(['parent_id'], 'ParentNodes'));
 
         return $rules;
+    }
+
+    public function beforeSave(Event $event, Node $node, \ArrayObject $options)
+    {
+        if(!empty($node->id)) {
+            $prev = $this->get($node->id);
+            $newRevision = $this->NodeRevisions->createRevision($prev, (!empty($options['User']) ? $options['User'] : null));
+            $this->NodeRevisions->save($newRevision);
+        }
     }
 }
