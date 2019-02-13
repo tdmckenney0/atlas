@@ -51,7 +51,7 @@ class NodeRevisionsTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'joinType' => 'LEFT'
         ]);
         $this->belongsTo('Nodes', [
             'foreignKey' => 'node_id',

@@ -15,6 +15,7 @@ class NodeRevisionsController extends AppController
 
     public $paginate = [
         'limit' => 10,
+        'contain' => ['Users'],
         'order' => ['NodeRevisions.created' => 'DESC']
     ];
 
@@ -27,10 +28,9 @@ class NodeRevisionsController extends AppController
     {
         $node = $this->NodeRevisions->Nodes->get($node_id);
 
-        $this->paginate = [
-            'contain' => ['Users'],
+        $this->paginate = array_merge($this->paginate, [
             'conditions' => ['NodeRevisions.node_id' => $node->id]
-        ];
+        ]);
         $nodeRevisions = $this->paginate($this->NodeRevisions);
 
         $this->set(compact('nodeRevisions', 'node'));

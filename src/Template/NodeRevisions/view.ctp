@@ -30,10 +30,43 @@
         <?php echo $this->cell('Markdown', [$nodeRevision->description]); ?>
     </div>
 
-    <div class="my-3">
-        <h2>Next Revisions</h2>
-        <div class="list-group">
-            <?php if (!empty($nodeRevision->child_node_revisions)): ?>
+    <nav class="p-2">
+        <ul class="pagination justify-content-center">
+            <?php if(!empty($nodeRevision->parent_id)): ?>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="First">
+                        <span aria-hidden="true"><span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('First'); ?></span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', $nodeRevision->parent_id]); ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('Prev'); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Current"><?php echo h($nodeRevision->created); ?></a>
+            </li>
+            <?php if(!empty($nodeRevision->child_node_revisions) && count($nodeRevision->child_node_revisions) == 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', reset($nodeRevision->child_node_revisions)->id]); ?>" aria-label="Next">
+                        <?php echo __('Next'); ?>&nbsp;<span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="" aria-label="Last">
+                        <span aria-hidden="true"><?php echo __('Last'); ?>&nbsp;<span aria-hidden="true">&raquo;</span></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
+    <?php if (!empty($nodeRevision->child_node_revisions) && count($nodeRevision->child_node_revisions) > 1): ?>
+        <div class="my-3">
+            <h2><?php echo __('Branch Split'); ?></h2>
+            <div class="list-group">
                 <?php foreach ($nodeRevision->child_node_revisions as $child): ?>
                     <?php echo $this->element('browser_item', [
                         'url' => ['action' => 'view', $child->id],
@@ -43,7 +76,7 @@
                         'class' => ""
                     ]); ?>
                 <?php endforeach; ?>
-            <?php endif; ?>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 </div>
