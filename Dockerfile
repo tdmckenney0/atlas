@@ -44,6 +44,9 @@ RUN a2enmod rewrite
 #copy source files and run composer
 COPY . $APP_HOME
 
+# Get the INI file installed.
+COPY ./php.ini /usr/local/etc/php
+
 # install all PHP dependencies
 RUN composer install --no-interaction
 
