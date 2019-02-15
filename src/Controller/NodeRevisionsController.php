@@ -66,12 +66,12 @@ class NodeRevisionsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $nodeRevision = $this->NodeRevisions->get($id);
+        $this->NodeRevisions->removeFromTree($nodeRevision);
         if ($this->NodeRevisions->delete($nodeRevision)) {
             $this->Flash->success(__('The node revision has been deleted.'));
         } else {
             $this->Flash->error(__('The node revision could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', $nodeRevision->node_id]);
     }
 }
