@@ -55,14 +55,17 @@ class NodesTable extends Table
             'foreignKey' => 'parent_id'
         ]);
         $this->hasMany('ChildNodes', [
+            'dependent' => true,
             'className' => 'Nodes',
             'foreignKey' => 'parent_id'
         ]);
 
         $this->hasMany('NodeComments', [
+            'dependent' => true,
             'foreignKey' => 'node_id'
         ]);
         $this->hasMany('NodeRevisions', [
+            'dependent' => true,
             'foreignKey' => 'node_id'
         ]);
         $this->belongsToMany('Files', [
