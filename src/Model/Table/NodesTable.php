@@ -8,6 +8,7 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use App\Model\Entity\Node;
 use App\Model\Entity\NodeRevision;
+use App\Model\Entity\User;
 
 /**
  * Nodes Model
@@ -111,12 +112,16 @@ class NodesTable extends Table
         return $rules;
     }
 
-    public function beforeSave(Event $event, Node $node, \ArrayObject $options)
+    public function createRevision(Node &$node = null, User $user = null)
     {
         if(!empty($node->id)) {
-            $prev = $this->get($node->id);
-            $newRevision = $this->NodeRevisions->createRevision($prev, (!empty($options['User']) ? $options['User'] : null));
+            $newRevision = $this->NodeRevisions->createRevision($node, $user);
             $this->NodeRevisions->save($newRevision);
         }
+    }
+
+    public function beforeSave(Event $event, Node $node, \ArrayObject $options)
+    {
+        $this->createRevision($node, (!empty($options['User']) ? $options['User'] : null));
     }
 }

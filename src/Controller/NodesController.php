@@ -12,11 +12,6 @@ use App\Controller\AppController;
  */
 class NodesController extends AppController
 {
-    public function initialize()
-    {
-        parent::initialize();
-        $this->loadComponent('UserInjection');
-    }
     /**
      * Index method
      *
@@ -90,6 +85,7 @@ class NodesController extends AppController
             'contain' => ['Files']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->loadComponent('UserInjection');
             $node = $this->Nodes->patchEntity($node, $this->request->getData());
             if ($this->Nodes->save($node)) {
                 $this->Flash->success(__('The node has been saved.'));

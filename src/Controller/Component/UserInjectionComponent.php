@@ -34,6 +34,7 @@ class UserInjectionComponent extends Component implements EventListenerInterface
     {
         return [
             'Model.beforeSave' => 'injectUserIntoOptions',
+            'Model.beforeDelete' => 'injectUserIntoOptions',
         ];
     }
 
