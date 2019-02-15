@@ -15,10 +15,6 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
-use Cake\Event\Event;
-use Cake\Event\EventManager;
-use Cake\Datasource\EntityInterface;
-use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -85,14 +81,5 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         $this->loadComponent('Security');
-
-        /**
-         * Pass the current logged in user to Model.beforeSave.
-         */
-        EventManager::instance()->on('Model.beforeSave', ['priority' => -1], function(Event $event, EntityInterface $entity, \ArrayObject $options) {
-            if($this->Auth->user('id')) {
-                $options['User'] = TableRegistry::getTableLocator()->get('Users')->get($this->Auth->user('id'));
-            }
-        });
     }
 }

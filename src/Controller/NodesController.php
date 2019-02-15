@@ -12,6 +12,11 @@ use App\Controller\AppController;
  */
 class NodesController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('UserInjection');
+    }
     /**
      * Index method
      *
