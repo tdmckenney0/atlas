@@ -31,6 +31,6 @@
             echo $this->Form->control('files._ids', ['options' => $files]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div><?= $this->Form->button(__('Save')) ?></div>
     <?= $this->Form->end() ?>
 </div>

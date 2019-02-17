@@ -90,9 +90,10 @@ class NodesController extends AppController
             if ($this->Nodes->save($node)) {
                 $this->Flash->success(__('The node has been saved.'));
 
-                return $this->redirect(['action' => 'view', $node->id]);
+                // return $this->redirect(['action' => 'view', $node->id]);
+            } else {
+                $this->Flash->error(__('The node could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The node could not be saved. Please, try again.'));
         }
         $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
         $files = $this->Nodes->Files->find('list', ['limit' => 200]);
