@@ -19,17 +19,21 @@
 <?php echo $this->cell('Breadcrumb', [$node->id, __('Revisions')]) ; ?>
 
 <div class="nodeRevisions">
-    <div class="list-group">
-        <?php foreach ($nodeRevisions as $nodeRevision): ?>
-            <?php echo $this->element('browser_item', [
-                'url' => ['action' => 'view', $nodeRevision->id],
-                'title' => $nodeRevision->created,
-                'body' => __('Created By: {0}', (!empty($nodeRevision->user->email) ? $nodeRevision->user->email : 'Atlas')),
-                'icon' => 'fas fa-clock',
-                'class' => ""
-            ]); ?>
-        <?php endforeach; ?>
-    </div>
+    <?php if(!$nodeRevisions->isEmpty()): ?>
+        <div class="list-group">
+            <?php foreach ($nodeRevisions as $nodeRevision): ?>
+                <?php echo $this->element('browser_item', [
+                    'url' => ['action' => 'view', $nodeRevision->id],
+                    'title' => $nodeRevision->created,
+                    'body' => __('Created By: {0}', (!empty($nodeRevision->user->email) ? $nodeRevision->user->email : 'Atlas')),
+                    'icon' => 'fas fa-clock',
+                    'class' => ""
+                ]); ?>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <div class="alert alert-info"><?php echo __('There are no revisions for this node. Edit it to create one!'); ?></div>
+    <?php endif; ?>
 
     <nav class="paginator mt-3">
         <ul class="pagination justify-content-center">
