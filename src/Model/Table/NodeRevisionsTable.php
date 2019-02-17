@@ -110,7 +110,15 @@ class NodeRevisionsTable extends Table
 
     public function findRecent(Query $query, array $options = null)
     {
-        return $query->order(['NodeRevisions.created' => 'DESC'])->limit(1);
+        return $query->where(['NodeRevisions.node_id' => $options['node_id']])
+                    ->order(['NodeRevisions.created' => 'DESC'])
+                    ->limit(1);
+    }
+
+    public function findRoot(Query $query, array $options = null)
+    {
+        return $query->where(['NodeRevisions.parent_id IS' => null, 'NodeRevisions.node_id' => $options['node_id']])
+                    ->limit(1);
     }
 
     /**
@@ -119,7 +127,7 @@ class NodeRevisionsTable extends Table
     public function createRevision(Node &$node = null, User &$user = null)
     {
         if(!empty($node)) {
-            $parent = $this->findByNodeId($node->id)->find('recent')->first();
+            $parent = $this->find('recent', ['node_id' => $node->id])->first();
 
             return $this->newEntity([
                 'node_id' => $node->id,

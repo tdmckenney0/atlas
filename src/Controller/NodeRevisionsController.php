@@ -47,12 +47,14 @@ class NodeRevisionsController extends AppController
     public function view($id = null)
     {
         $nodeRevision = $this->NodeRevisions->get($id, [
-            'contain' => ['Users', 'ParentNodeRevisions', 'ChildNodeRevisions']
+            'contain' => ['Users', 'Nodes', 'ParentNodeRevisions', 'ChildNodeRevisions']
         ]);
-        $node = $this->NodeRevisions->Nodes->get($nodeRevision->node_id);
 
-        $this->set(compact('nodeRevision', 'node'));
-        $this->set('_serialize', ['nodeRevision']);
+        $first = $this->NodeRevisions->find('root', ['node_id' => $nodeRevision->node_id])->first();
+        $last = $this->NodeRevisions->find('recent', ['node_id' => $nodeRevision->node_id])->first();
+
+        $this->set(compact('nodeRevision', 'first', 'last'));
+        $this->set('_serialize', ['nodeRevision','first', 'last']);
     }
 
     /**

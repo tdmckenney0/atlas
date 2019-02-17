@@ -17,8 +17,8 @@
 
     <hr />
 
-    <?php echo $this->cell('Breadcrumb', [$node->id, [
-        $this->Html->link(__('Revisions'), ['action' => 'index', $node->id]),
+    <?php echo $this->cell('Breadcrumb', [$nodeRevision->node_id, [
+        $this->Html->link(__('Revisions'), ['action' => 'index', $nodeRevision->node_id]),
         $nodeRevision->created
     ]]); ?>
 
@@ -33,11 +33,15 @@
     <nav class="p-2">
         <ul class="pagination justify-content-center">
             <?php if(!empty($nodeRevision->parent_id)): ?>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="First">
-                        <span aria-hidden="true"><span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('First'); ?></span>
-                    </a>
-                </li>
+
+                <?php if(!empty($first)): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', $first->id]); ?>" aria-label="First">
+                            <span aria-hidden="true"><span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('First'); ?></span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
                 <li class="page-item">
                     <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', $nodeRevision->parent_id]); ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('Prev'); ?>
@@ -54,11 +58,13 @@
                     </a>
                 </li>
 
-                <li class="page-item">
-                    <a class="page-link" href="" aria-label="Last">
-                        <span aria-hidden="true"><?php echo __('Last'); ?>&nbsp;<span aria-hidden="true">&raquo;</span></span>
-                    </a>
-                </li>
+                <?php if(!empty($last)): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', $last->id]); ?>" aria-label="Last">
+                            <span aria-hidden="true"><?php echo __('Last'); ?>&nbsp;<span aria-hidden="true">&raquo;</span></span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             <?php endif; ?>
         </ul>
     </nav>
