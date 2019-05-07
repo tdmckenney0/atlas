@@ -111,27 +111,40 @@ class FilesTable extends Table
      */
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-        if(!empty($data['file']) && is_uploaded_file($data['file']['tmp_name'])) {
-
-            $file = new CakeFile($data['file']['tmp_name'], false);
+        if(!empty($data['file'])) {
+            if($data['file'] instanceof CakeFile) {
+                $file = $data['file'];
+            } else if (is_uploaded_file($data['file']['tmp_name'])) {
+                $file = new CakeFile($data['file']['tmp_name'], false);
+            } else {
+                $file = new CakeFile($data['file'], false);
+            }
 
             if($file->exists()) {
 
-                $exts = [];
-
-                preg_match('/\w*$/', $data['file']['name'], $exts);
+                if(empty($data['name'])) {
+                    if(!($data['file'] instanceof CakeFile) && !empty($data['file']['name'])) {
+                        $data['name'] = $data['file']['name'];
+                    } else {
+                        $data['name'] = $file->name() . '.' . $file->ext();
+                    }
+                }
 
                 $data['id'] = hash_file('sha256', $file->path);
                 $data['mime_type'] = $file->mime();
-                $data['name'] = $data['file']['name'];
-                $data['file_extension'] = (!empty($exts[0]) ? $exts[0] : 'dunno');
+
+                $exts = [];
+
+                preg_match('/\w*$/', $data['name'], $exts);
+
+                $data['file_extension'] = array_pop($exts);
 
                 $filename = self::STORAGE . $data['id'] . '.' . $data['file_extension'];
 
                 $file->copy($filename, false);
                 $file->delete();
-                $file->close();
             }
+            $file->close();
         }
     }
 

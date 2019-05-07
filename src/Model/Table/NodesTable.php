@@ -9,6 +9,8 @@ use Cake\Event\Event;
 use App\Model\Entity\Node;
 use App\Model\Entity\NodeRevision;
 use App\Model\Entity\User;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File as CakeFile;
 
 /**
  * Nodes Model
@@ -126,5 +128,41 @@ class NodesTable extends Table
     public function beforeSave(Event $event, Node $node, \ArrayObject $options)
     {
         $this->createRevision($node, (!empty($options['User']) ? $options['User'] : null));
+    }
+
+    /**
+     *
+     */
+    public function importFromFolder(Node &$parent = null, Folder &$target = null)
+    {
+        if(!empty($target) && !empty($parent)) {
+            $dir = $target->read(true, false, true);
+
+            foreach($dir[1] as $tempFile) {
+                $tempFile = new CakeFile($tempFile);
+                $file = $this->Files->newEntity([
+                    'file' => $tempFile
+                ]);
+                if($this->Files->save($file)) {
+                    $this->Files->link($parent, [$file]);
+                }
+            }
+
+            foreach($dir[0] as $folder) {
+                $name = substr($folder, (strrpos($folder, DS) + 1));
+                $folder = new Folder($folder, false);
+                $child = $this->newEntity([
+                    'name' => $name,
+                    'parent_id' => $parent->id,
+                    'description' => 'This was a folder...'
+                ]);
+                if($this->save($child)) {
+                    $this->importFromFolder($child, $folder);
+                }
+            }
+
+
+        }
+        return $target;
     }
 }

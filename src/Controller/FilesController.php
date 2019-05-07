@@ -146,11 +146,11 @@ class FilesController extends AppController
     public function extract($id = null, $node_id = null)
     {
         $this->request->allowMethod(['get']);
-        $file = $this->Files->get($id);
         $node = $this->Files->Nodes->findById($node_id)->first();
-        $folder = $file->decompress();
-        $folder->delete();
         if(!empty($node->id)) {
+            $file = $this->Files->get($id);
+            $folder = $file->decompress();
+            $this->Files->Nodes->importFromFolder($node, $folder)->delete();
             return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $node->id]);
         }
         return $this->redirect(['action' => 'index']);

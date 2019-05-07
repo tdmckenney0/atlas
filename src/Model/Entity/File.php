@@ -85,8 +85,6 @@ class File extends Entity
 
         $zip = new \ZipArchive();
 
-        \Cake\Log\Log::write('error', $destination->path);
-
         if($zip->open($this->File->path) === true) {
             $zip->extractTo($destination->path);
             $zip->close();
