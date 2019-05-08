@@ -118,7 +118,7 @@ class FilesTable extends Table
     public function importFromFile(CakeFile $file = null, Node $node = null, Array $options = null)
     {
         // Don't import hidden files.
-        if(!empty($file) && strpos($file->name(), '.') !== 1 && $file->exists()) {
+        if(!empty($file) && strpos($file->name(), '.') !== 0 && $file->exists()) {
 
             $data = [
                 'id' => hash_file('sha256', $file->path),
