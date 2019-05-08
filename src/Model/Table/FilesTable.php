@@ -10,6 +10,7 @@ use Cake\Filesystem\File as CakeFile;
 use App\Model\Entity\File;
 use App\Model\Entity\Node;
 use ArrayObject;
+use Cake\Utility\Hash;
 
 /**
  * Files Model
@@ -148,7 +149,12 @@ class FilesTable extends Table
             }
 
             if(!empty($node)) {
-                $this->Nodes->Files->link($node, [$entity]);
+                $this->Nodes->loadInto($node, ['Files']);
+                $ids = Hash::extract($node->files, '{n}.id');
+
+                if(!in_array($entity->id, $ids)) {
+                    $this->Nodes->Files->link($node, [$entity]);
+                }
             }
 
             return $entity;
