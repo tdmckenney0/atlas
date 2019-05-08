@@ -34,7 +34,12 @@ use Cake\Filesystem\File as CakeFile;
  */
 class NodesTable extends Table
 {
-
+    /**
+     * Folder names to avoid.
+     */
+    const FOLDERS_TO_IGNORE = [
+        '__MACOSX'
+    ];
     /**
      * Initialize method
      *
@@ -165,6 +170,9 @@ class NodesTable extends Table
 
             foreach($dir[0] as $folder) {
                 $name = substr($folder, (strrpos($folder, DS) + 1));
+                if(in_array($name, self::FOLDERS_TO_IGNORE)) {
+                   continue;
+                }
                 $folder = new Folder($folder, false);
                 $child = $this->newEntity([
                     'name' => $name,
