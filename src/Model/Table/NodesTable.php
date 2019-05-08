@@ -98,7 +98,7 @@ class NodesTable extends Table
         $validator
             ->scalar('description')
             ->requirePresence('description', 'create')
-            ->allowEmptyString('description', false);
+            ->allowEmptyString('description', true);
 
         return $validator;
     }
@@ -131,7 +131,12 @@ class NodesTable extends Table
     }
 
     /**
+     * importFromFolder
      *
+     * @param Node The parent node to extract to.
+     * @param Folder The target Folder object.
+     *
+     * @return Folder For method chaining.
      */
     public function importFromFolder(Node &$parent = null, Folder &$target = null)
     {
@@ -140,7 +145,22 @@ class NodesTable extends Table
 
             foreach($dir[1] as $tempFile) {
                 $tempFile = new CakeFile($tempFile);
-                $this->Files->importFromFile($tempFile, $parent);
+                if((strpos($tempFile->mime(), 'text/') !== false)) {
+                    $body = $tempFile->read();
+                    if ($tempFile->name() == 'overview') {
+                        $parent->description .= $body;
+                        $this->save($parent);
+                    } else {
+                        $child = $this->newEntity([
+                            'name' => $tempFile->name(),
+                            'parent_id' => $parent->id,
+                            'description' => $body
+                        ]);
+                        $this->save($child);
+                    }
+                } else {
+                    $this->Files->importFromFile($tempFile, $parent);
+                }
             }
 
             foreach($dir[0] as $folder) {
@@ -149,7 +169,7 @@ class NodesTable extends Table
                 $child = $this->newEntity([
                     'name' => $name,
                     'parent_id' => $parent->id,
-                    'description' => 'This was a folder...'
+                    'description' => ''
                 ]);
                 if($this->save($child)) {
                     $this->importFromFolder($child, $folder);
