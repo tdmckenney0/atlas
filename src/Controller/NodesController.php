@@ -117,6 +117,10 @@ class NodesController extends AppController
             $this->Flash->error(__('The node could not be deleted. Please, try again.'));
         }
 
+        if(!empty($node->parent_id)) {
+            return $this->redirect(['action' => 'view', $node->parent_id]);
+        }
+
         return $this->redirect(['action' => 'index']);
     }
 }
