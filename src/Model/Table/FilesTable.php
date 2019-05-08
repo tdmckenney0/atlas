@@ -8,6 +8,7 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Filesystem\File as CakeFile;
 use App\Model\Entity\File;
+use App\Model\Entity\Node;
 use ArrayObject;
 
 /**
@@ -107,49 +108,64 @@ class FilesTable extends Table
     }
 
     /**
+     * importFromFile
      *
+     * @param CakeFile The CakeFile object you want to import.
+     * @param Node The parent node.
+     *
+     * @return File The resulting entity, or null if failure.
      */
-    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+    public function importFromFile(CakeFile $file = null, Node $node = null, Array $options = null)
     {
-        if(!empty($data['file'])) {
-            if($data['file'] instanceof CakeFile) {
-                $file = $data['file'];
-            } else if (is_uploaded_file($data['file']['tmp_name'])) {
-                $file = new CakeFile($data['file']['tmp_name'], false);
+        // Don't import hidden files.
+        if(!empty($file) && strpos($file->name(), '.') !== 1 && $file->exists()) {
+
+            $data = [
+                'id' => hash_file('sha256', $file->path),
+            ];
+
+            if($this->exists($data)) {
+                $entity = $this->get($data['id']);
             } else {
-                $file = new CakeFile($data['file'], false);
-            }
+                $data['name'] = $options['name'] ?? $file->name() . '.' . $file->ext();
+                $data['mime_type'] = $options['mime_type'] ?? $file->mime();
+                $data['file_extension'] = $options['file_extension'] ?? $file->ext();
 
-            if($file->exists()) {
-
-                if(empty($data['name'])) {
-                    if(!($data['file'] instanceof CakeFile) && !empty($data['file']['name'])) {
-                        $data['name'] = $data['file']['name'];
-                    } else {
-                        $data['name'] = $file->name() . '.' . $file->ext();
-                    }
+                if(empty($data['file_extension'])) {
+                    $exts = [];
+                    preg_match('/\w*$/', $data['name'], $exts);
+                    $data['file_extension'] = array_pop($exts);
                 }
 
-                $data['id'] = hash_file('sha256', $file->path);
-                $data['mime_type'] = $file->mime();
+                $entity = $this->newEntity($data);
 
-                $exts = [];
-
-                preg_match('/\w*$/', $data['name'], $exts);
-
-                $data['file_extension'] = array_pop($exts);
+                if(!$this->save($entity)) {
+                    return null;
+                }
 
                 $filename = self::STORAGE . $data['id'] . '.' . $data['file_extension'];
-
                 $file->copy($filename, false);
-                $file->delete();
             }
-            $file->close();
+
+            if(!empty($node)) {
+                $this->Nodes->Files->link($node, [$entity]);
+            }
+
+            return $entity;
         }
+        return null;
     }
 
     /**
-     *
+     * beforeMarshal
+     */
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+    {
+
+    }
+
+    /**
+     * beforeDelete
      */
     public function beforeDelete(Event $event, File $entity, ArrayObject $options)
     {

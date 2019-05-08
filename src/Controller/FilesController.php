@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Filesystem\File as CakeFile;
 
 /**
  * Files Controller
@@ -67,10 +68,13 @@ class FilesController extends AppController
     public function add($node_id = null)
     {
         $node = $this->Files->Nodes->findById($node_id)->first();
-        $file = $this->Files->newEntity();
-        if ($this->request->is('post')) {
-            $file = $this->Files->patchEntity($file, $this->request->getData());
-            if ($this->Files->save($file)) {
+        $data = $this->request->getData();
+        if ($this->request->is('post') && !empty($data['file']['tmp_name']) && is_uploaded_file($data['file']['tmp_name'])) {
+            $temp = new CakeFile($data['file']['tmp_name']);
+            $file = $this->Files->importFromFile($temp, $node, [
+                'name' => $data['file']['name']
+            ]);
+            if (!empty($file)) {
                 $this->Flash->success(__('The file has been saved.'));
 
                 if(!empty($node->id)) {
@@ -80,6 +84,7 @@ class FilesController extends AppController
             }
             $this->Flash->error(__('The file could not be saved. Please, try again.'));
         }
+        $file = $this->Files->newEntity();
         $nodes = $this->Files->Nodes->find('list', ['limit' => 200]);
         $this->set(compact('file', 'nodes', 'node'));
     }

@@ -140,12 +140,7 @@ class NodesTable extends Table
 
             foreach($dir[1] as $tempFile) {
                 $tempFile = new CakeFile($tempFile);
-                $file = $this->Files->newEntity([
-                    'file' => $tempFile
-                ]);
-                if($this->Files->save($file)) {
-                    $this->Files->link($parent, [$file]);
-                }
+                $this->Files->importFromFile($tempFile, $parent);
             }
 
             foreach($dir[0] as $folder) {
@@ -160,8 +155,6 @@ class NodesTable extends Table
                     $this->importFromFolder($child, $folder);
                 }
             }
-
-
         }
         return $target;
     }
