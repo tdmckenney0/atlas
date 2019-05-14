@@ -76,6 +76,7 @@ class Node extends Entity
         $nodes->loadInto($this, [
             'Files',
             'ChildNodes',
+            'NodeRevisions',
             'NodeComments' => [
                 'conditions' => ['NodeComments.parent_id IS' => null]
             ]
@@ -95,6 +96,15 @@ class Node extends Entity
 
             foreach ($this->node_comments as $comment) {
                 $comments->write($comment->consolidate(), 'a');
+            }
+        }
+
+        if (!empty($this->node_revisions)) {
+            $revisions = new Folder($target->path . DS . 'revisions', true);
+
+            foreach ($this->node_revisions as $revision) {
+                $revisionFile = new CakeFile($revisions->path . DS . $revision->created->getTimestamp() . '.md', true);
+                $revisionFile->write($revision->description);
             }
         }
 
