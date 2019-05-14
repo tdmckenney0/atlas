@@ -66,8 +66,10 @@ class NodeComment extends Entity
 
         $buffer = $this->user->email . ': "' . trim($this->body) . '"' . PHP_EOL;
 
+        $level = $node_comments->behaviors()->Tree->getLevel($this);
+
         foreach ($this->child_node_comments as $child) {
-            $buffer .= "\t" . $child->consolidate();
+            $buffer .= str_repeat("\t", $level + 1) . $child->consolidate();
         }
 
         return $buffer;

@@ -89,10 +89,13 @@ class Node extends Entity
             $node->toFolder(new Folder($target->path . DS . $node->name, true));
         }
 
-        $comments = new CakeFile($target->path . DS . 'comments.md', true);
+        if (!empty($this->node_comments)) {
 
-        foreach ($this->node_comments as $comment) {
-            $comments->write($comment->consolidate(), 'a');
+            $comments = new CakeFile($target->path . DS . 'comments.md', true);
+
+            foreach ($this->node_comments as $comment) {
+                $comments->write($comment->consolidate(), 'a');
+            }
         }
 
         return $target;
