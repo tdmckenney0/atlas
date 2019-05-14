@@ -36,7 +36,14 @@ class TableOfContentsCell extends Cell
         $user = $this->request->getSession()->read('Auth.User.id');
         if(!empty($user)) {
             $this->loadModel('Nodes');
-            $nodes = $this->Nodes->find('threaded', ['contain' => ['Files']])->toArray();
+            $nodes = $this->Nodes->find('threaded', [
+                'contain' => [
+                    'Files' => [
+                        'sort' => ['Files.name' => 'ASC']
+                    ]
+                ],
+                'order' => ['Nodes.name' => 'ASC']
+            ])->toArray();
             $this->set(compact('nodes'));
         }
     }

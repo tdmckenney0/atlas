@@ -64,7 +64,10 @@ class NodesTable extends Table
         $this->hasMany('ChildNodes', [
             'dependent' => true,
             'className' => 'Nodes',
-            'foreignKey' => 'parent_id'
+            'foreignKey' => 'parent_id',
+            'sort' => [
+                'ChildNodes.name' => 'ASC'
+            ]
         ]);
 
         $this->hasMany('NodeComments', [
@@ -78,7 +81,10 @@ class NodesTable extends Table
         $this->belongsToMany('Files', [
             'foreignKey' => 'node_id',
             'targetForeignKey' => 'file_id',
-            'joinTable' => 'nodes_files'
+            'joinTable' => 'nodes_files',
+            'sort' => [
+                'Files.name' => 'ASC'
+            ]
         ]);
     }
 
