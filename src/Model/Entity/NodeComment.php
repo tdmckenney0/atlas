@@ -2,6 +2,9 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\ORM\TableRegistry;
+use Cake\Filesystem\File as CakeFile;
+use Cake\Filesystem\Folder;
 
 /**
  * NodeComment Entity
@@ -43,4 +46,30 @@ class NodeComment extends Entity
         'parent_node_comment' => true,
         'child_node_comments' => true
     ];
+
+    /**
+     * consolidate
+     *
+     * Grabs all child comments and writes concatenates them together
+     *
+     * @return String
+     */
+    public function consolidate()
+    {
+        static $node_comments;
+
+        if(!($node_comments instanceof App\Model\Table\NodeCommentsTable)) {
+            $node_comments = TableRegistry::getTableLocator()->get('NodeComments');
+        }
+
+        $node_comments->loadInto($this, ['ChildNodeComments', 'Users']);
+
+        $buffer = $this->user->email . ': "' . $this->body . '"' . PHP_EOL;
+
+        foreach ($this->child_node_comments as $child) {
+            $buffer .= "\t" . $child->consolidate();
+        }
+
+        return $buffer;
+    }
 }
