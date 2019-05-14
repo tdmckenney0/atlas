@@ -2,6 +2,10 @@
     <div class="p-3">
         <?php echo $this->Html->image($this->Url->build(['controller' => 'files', 'action' => 'get', $file->id]), ['class' => 'img-fluid']); ?>
     </div>
+<?php elseif($file->isAudio()): ?>
+    <div class="p-3">
+        <audio controls style="width: 100%;" src="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'get', $file->id]); ?>">Your browser does not support the <code>audio</code> element.</audio>
+    </div>
 <?php elseif($file->isCSV()): ?>
     <div class="table-responsive">
         <table class="table table-hover">

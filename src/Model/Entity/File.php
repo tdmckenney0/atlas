@@ -119,6 +119,11 @@ class File extends Entity
         return $this->isText() && ($this->file_extension == 'csv');
     }
 
+    public function isAudio()
+    {
+        return (strpos($this->mime_type, 'audio/') !== false);
+    }
+
     public function readlineCSV(int $length = 0, string $delimiter = ",", string $enclosure = '"', string $escape = "\\")
     {
         return fgetcsv($this->openFile()->handle, $length, $delimiter, $enclosure, $escape);
