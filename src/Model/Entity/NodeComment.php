@@ -64,7 +64,7 @@ class NodeComment extends Entity
 
         $node_comments->loadInto($this, ['ChildNodeComments', 'Users']);
 
-        $buffer = $this->user->email . ': "' . $this->body . '"' . PHP_EOL;
+        $buffer = $this->user->email . ': "' . trim($this->body) . '"' . PHP_EOL;
 
         foreach ($this->child_node_comments as $child) {
             $buffer .= "\t" . $child->consolidate();

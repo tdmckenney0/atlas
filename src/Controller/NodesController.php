@@ -38,9 +38,15 @@ class NodesController extends AppController
      */
     public function view($id = null)
     {
+        $ext = $this->request->param('_ext');
         $node = $this->Nodes->get($id, [
             'contain' => ['ParentNodes', 'Files', 'ChildNodes']
         ]);
+
+        if($ext == 'zip') {
+            $file = $node->toZip();
+            return $this->response->withFile($file->path);
+        }
 
         $this->set('node', $node);
         $this->set('_serialize', 'node');
