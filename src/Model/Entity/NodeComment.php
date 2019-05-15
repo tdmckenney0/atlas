@@ -50,7 +50,7 @@ class NodeComment extends Entity
     /**
      * consolidate
      *
-     * Grabs all child comments and writes concatenates them together
+     * Grabs all child comments and concatenates them together into a single text string.
      *
      * @return String
      */

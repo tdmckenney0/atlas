@@ -10,7 +10,17 @@ class MarkdownView extends View
      * Log Path
      */
     const LOG_PATH = LOGS . DS . 'pandoc.log';
-    const PANDOC_COMMAND = 'PATH=/usr/bin: pandoc -f markdown -o %s'; //
+
+    /**
+     * Default Pandoc Options
+     */
+    const PANDOC_MARGIN = '0.5in';
+    const PANDOC_DOC_CLASS = 'report';
+
+    /**
+     * Pandoc Command
+     */
+    const PANDOC_COMMAND = 'PATH=/usr/bin: pandoc -V documentclass:%s -V geometry:margin=%s --toc -f markdown -o %s';
 
     /**
      * JSON views are located in the 'json' sub directory for controllers' views.
@@ -35,7 +45,9 @@ class MarkdownView extends View
         $file = TMP . time() . rand() . '.' . $ext;
         $pipes = [];
 
-        $res = proc_open(sprintf(self::PANDOC_COMMAND, $file), [
+        $cmd = sprintf(self::PANDOC_COMMAND, self::PANDOC_DOC_CLASS, self::PANDOC_MARGIN, $file);
+
+        $res = proc_open($cmd, [
             ["pipe", "r"],
             ["pipe", "w"],
             ["file", self::LOG_PATH, 'a']

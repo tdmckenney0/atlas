@@ -52,6 +52,70 @@ class Node extends Entity
     ];
 
     /**
+     * _getTable
+     *
+     * Gets the Table object for this Entity.
+     *
+     * @return App\Model\Table\NodesTable
+     */
+    protected function _getTable()
+    {
+        return TableRegistry::getTableLocator()->get('Nodes');
+    }
+
+    /**
+     * _lazyLoad
+     *
+     * @param Array An array to feed into App\Model\Table\NodesTable::loadInto's second arg.
+     *
+     * @return EntityInterface|array
+     */
+    protected function _lazyLoad(Array $contain = [])
+    {
+        return $this->_getTable()->loadInto($this, $contain);
+    }
+
+    /**
+     * getLevel()
+     *
+     * Gets the current node's level in the tree.
+     *
+     * @return Int Level in the tree.
+     */
+    public function getLevel()
+    {
+        return $this->_getTable()->behaviors()->Tree->getLevel($this);
+    }
+
+    /**
+     * consolidate
+     *
+     * Grabs all child nodes and files and concatenates them together into a single markdown stream.
+     *
+     * @return String [Markdown]
+     */
+    public function consolidate()
+    {
+        $this->_lazyLoad(['Files', 'ChildNodes']);
+
+        $level = $this->getLevel();
+
+        $buffer = str_repeat('#', $level) . ' ' . trim($this->name) . PHP_EOL . PHP_EOL . trim($this->description) . PHP_EOL  . PHP_EOL;
+
+        foreach ($this->files as $file) {
+            if ($file->isImage() && $file->file_extension != 'psd') {
+                $buffer .= sprintf('![%s](%s)', $file->name, $file->File->path) . PHP_EOL . PHP_EOL . PHP_EOL;
+            }
+        }
+
+        foreach($this->child_nodes as $node) {
+            $buffer .= $node->consolidate();
+        }
+
+        return $buffer;
+    }
+
+    /**
      * toFolder
      *
      * Writes a node structure out to a folder.
@@ -67,13 +131,7 @@ class Node extends Entity
         $overview = new CakeFile($target->path . DS . 'overview.md', true);
         $overview->write($this->description);
 
-        static $nodes;
-
-        if(!($nodes instanceof App\Model\Table\NodesTable)) {
-            $nodes = TableRegistry::getTableLocator()->get('Nodes');
-        }
-
-        $nodes->loadInto($this, [
+        $this->_lazyLoad([
             'Files',
             'ChildNodes',
             'NodeRevisions',
