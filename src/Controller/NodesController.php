@@ -38,7 +38,7 @@ class NodesController extends AppController
      */
     public function view($id = null)
     {
-        $ext = $this->request->param('_ext');
+        $ext = $this->request->getParam('_ext');
         $node = $this->Nodes->get($id, [
             'contain' => ['ParentNodes', 'Files', 'ChildNodes']
         ]);
