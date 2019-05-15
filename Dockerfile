@@ -1,12 +1,15 @@
 #start with our base image (the foundation) - version 7.1.5
 FROM php:7.1.5-apache
 
+RUN sed -i '/jessie-updates/d' /etc/apt/sources.list
+
 #install all the system dependencies and enable PHP modules
 RUN apt-get update && apt-get install -y \
       libicu-dev \
       libpq-dev \
       pandoc \
       texlive-latex-base \
+      texlive-latex-recommended \
       texlive-fonts-recommended \
       libmcrypt-dev \
       mysql-client \
