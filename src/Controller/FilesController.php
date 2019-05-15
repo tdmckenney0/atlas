@@ -85,7 +85,7 @@ class FilesController extends AppController
             $this->Flash->error(__('The file could not be saved. Please, try again.'));
         }
         $file = $this->Files->newEntity();
-        $nodes = $this->Files->Nodes->find('list', ['limit' => 200]);
+        $nodes = $this->Files->Nodes->find('list', ['limit' => 200, 'order' => ['Nodes.name' => 'ASC']]);
         $this->set(compact('file', 'nodes', 'node'));
     }
 
@@ -115,7 +115,7 @@ class FilesController extends AppController
             }
             $this->Flash->error(__('The file could not be saved. Please, try again.'));
         }
-        $nodes = $this->Files->Nodes->find('list', ['limit' => 200]);
+        $nodes = $this->Files->Nodes->find('list', ['limit' => 200, 'order' => ['Nodes.name' => 'ASC']]);
         $this->set(compact('file', 'nodes', 'children', 'node'));
     }
 
