@@ -178,12 +178,14 @@ class Node extends Entity
      */
     public function toZip()
     {
-        $zipFile = new CakeFile(TMP . DS . $this->id . '.zip', true);
+        $zipFile = new CakeFile(TMP . DS . $this->id . '.zip', false);
         $folder = $this->toFolder();
 
         if ($zipFile->exists()) {
-            $zipFile->write('', 'w', true);
+            $zipFile->delete();
         }
+
+	/*
 
         $zip = new \ZipArchive();
         $zip->open($zipFile->path);
@@ -200,6 +202,15 @@ class Node extends Entity
         }
 
         $zip->close();
+	*/
+
+	$logFile = LOGS . DS . 'zip.log';
+	$cmd = sprintf("zip -r %s %s 2>&1 >> %s", $zipFile->pwd(), $folder->path, $logFile);
+
+	file_put_contents($logFile, $cmd . PHP_EOL, FILE_APPEND | LOCK_EX);
+
+	$s = shell_exec($cmd);
+
         $folder->delete();
 
         return $zipFile;
