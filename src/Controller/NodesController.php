@@ -45,7 +45,10 @@ class NodesController extends AppController
 
         if($ext == 'zip') {
             $file = $node->toZip();
-            return $this->response->withFile($file->path);
+            return $this->response->withFile($file->path, [
+		'download' => true,
+		'name' => (trim($node->name) . '.zip')
+	    ]);
         }
 
         $this->set('node', $node);

@@ -125,7 +125,7 @@ class Node extends Entity
     public function toFolder(Folder $target = null)
     {
         if(empty($target)) {
-            $target = new Folder(TMP . DS . $this->id, true);
+            $target = new Folder(TMP . $this->id, true);
         }
 
         $overview = new CakeFile($target->path . DS . 'overview.md', true);
@@ -178,38 +178,19 @@ class Node extends Entity
      */
     public function toZip()
     {
-        $zipFile = new CakeFile(TMP . DS . $this->id . '.zip', false);
+        $zipFile = new CakeFile(TMP . $this->id . '.zip', false);
         $folder = $this->toFolder();
 
         if ($zipFile->exists()) {
             $zipFile->delete();
         }
 
-	/*
+        $logFile = LOGS . 'zip.log';
+        $cmd = sprintf("cd %s; zip -r %s * 2>&1", $folder->pwd(), $zipFile->pwd());
 
-        $zip = new \ZipArchive();
-        $zip->open($zipFile->path);
+        $result = shell_exec($cmd);
 
-        $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($folder->path), \RecursiveIteratorIterator::LEAVES_ONLY);
-
-        foreach($files as $name => $file) {
-            if (!$file->isDir()) {
-                $path = $file->getRealPath();
-                $relative = substr($path, strlen($folder->path));
-
-                $zip->addFile($path, $relative);
-            }
-        }
-
-        $zip->close();
-	*/
-
-	$logFile = LOGS . DS . 'zip.log';
-	$cmd = sprintf("zip -r %s %s 2>&1 >> %s", $zipFile->pwd(), $folder->path, $logFile);
-
-	file_put_contents($logFile, $cmd . PHP_EOL, FILE_APPEND | LOCK_EX);
-
-	$s = shell_exec($cmd);
+        file_put_contents($logFile, date('Y-m-d H:i:s') . ' $ ' . $cmd . PHP_EOL . $result . PHP_EOL, FILE_APPEND | LOCK_EX);
 
         $folder->delete();
 
