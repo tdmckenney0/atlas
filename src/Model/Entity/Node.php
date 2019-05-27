@@ -64,13 +64,13 @@ class Node extends Entity
     }
 
     /**
-     * _lazyLoad
+     * lazyLoad
      *
      * @param Array An array to feed into App\Model\Table\NodesTable::loadInto's second arg.
      *
      * @return EntityInterface|array
      */
-    protected function _lazyLoad(Array $contain = [])
+    public function lazyLoad(Array $contain = [])
     {
         return $this->_getTable()->loadInto($this, $contain);
     }
@@ -96,7 +96,7 @@ class Node extends Entity
      */
     public function consolidate()
     {
-        $this->_lazyLoad(['Files', 'ChildNodes']);
+        $this->lazyLoad(['Files', 'ChildNodes']);
 
         $level = $this->getLevel();
 
@@ -131,7 +131,7 @@ class Node extends Entity
         $overview = new CakeFile($target->path . DS . 'overview.md', true);
         $overview->write($this->description);
 
-        $this->_lazyLoad([
+        $this->lazyLoad([
             'Files',
             'ChildNodes',
             'NodeRevisions',
