@@ -27,8 +27,9 @@
             <h1 class="overflow-hidden"><?= __('Add Node') ?></h1>
         </div>
 
+        <?php $this->Form->unlockField('parent_id'); ?>
+        <?php echo $this->cell('NodePicker', [null, ['label' => 'Parent', 'name' => 'parent_id', 'value' => $parent_id]]); ?>
         <?php
-            echo $this->Form->control('parent_id', ['options' => $parentNodes, 'value' => $parent_id, 'empty' => " - Top Level - "]);
             echo $this->Form->control('name');
             echo $this->Form->control('description', ['required' => false]);
             echo $this->Form->control('files._ids', ['options' => $files]);

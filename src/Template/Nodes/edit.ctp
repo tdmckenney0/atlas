@@ -24,8 +24,9 @@
     <?= $this->Form->create($node) ?>
     <fieldset>
         <legend><?= __('Edit Node') ?></legend>
+        <?php $this->Form->unlockField('parent_id'); ?>
+        <?php echo $this->cell('NodePicker', [null, ['label' => 'Parent', 'name' => 'parent_id', 'value' => $node->parent_id, 'this' => $node]]); ?>
         <?php
-            echo $this->Form->control('parent_id', ['options' => $parentNodes, 'empty' => ' - None - ']);
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('files._ids', ['options' => $files]);

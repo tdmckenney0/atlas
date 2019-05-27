@@ -76,9 +76,8 @@ class NodesController extends AppController
             }
             $this->Flash->error(__('The node could not be saved. Please, try again.'));
         }
-        $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
         $files = $this->Nodes->Files->find('list', ['limit' => 200, 'order' => ['Files.name' => 'ASC']]);
-        $this->set(compact('node', 'parentNodes', 'files', 'parent_id'));
+        $this->set(compact('node', 'files', 'parent_id'));
     }
 
     /**
@@ -104,9 +103,8 @@ class NodesController extends AppController
                 $this->Flash->error(__('The node could not be saved. Please, try again.'));
             }
         }
-        $parentNodes = $this->Nodes->ParentNodes->find('list', ['limit' => 200]);
         $files = $this->Nodes->Files->find('list', ['limit' => 200, 'order' => ['Files.name' => 'ASC']]);
-        $this->set(compact('node', 'parentNodes', 'files'));
+        $this->set(compact('node', 'files'));
     }
 
     /**
