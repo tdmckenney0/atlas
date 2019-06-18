@@ -2,6 +2,7 @@
 namespace App\View\Cell;
 
 use Cake\View\Cell;
+use Cake\ORM\ResultSet;
 use \App\Model\Entity\Node;
 
 /**
@@ -25,6 +26,7 @@ class NodePickerCell extends Cell
      */
     public function initialize()
     {
+
     }
 
     /**
@@ -32,36 +34,45 @@ class NodePickerCell extends Cell
      *
      * @return void
      */
-    public function display(Node $node = null, Array $options = [])
+    public function display(string $name = 'node_id', string $label = 'Node Picker', $value = [], Node $current = null)
     {
-        if (!isset($options['top'])) {
-            $options['top'] = true;
-        }
-        if (!empty($options['value']) && is_string($options['value'])) {
-            $this->loadModel('Nodes');
-            $options['value'] = $this->Nodes->get($options['value']);
-        }
-        if (!empty($options['this']) && is_string($options['this'])) {
-            $this->loadModel('Nodes');
-            $options['this'] = $this->Nodes->get($options['this']);
-        }
-        if ($node === null) {
-            $this->loadModel('Nodes');
-            $nodes = $this->Nodes->find('all', [
-                'conditions' => ['Nodes.parent_id IS' => null],
-                'order' => ['Nodes.name' => 'ASC']
-            ])->toArray();
-            $this->set(compact('nodes'));
-        } else {
+        $this->loadModel('Nodes');
 
-            if (empty($node->child_nodes)) {
-                $node->lazyLoad([
-                    'ChildNodes'
-                ]);
-            }
-            $this->set('nodes', $node->child_nodes);
-            $this->set('current', $node);
+        if (is_string($value)) {
+            $value = [$value];
         }
-        $this->set('options', $options);
+
+        $nodes = $this->Nodes->find('all', [
+            'conditions' => ['Nodes.parent_id IS' => null],
+            'order' => ['Nodes.name' => 'ASC']
+        ])->all();
+
+        $selected = $this->Nodes->find('all')->where(['id' => $value], ['id' => 'string[]'])->all();
+
+        $this->set(compact('nodes', 'current', 'selected', 'name', 'label'));
+    }
+
+    /**
+     * Child display method
+     *
+     * @param Node The node to populate
+     * @param Node The current node, if available; A node cannot be its own parent!
+     * @param ResultSet ResultSet of currently selected nodes.
+     *
+     * @return void
+     */
+    public function child(Node $node, Node $current = null, ResultSet $selected = null)
+    {
+        if (empty($node->child_nodes)) {
+            $node->lazyLoad(['ChildNodes']);
+        }
+
+        $is_current = !empty($current) ? ($node->id == $current->id) : false;
+
+        $is_selected = !empty($selected) ? $selected->some(function($v) use ($node) {
+            return $v->id == $node->id;
+        }) : false;
+
+        $this->set(compact('node', 'current', 'selected', 'is_selected', 'is_current'));
     }
 }

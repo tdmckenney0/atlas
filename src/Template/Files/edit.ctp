@@ -19,28 +19,19 @@
 
 <?php echo $this->cell('Breadcrumb', [!empty($node->id) ? $node->id : null, __('Edit {0}', $file->name)]); ?>
 <div class="files overflow-hidden">
+
+    <div class="overflow-hidden">
+        <h1 class="overflow-hidden"><?= __('Edit {0}', $file->name) ?></h1>
+    </div>
+
+    <?php echo $this->cell('File', [$file->id]); ?>
+
     <?= $this->Form->create($file, ['type' => 'file']) ?>
-        <div class="overflow-hidden">
-            <h1 class="overflow-hidden"><?= __('Edit {0}', $file->name) ?></h1>
-        </div>
 
         <?php $this->Form->unlockField('nodes._ids'); ?>
 
         <?php echo $this->Form->control('name'); ?>
-
-        <h2 class="my-3"><?= __('Nodes') ?></h2>
-
-        <ul class="list-group my-3">
-            <?php foreach($nodes as $id => $name): ?>
-
-            <li class="list-group-item">
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" name="nodes[_ids][]" class="custom-control-input" value="<?php echo $id; ?>" <?php echo (in_array($id, $children) ? 'checked="checked"' : ''); ?> id="node-<?php echo $id; ?>">
-                    <label class="custom-control-label" for="node-<?php echo $id; ?>"><?php echo $name; ?></label>
-                </div>
-            </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php echo $this->cell('NodePicker', ['nodes._ids', 'Nodes', $children, null]); ?>
 
         <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>

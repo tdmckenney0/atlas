@@ -25,7 +25,7 @@
     <fieldset>
         <legend><?= __('Edit Node') ?></legend>
         <?php $this->Form->unlockField('parent_id'); ?>
-        <?php echo $this->cell('NodePicker', [null, ['label' => 'Parent', 'name' => 'parent_id', 'value' => $node->parent_id, 'this' => $node]]); ?>
+        <?php echo $this->cell('NodePicker', ['parent_id', 'Parent', $node->parent_id, $node]); ?>
         <?php
             echo $this->Form->control('name');
             echo $this->Form->control('description');
