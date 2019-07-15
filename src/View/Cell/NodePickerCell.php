@@ -47,7 +47,7 @@ class NodePickerCell extends Cell
             'order' => ['Nodes.name' => 'ASC']
         ])->all();
 
-        $selected = $this->Nodes->find('all')->where(['id' => $value], ['id' => 'string[]'])->all();
+        $selected = !empty($value) ? $this->Nodes->find('all')->where(['id' => $value], ['id' => 'string[]'])->all() : null;
 
         $this->set(compact('nodes', 'current', 'selected', 'name', 'label'));
     }

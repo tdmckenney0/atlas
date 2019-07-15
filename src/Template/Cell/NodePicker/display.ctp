@@ -32,9 +32,11 @@
     </div>
 
     <div class="hide node-picker-inputs">
-        <?php foreach($selected as $value): ?>
-            <?php echo $this->Form->control($name, ['type' => 'hidden', 'value' => $value->id]); ?>
-        <?php endforeach; ?>
+        <?php if(!empty($selected)): ?>
+            <?php foreach($selected as $value): ?>
+                <?php echo $this->Form->control($name, ['type' => 'hidden', 'value' => $value->id]); ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
     <div class="flex-column collapse" id="node-picker-top">
