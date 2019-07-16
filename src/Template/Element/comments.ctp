@@ -5,13 +5,13 @@
         <div class="card-body"><?php echo $this->cell('Markdown', [$comment->body]); ?></div>
         <div class="card-footer">
             <ul class="nav nav-pills">
-                <li class="nav-item">
+                <li class="">
                     <?= $this->Html->link(__('Reply'), ['controller' => 'NodeComments', 'action' => 'add', $comment->node_id, $comment->id], ['class' => 'nav-link border border-primary']) ?>
                 </li>
-                <li class="nav-item">
+                <li class="">
                     <?= $this->Html->link(__('Edit'), ['controller' => 'NodeComments', 'action' => 'edit', $comment->id], ['class' => 'nav-link text-secondary']) ?>
                 </li>
-                <li class="nav-item">
+                <li class="">
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'NodeComments', 'action' => 'delete', $comment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comment->id), 'class' => 'nav-link text-danger']) ?>
                 </li>
             </ul>

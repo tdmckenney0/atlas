@@ -19,29 +19,39 @@
     });
 </script>
 
+
+<?php $this->start('actions'); ?>
+    <ul class="">
+        <li class="">
+            <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
+        </li>
+        <li class=""><?= $this->Html->link(__('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['class' => '']) ?></li>
+        <li class=""><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => '']) ?></li>
+        <li class=""><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => '']) ?></li>
+        <li class=""><?= $this->Html->link(__('Export to Zip'), ['action' => 'view', $node->id, '_ext' => 'zip'], ['class' => '']) ?></li>
+        <li class=""><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => ' text-danger border border-danger']) ?></li>
+    </ul>
+<?php $this->end(); ?>
+
 <div class="nodes">
 
-    <ul class="nav nav-pills flex-column flex-lg-row">
-        <li class="nav-item">
-            <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
-        </li>
-        <li class="nav-item"><?= $this->Html->link(__('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Html->link(__('Export to Zip'), ['action' => 'view', $node->id, '_ext' => 'zip'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'flex-lg-fill text-sm-center nav-link text-danger border border-danger']) ?></li>
-    </ul>
-
-    <hr />
+    <section class="hero is-info">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title"><?= h($node->name) ?></h1>
+                <h2 class="subtitle">
+                    <small class="text-muted"> <?= __('Created: ') . h($node->created) ?></small>
+                    <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
+                </h2>
+            </div>
+        </div>
+    </section>
 
     <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
-    <h1 class="overflow-hidden"><?= h($node->name) ?></h1>
 
-    <small class="text-muted"> <?= __('Created: ') . h($node->created) ?></small>
-    <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
 
-    <div class="text-justify">
+    <div class="has-text-justified">
         <?php echo $this->cell('Markdown', [$node->description]); ?>
     </div>
 

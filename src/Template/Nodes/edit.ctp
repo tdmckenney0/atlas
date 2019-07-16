@@ -5,18 +5,18 @@
  */
 ?>
 
-<ul class="nav nav-pills flex-column flex-lg-row">
+<?php $this->start('actions'); ?>
+    <ul>
 
-    <li class="nav-item"><?= $this->Html->link(__('Overview'), ['action' => 'view', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item">
-        <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Edit Node</a>
-    </li>
-    <li class="nav-item"><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'flex-lg-fill text-sm-center nav-link text-danger border border-danger']) ?></li>
-</ul>
-
-<hr />
+        <li><?= $this->Html->link(__('Overview'), ['action' => 'view', $node->id], ['class' => '']) ?></li>
+        <li><?= $this->Html->link(__('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['class' => '']) ?></li>
+        <li>
+            <a class="" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Edit Node</a>
+        </li>
+        <li><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => '']) ?></li>
+        <li><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => ' text-danger border border-danger']) ?></li>
+    </ul>
+<?php $this->end('actions'); ?>
 
 <?php echo $this->cell('Breadcrumb', [$node->id, __('Edit')]); ?>
 

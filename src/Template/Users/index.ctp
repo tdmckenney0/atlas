@@ -4,11 +4,11 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
-<ul class="nav nav-pills flex-column flex-lg-row">
-    <li class="nav-item"><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item">
-        <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Users</a>
+<ul class="">
+    <li class=""><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => '']) ?></li>
+    <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
+    <li class="">
+        <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Users</a>
     </li>
 </ul>
 

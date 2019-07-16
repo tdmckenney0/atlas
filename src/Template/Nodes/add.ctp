@@ -4,21 +4,19 @@
  * @var \App\Model\Entity\Node $node
  */
 ?>
-<ul class="nav nav-pills flex-column flex-lg-row">
-    <li class="nav-item"><?= $this->Html->link(__('List Nodes'), ['action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item">
-        <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">New Node</a>
+<?php $this->start('actions'); ?>
+<ul class="">
+    <li class=""><?= $this->Html->link(__('List Nodes'), ['action' => 'index'], ['class' => '']) ?></li>
+    <li class="">
+        <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">New Node</a>
     </li>
 
-    <li class="nav-item"><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+    <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
+    <li class=""><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => '']) ?></li>
 </ul>
-
-<hr />
+<?php $this->end(); ?>
 
 <?php echo $this->cell('Breadcrumb', [$parent_id, __('Add')]); ?>
-
-
 
 <div class="nodes form large-9 medium-8 columns content">
     <?= $this->Form->create($node) ?>

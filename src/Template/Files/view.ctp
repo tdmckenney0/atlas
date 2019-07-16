@@ -4,18 +4,18 @@
  * @var \App\Model\Entity\File $file
  */
 ?>
-<ul class="nav nav-pills flex-column flex-lg-row">
-    <li class="nav-item">
-        <a class="flex-lg-fill text-sm-center nav-link active dont-think" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo __('Preview'); ?></a>
+<ul class="">
+    <li class="">
+        <a class=" active dont-think" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo __('Preview'); ?></a>
     </li>
-    <li class="nav-item"><?= $this->Html->link(__('Download File'), ['controller' => 'files', 'action' => 'get', $file->id], ['class' => 'flex-lg-fill text-sm-center nav-link dont-think', 'download' => (\Cake\Utility\Text::slug(strtolower($file->name)) . '.' . $file->file_extension)]) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('Edit File'), ['controller' => 'Files', 'action' => 'edit', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+    <li class=""><?= $this->Html->link(__('Download File'), ['controller' => 'files', 'action' => 'get', $file->id], ['class' => ' dont-think', 'download' => (\Cake\Utility\Text::slug(strtolower($file->name)) . '.' . $file->file_extension)]) ?></li>
+    <li class=""><?= $this->Html->link(__('Edit File'), ['controller' => 'Files', 'action' => 'edit', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
     <?php if($file->isCompressed()): ?>
-        <li class="nav-item"><?= $this->Html->link(__('Extract File'), ['controller' => 'Files', 'action' => 'extract', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+        <li class=""><?= $this->Html->link(__('Extract File'), ['controller' => 'Files', 'action' => 'extract', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
     <?php endif; ?>
-    <li class="nav-item"><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add', (!empty($node->id) ? $node->id : null)], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Form->postLink(__('Delete File'), ['action' => 'delete', $file->id, (!empty($node->id) ? $node->id : null)], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id), 'class' => 'flex-lg-fill text-sm-center nav-link border border-danger text-danger']) ?></li>
+    <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
+    <li class=""><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add', (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
+    <li class=""><?= $this->Form->postLink(__('Delete File'), ['action' => 'delete', $file->id, (!empty($node->id) ? $node->id : null)], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id), 'class' => ' border border-danger text-danger']) ?></li>
 </ul>
 
 <hr />

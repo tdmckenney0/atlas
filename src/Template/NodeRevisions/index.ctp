@@ -4,17 +4,17 @@
  * @var \App\Model\Entity\NodeRevision[]|\Cake\Collection\CollectionInterface $nodeRevisions
  */
 ?>
-<ul class="nav nav-pills flex-column flex-lg-row">
-    <li class="nav-item"><?= $this->Html->link(__('Overview'), ['controller' => 'Nodes', 'action' => 'view', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item">
-        <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo __('List Revisions'); ?></a>
-    </li>
-    <li class="nav-item"><?= $this->Html->link(__('Edit Node'), ['controller' => 'Nodes', 'action' => 'edit', $node->id], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('Export to PDF'), ['controller' => 'Nodes', 'action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Form->postLink(__('Delete Node'), ['controller' => 'Nodes', 'action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => 'flex-lg-fill text-sm-center nav-link text-danger border border-danger']) ?></li>
-</ul>
-
-<hr />
+<?php $this->start('actions'); ?>
+    <ul class="">
+        <li class=""><?= $this->Html->link(__('Overview'), ['controller' => 'Nodes', 'action' => 'view', $node->id], ['class' => '']) ?></li>
+        <li class="">
+            <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo __('List Revisions'); ?></a>
+        </li>
+        <li class=""><?= $this->Html->link(__('Edit Node'), ['controller' => 'Nodes', 'action' => 'edit', $node->id], ['class' => '']) ?></li>
+        <li class=""><?= $this->Html->link(__('Export to PDF'), ['controller' => 'Nodes', 'action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => '']) ?></li>
+        <li class=""><?= $this->Form->postLink(__('Delete Node'), ['controller' => 'Nodes', 'action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => ' text-danger border border-danger']) ?></li>
+    </ul>
+<?php $this->end(); ?>
 
 <?php echo $this->cell('Breadcrumb', [$node->id, __('Revisions')]) ; ?>
 

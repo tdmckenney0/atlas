@@ -5,22 +5,23 @@
  * @var \App\Model\Entity\Node $node
  */
 ?>
-<div class="nodes">
 
-    <ul class="nav nav-pills flex-column flex-lg-row">
-        <li class="nav-item">
-            <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
+<?php $this->start('actions'); ?>
+    <ul class="">
+        <li class="">
+            <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
         </li>
-        <li class="nav-item"><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $nodeRevision->id, '_ext' => 'pdf'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Form->postLink(__('Delete Revision'), ['action' => 'delete', $nodeRevision->id], ['confirm' => __('Are you sure you want to delete # {0}?', $nodeRevision->id), 'class' => 'flex-lg-fill text-sm-center nav-link text-danger border border-danger']) ?></li>
+        <li class=""><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $nodeRevision->id, '_ext' => 'pdf'], ['class' => '']) ?></li>
+        <li class=""><?= $this->Form->postLink(__('Delete Revision'), ['action' => 'delete', $nodeRevision->id], ['confirm' => __('Are you sure you want to delete # {0}?', $nodeRevision->id), 'class' => ' text-danger border border-danger']) ?></li>
     </ul>
+<?php $this->end(); ?>
 
-    <hr />
+<?php echo $this->cell('Breadcrumb', [$nodeRevision->node_id, [
+    $this->Html->link(__('Revisions'), ['action' => 'index', $nodeRevision->node_id]),
+    $nodeRevision->created
+]]); ?>
 
-    <?php echo $this->cell('Breadcrumb', [$nodeRevision->node_id, [
-        $this->Html->link(__('Revisions'), ['action' => 'index', $nodeRevision->node_id]),
-        $nodeRevision->created
-    ]]); ?>
+<div class="nodes">
 
     <h1 class="overflow-hidden"><?= h($nodeRevision->name) ?></h1>
 

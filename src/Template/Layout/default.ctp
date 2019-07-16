@@ -24,31 +24,10 @@
     </title>
     <?= $this->Html->meta('icon', '/img/xenolith_icon_white.png') ?>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script> -->
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-
-    <!-- <script type="text/javascript">
-    $(function() {
-        $('textarea').each(function(e) {
-            this.simpleMde = new SimpleMDE({
-                element: $(this).get(0),
-                spellChecker: false  // Helps with Mobile.
-            });
-        });
-    });
-    </script> -->
-
     <script type="text/javascript">
         $(function() {
             $('textarea').each(function(e) {
@@ -75,29 +54,29 @@
 
     </style>
 
+    <?php echo $this->Html->css('bulma-0.7.5/css/bulma.min'); ?>
+
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <aside class="col-sm-12 col-md-3 p-0 bg-primary overflow-hidden">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-md-column flex-row align-items-start py-2">
-                    <a class="navbar-brand" href="<?php echo $this->Url->build('/'); ?>">
+    <div class="container">
+        <div class="columns">
+            <aside class="is-primary column is-4 menu">
+
+                    <figure class="image" href="<?php echo $this->Url->build('/'); ?>">
                         <?php echo $this->Html->image('atlas_white.png', [
                             'height' => 30
                         ]); ?>
-                    </a>
-                    <button class="navbar-toggler dont-think" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse w-auto" id="navbarSupportedContent">
-                        <?php echo $this->cell('TableOfContents'); ?>
-                    </div>
-                </nav>
+                    </figure>
+                <p class="menu-label">Actions</p>
+                <?php echo $this->fetch('actions'); ?>
+
+                <p class="menu-label">Navigation</p>
+                <?php echo $this->cell('TableOfContents'); ?>
             </aside>
-            <main class="col col-md-9 my-3 min-vh-100">
+            <main class="column is-8">
                 <?= $this->Flash->render() ?>
                 <?= $this->fetch('content') ?>
             </main>

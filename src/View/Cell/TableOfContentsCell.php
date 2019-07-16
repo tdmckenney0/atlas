@@ -47,4 +47,14 @@ class TableOfContentsCell extends Cell
             $this->set(compact('nodes'));
         }
     }
+
+    /**
+     * Child Display Method.
+     *
+     * @return void
+     */
+    public function child($nodes)
+    {
+        $this->set(compact('nodes'));
+    }
 }

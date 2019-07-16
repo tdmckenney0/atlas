@@ -5,13 +5,15 @@
  */
 ?>
 
-<ul class="nav nav-pills flex-column flex-lg-row">
-    <li class="nav-item">
-        <a class="flex-lg-fill text-sm-center nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Nodes</a>
+<?php $this->start('actions'); ?>
+<ul class="">
+    <li class="">
+        <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Nodes</a>
     </li>
-    <li class="nav-item"><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
-    <li class="nav-item"><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'flex-lg-fill text-sm-center nav-link']) ?></li>
+    <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
+    <li class=""><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index'], ['class' => '']) ?></li>
 </ul>
+<?php $this->end(); ?>
 
 <hr />
 
