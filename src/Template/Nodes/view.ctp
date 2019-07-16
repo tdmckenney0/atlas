@@ -6,7 +6,7 @@
 ?>
 
 <script type="text/javascript">
-    $(function() {
+    /* $(function() {
         $('.atlas-file-add').unbind('click').click(function(event) {
             event.preventDefault();
             $('.atlas-file-add-form input[type="file"]').click();
@@ -16,100 +16,55 @@
             if(atlas.think) atlas.think();
             $(this).parent('form').submit();
         });
-    });
+    }); */
 </script>
 
-
 <?php $this->start('actions'); ?>
-    <ul class="">
-        <li class="">
-            <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
-        </li>
-        <li class=""><?= $this->Html->link(__('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['class' => '']) ?></li>
-        <li class=""><?= $this->Html->link(__('Edit Node'), ['action' => 'edit', $node->id], ['class' => '']) ?></li>
-        <li class=""><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => '']) ?></li>
-        <li class=""><?= $this->Html->link(__('Export to Zip'), ['action' => 'view', $node->id, '_ext' => 'zip'], ['class' => '']) ?></li>
-        <li class=""><?= $this->Form->postLink(__('Delete Node'), ['action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => ' text-danger border border-danger']) ?></li>
+    <ul class="menu-list">
+        <li class=""><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-clock']) . '&nbsp;' . __('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['escape' => false]) ?></li>
+        <li class=""><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-edit']) . '&nbsp;' . __('Edit Node'), ['action' => 'edit', $node->id], ['escape' => false]) ?></li>
+        <li class=""><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-pdf']) . '&nbsp;' . __('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['escape' => false]) ?></li>
+        <li class=""><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-archive']) . '&nbsp;' . __('Export to Zip'), ['action' => 'view', $node->id, '_ext' => 'zip'], ['escape' => false]) ?></li>
+        <li class=""><?= $this->Form->postLink($this->Html->tag('i', '', ['class' => 'fas fa-trash']) . '&nbsp;' . __('Delete Node'), ['action' => 'delete', $node->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => ' text-danger border border-danger']) ?></li>
     </ul>
 <?php $this->end(); ?>
 
+<?php $this->start('nodes'); ?>
+    <ul class="menu-list">
+        <?php if (!empty($node->child_nodes)): ?>
+            <?php foreach ($node->child_nodes as $child): ?>
+                <li><a href="<?php echo $this->Url->build(['action' => 'view', $child->id]); ?>"><i class="fas fa-folder"></i>&nbsp;<?php echo h($child->name); ?></a></li>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <li><a href="<?php echo $this->Url->build(['action' => 'add', $node->id]); ?>"><i class="fas fa-folder-plus"></i>&nbsp;<?php echo __('Add Node'); ?></a></li>
+    </ul>
+<?php $this->end(); ?>
+
+<?php $this->start('files'); ?>
+    <ul class="menu-list">
+        <?php if (!empty($node->child_nodes)): ?>
+            <?php foreach ($node->files as $file): ?>
+                <li><a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>"><i class="fas fa-file"></i>&nbsp;<?php echo h($file->name); ?></a></li>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <li><a title="<?php echo __('Add a new Node to {0}', $node->name); ?>" href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'add', $node->id]); ?>"><i class="fas fa-file-upload"></i>&nbsp;<?php echo __('Add File'); ?></a></li>
+    </ul>
+<?php $this->end(); ?>
+
+<?php echo $this->cell('Breadcrumb', [$node->id]); ?>
+
 <div class="nodes">
 
-    <section class="hero is-info">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title"><?= h($node->name) ?></h1>
-                <h2 class="subtitle">
-                    <small class="text-muted"> <?= __('Created: ') . h($node->created) ?></small>
-                    <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
-                </h2>
-            </div>
-        </div>
-    </section>
 
-    <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
+    <h1 class="title is-1"><?= h($node->name) ?></h1>
 
+    <div>
+        <small class="text-muted"> <?= __('Created: ') . h($node->created) ?></small>
+        <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
+    </div>
 
-
-    <div class="has-text-justified">
+    <div class="has-text-justified content">
         <?php echo $this->cell('Markdown', [$node->description]); ?>
-    </div>
-
-    <div class="my-3">
-        <h2>Nodes</h2>
-        <div class="list-group">
-            <?php if (!empty($node->child_nodes)): ?>
-                <?php foreach ($node->child_nodes as $child): ?>
-                    <?php echo $this->element('browser_item', [
-                        'url' => ['action' => 'view', $child->id],
-                        'title' => $child->name,
-                        'body' => substr($child->description, 0, 200),
-                        'icon' => 'fas fa-folder',
-                        'class' => ""
-                    ]); ?>
-                <?php endforeach; ?>
-            <?php endif; ?>
-
-            <?php echo $this->element('browser_item', [
-                'url' => ['action' => 'add', $node->id],
-                'title' => __('Add Node'),
-                'body' => __('Add a new Node to {0}', $node->name),
-                'icon' => 'fas fa-folder-plus',
-                'class' => "text-primary"
-            ]); ?>
-        </div>
-    </div>
-
-    <div class="my-3">
-        <h2>Files</h2>
-        <div class="list-group">
-            <?php if (!empty($node->files)): ?>
-                <?php foreach ($node->files as $file): ?>
-                    <?php echo $this->element('browser_item', [
-                        'url' => ['controller' => 'files', 'action' => 'view', $file->id, $node->id],
-                        'title' => $file->name,
-                        'body' => __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type),
-                        'icon' => 'fas fa-file-alt',
-                        'class' => ""
-                    ]); ?>
-                <?php endforeach; ?>
-            <?php endif; ?>
-
-            <?php echo $this->element('browser_item', [
-                'url' => ['controller' => 'Files', 'action' => 'add', $node->id],
-                'title' => __('Add File'),
-                'body' => __('Upload a new file to {0}', $node->name),
-                'icon' => 'fas fa-plus-circle',
-                'class' => "text-primary atlas-file-add"
-            ]); ?>
-
-            <?php echo $this->Form->create(null, ['url' => ['controller' => 'Files', 'action' => 'add', $node->id], 'type' => 'file', 'class' => 'atlas-file-add-form d-none']) ?>
-                <?php $this->Form->unlockField('file'); ?>
-                <?php $this->Form->unlockField('nodes._ids'); ?>
-                <input type="file" name="file" class="custom-file-input" id="customFile">
-                <input type="checkbox" name="nodes[_ids][]" value="<?= h($node->id) ?>" checked="checked">
-            <?php echo $this->Form->end(); ?>
-        </div>
     </div>
 
     <?php echo $this->cell('Comments', [$node->id]); ?>

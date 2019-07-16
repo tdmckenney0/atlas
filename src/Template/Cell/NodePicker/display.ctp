@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $(function() {
+    /* $(function() {
 
         $('button.node-picker-select').click(function(e) {
             $('div.node-picker-field input').val($(this).attr('data-node-id'));
@@ -20,7 +20,7 @@
                 .removeClass('btn-outline-secondary')
                 .addClass('btn-warning');
         });
-    });
+    }); */
 
 </script>
 

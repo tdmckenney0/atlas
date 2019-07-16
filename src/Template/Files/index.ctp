@@ -6,7 +6,7 @@
 ?>
 
 <script type="text/javascript">
-    $(function() {
+    /* $(function() {
         $('.atlas-file-add').unbind('click').click(function(event) {
             event.preventDefault();
             $('.atlas-file-add-form input[type="file"]').click();
@@ -16,7 +16,7 @@
             if(atlas.think) atlas.think();
             $(this).parent('form').submit();
         });
-    });
+    }); */
 </script>
 
 <ul class="">

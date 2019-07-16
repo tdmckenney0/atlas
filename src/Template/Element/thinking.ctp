@@ -1,13 +1,13 @@
 <div class="modal thinking">
     <div class="modal-background"></div>
     <div class="modal-content">
-        <article class="message is-info">
+        <article class="message is-primary" style="margin: 1em;">
             <div class="message-header">
                 <?php $sayings = ['Trying to...', 'I got this...', 'One sec...', '#BigFacts...', 'mmmmk...', '"By the rings! Arbiter!"'];?>
                 <p><?php echo (rand(0, 50) == 5 ? __($sayings[rand(0, count($sayings) - 1)])  : __('Thinking...')); ?></p>
             </div>
             <div class="message-body">
-                <progress class="progress is-info" max="100">Unknown</progress>
+                <progress class="progress is-primary" max="100">Unknown</progress>
             </div>
         </article>
     </div>

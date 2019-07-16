@@ -1,4 +1,4 @@
-<div class="comments mt-3">
+<div class="content">
     <h2><?= __('Comments') ?></h2>
     <?php echo $this->element('comments', ['comments' => $comments]); ?>
 

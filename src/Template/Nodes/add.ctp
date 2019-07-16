@@ -26,7 +26,7 @@
         </div>
 
         <?php $this->Form->unlockField('parent_id'); ?>
-        <?php echo $this->cell('NodePicker', [null, ['label' => 'Parent', 'name' => 'parent_id', 'value' => $parent_id]]); ?>
+        <?php // echo $this->cell('NodePicker', [null, ['label' => 'Parent', 'name' => 'parent_id', 'value' => $parent_id]]); ?>
         <?php
             echo $this->Form->control('name');
             echo $this->Form->control('description', ['required' => false]);

@@ -29,12 +29,25 @@
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <script type="text/javascript">
-        $(function() {
-            $('textarea').each(function(e) {
-                this.EasyMDE = new EasyMDE({
-                    element: $(this).get(0)
-                });
-            });
+        document.addEventListener('readystatechange', docReady => {
+            if (event.target.readyState === 'complete') {
+
+                const sidebarToggle = document.querySelector('#sidebar-toggle');
+                const sidebarMenu = document.querySelector('#sidebar-menu');
+
+                /* document.querySelectorAll('textarea').forEach(function(v, k, o) {
+                    console.log(v);
+                    v.EasyMDE = new EasyMDE({
+                        element: v
+                    });
+                }); */
+
+                if (sidebarToggle != null && sidebarMenu != null) {
+                    sidebarToggle.addEventListener('click', sidebarToggleClick => {
+                        sidebarMenu.classList.toggle('is-hidden-mobile');
+                    });
+                }
+            }
         });
     </script>
 
@@ -47,7 +60,7 @@
             font-style: normal;
         }
 
-        h1,h2,h3,legend, .mg-bold {
+        h1,h2,h3,legend, .mg-bold,.menu-label {
             font-family: "microgramma-bold", system-ui, sans-serif;
             letter-spacing: 0.05em;
         }
@@ -61,27 +74,40 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="container">
-        <div class="columns">
-            <aside class="is-primary column is-4 menu">
+    <div class="columns" style="min-height: 100vh !important;">
+        <aside class="column is-4 has-background-primary" role="navigation" aria-label="main navigation" style="padding-bottom: 0em;">
+            <nav class="navbar is-primary">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="<?php echo $this->Url->build('/'); ?>">
+                        <?php echo $this->Html->image('atlas_white.png'); ?>
+                    </a>
 
-                    <figure class="image" href="<?php echo $this->Url->build('/'); ?>">
-                        <?php echo $this->Html->image('atlas_white.png', [
-                            'height' => 30
-                        ]); ?>
-                    </figure>
+                    <a id="sidebar-toggle" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+            </nav>
+            <div class="menu is-hidden-mobile has-text-light is-clipped" id="sidebar-menu" style="padding: 1em;">
                 <p class="menu-label">Actions</p>
                 <?php echo $this->fetch('actions'); ?>
 
+                <p class="menu-label">Nodes</p>
+                <?php echo $this->fetch('nodes'); ?>
+
+                <p class="menu-label">Files</p>
+                <?php echo $this->fetch('files'); ?>
+
                 <p class="menu-label">Navigation</p>
                 <?php echo $this->cell('TableOfContents'); ?>
-            </aside>
-            <main class="column is-8">
-                <?= $this->Flash->render() ?>
-                <?= $this->fetch('content') ?>
-            </main>
-        </div>
+            </div>
+        </aside>
+        <main class="column is-8 has-background-white" style="padding: 1em;">
+            <?= $this->Flash->render() ?>
+            <?= $this->fetch('content') ?>
+            <?php echo $this->element('thinking'); ?>
+        </main>
     </div>
-    <?php echo $this->element('thinking'); ?>
 </body>
 </html>
