@@ -43,4 +43,14 @@ class CommentsCell extends Cell
             $this->set(compact('comments', 'nodeComment', 'node_id'));
         }
     }
+
+    /**
+     * Comment display method.
+     *
+     * @return void
+     */
+    public function comment($comments = null)
+    {
+        $this->set(compact('comments'));
+    }
 }

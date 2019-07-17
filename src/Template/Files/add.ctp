@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\File $file
  */
 ?>
-<ul class="">
+<ul class="menu-list">
     <li class=""><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => '']) ?></li>
     <li class=""><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => '']) ?></li>
     <li class=""><?= $this->Html->link(__('List Files'), ['action' => 'index'], ['class' => '']) ?></li>

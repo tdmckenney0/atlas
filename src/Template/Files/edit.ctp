@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\File $file
  */
 ?>
-<ul class="">
+<ul class="menu-list">
     <li class=""><?= $this->Html->link(__('Preview'), ['controller' => 'Files', 'action' => 'view', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
     <li class=""><?= $this->Html->link(__('Download File'), ['controller' => 'files', 'action' => 'get', $file->id], ['class' => ' dont-think', 'download' => (\Cake\Utility\Text::slug(strtolower($file->name)) . '.' . $file->file_extension)]) ?></li>
     <li class="">

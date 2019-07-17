@@ -5,7 +5,7 @@
  */
 ?>
 
-<ul class="">
+<ul class="menu-list">
     <li class=""><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => '']) ?></li>
     <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
     <li class=""><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index'], ['class' => '']) ?></li>

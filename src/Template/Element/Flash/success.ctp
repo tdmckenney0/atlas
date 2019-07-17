@@ -1,1 +1,3 @@
-<div class="alert alert-success" role="alert"><?= $message ?></div>
+<article class="message is-success" role="message">
+  <div class="message-body"><?= $message ?></div>
+</article>

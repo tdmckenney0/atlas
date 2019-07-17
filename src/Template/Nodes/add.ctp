@@ -5,7 +5,7 @@
  */
 ?>
 <?php $this->start('actions'); ?>
-<ul class="">
+<ul class="menu-list">
     <li class=""><?= $this->Html->link(__('List Nodes'), ['action' => 'index'], ['class' => '']) ?></li>
     <li class="">
         <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">New Node</a>

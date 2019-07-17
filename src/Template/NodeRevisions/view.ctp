@@ -7,7 +7,7 @@
 ?>
 
 <?php $this->start('actions'); ?>
-    <ul class="">
+    <ul class="menu-list">
         <li class="">
             <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
         </li>

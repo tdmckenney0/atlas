@@ -6,16 +6,14 @@
 ?>
 
 <?php $this->start('actions'); ?>
-<ul class="">
-    <li class="">
-        <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Nodes</a>
-    </li>
-    <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
-    <li class=""><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index'], ['class' => '']) ?></li>
-</ul>
+    <ul class="menu-list">
+        <li class="">
+            <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Nodes</a>
+        </li>
+        <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
+        <li class=""><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index'], ['class' => '']) ?></li>
+    </ul>
 <?php $this->end(); ?>
-
-<hr />
 
 <?php echo $this->cell('Breadcrumb'); ?>
 

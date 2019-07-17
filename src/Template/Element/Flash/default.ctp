@@ -1,1 +1,3 @@
-<div class="alert alert-primary" role="alert"><?= $message ?></div>
+<article class="message is-info" role="info">
+  <div class="message-body"><?= $message ?></div>
+</article>

@@ -1,6 +1,5 @@
-<h1>Login</h1>
 <?= $this->Form->create() ?>
-<?= $this->Form->control('email') ?>
-<?= $this->Form->control('password') ?>
-<?= $this->Form->button('Login') ?>
+    <?= $this->Form->control('email') ?>
+    <?= $this->Form->control('password') ?>
+    <button class="button is-primary is-fullwidth">Login</button>
 <?= $this->Form->end() ?>

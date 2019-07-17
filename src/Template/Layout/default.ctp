@@ -75,7 +75,7 @@
 </head>
 <body>
     <div class="columns" style="min-height: 100vh !important;">
-        <aside class="column is-4 has-background-primary" role="navigation" aria-label="main navigation" style="padding-bottom: 0em;">
+        <aside class="column is-3 has-background-primary" role="navigation" aria-label="main navigation" style="padding-bottom: 0em;">
             <nav class="navbar is-primary">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="<?php echo $this->Url->build('/'); ?>">
@@ -90,20 +90,27 @@
                 </div>
             </nav>
             <div class="menu is-hidden-mobile has-text-light is-clipped" id="sidebar-menu" style="padding: 1em;">
-                <p class="menu-label">Actions</p>
-                <?php echo $this->fetch('actions'); ?>
 
-                <p class="menu-label">Nodes</p>
-                <?php echo $this->fetch('nodes'); ?>
+                <?php if($this->fetch('actions')): ?>
+                    <p class="menu-label">Actions</p>
+                    <?php echo $this->fetch('actions'); ?>
+                <?php endif; ?>
 
-                <p class="menu-label">Files</p>
-                <?php echo $this->fetch('files'); ?>
+                <?php if($this->fetch('nodes')): ?>
+                    <p class="menu-label">Nodes</p>
+                    <?php echo $this->fetch('nodes'); ?>
+                <?php endif; ?>
+
+                <?php if($this->fetch('files')): ?>
+                    <p class="menu-label">Files</p>
+                    <?php echo $this->fetch('files'); ?>
+                <?php endif; ?>
 
                 <p class="menu-label">Navigation</p>
                 <?php echo $this->cell('TableOfContents'); ?>
             </div>
         </aside>
-        <main class="column is-8 has-background-white" style="padding: 1em;">
+        <main class="column is-9 has-background-white" style="padding: 1em;">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
             <?php echo $this->element('thinking'); ?>

@@ -4,19 +4,24 @@
  * @var \App\Model\Entity\Node $node
  */
 ?>
-
 <script type="text/javascript">
-    /* $(function() {
-        $('.atlas-file-add').unbind('click').click(function(event) {
-            event.preventDefault();
-            $('.atlas-file-add-form input[type="file"]').click();
-        });
+    document.addEventListener('readystatechange', docReady => {
+        if (event.target.readyState === 'complete') {
+            const fileLink = document.querySelector('#add-file-to-node');
+            const fileInput = document.querySelector('#add-file-to-node-input');
+            const fileForm = document.querySelector('#add-file-to-node-form');
 
-        $('.atlas-file-add-form input[type="file"]').change(function() {
-            if(atlas.think) atlas.think();
-            $(this).parent('form').submit();
-        });
-    }); */
+            fileLink.addEventListener('click', event => {
+                event.preventDefault();
+                fileInput.dispatchEvent(new MouseEvent('click'));
+            });
+
+            fileInput.addEventListener('input', event => {
+                event.preventDefault();
+                fileForm.submit();
+            });
+        }
+    });
 </script>
 
 <?php $this->start('actions'); ?>
@@ -36,7 +41,7 @@
                 <li><a href="<?php echo $this->Url->build(['action' => 'view', $child->id]); ?>"><i class="fas fa-folder"></i>&nbsp;<?php echo h($child->name); ?></a></li>
             <?php endforeach; ?>
         <?php endif; ?>
-        <li><a href="<?php echo $this->Url->build(['action' => 'add', $node->id]); ?>"><i class="fas fa-folder-plus"></i>&nbsp;<?php echo __('Add Node'); ?></a></li>
+        <li><a href="<?php echo $this->Url->build(['action' => 'add', $node->id]); ?>"><i class="fas fa-folder-plus" ></i>&nbsp;<?php echo __('Add Node'); ?></a></li>
     </ul>
 <?php $this->end(); ?>
 
@@ -47,15 +52,13 @@
                 <li><a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>"><i class="fas fa-file"></i>&nbsp;<?php echo h($file->name); ?></a></li>
             <?php endforeach; ?>
         <?php endif; ?>
-        <li><a title="<?php echo __('Add a new Node to {0}', $node->name); ?>" href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'add', $node->id]); ?>"><i class="fas fa-file-upload"></i>&nbsp;<?php echo __('Add File'); ?></a></li>
+        <li><a id="add-file-to-node" title="<?php echo __('Add a new Node to {0}', $node->name); ?>" href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'add', $node->id]); ?>"><i class="fas fa-file-upload"></i>&nbsp;<?php echo __('Add File'); ?></a></li>
     </ul>
 <?php $this->end(); ?>
 
 <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
 <div class="nodes">
-
-
     <h1 class="title is-1"><?= h($node->name) ?></h1>
 
     <div>
@@ -65,6 +68,15 @@
 
     <div class="has-text-justified content">
         <?php echo $this->cell('Markdown', [$node->description]); ?>
+    </div>
+
+    <div class="is-hidden">
+        <?php echo $this->Form->create(null, ['url' => ['controller' => 'Files', 'action' => 'add', $node->id], 'type' => 'file', 'id' => 'add-file-to-node-form']) ?>
+            <?php $this->Form->unlockField('file'); ?>
+            <?php $this->Form->unlockField('nodes._ids'); ?>
+            <input type="file" name="file" id="add-file-to-node-input">
+            <input type="checkbox" name="nodes[_ids][]" value="<?= h($node->id) ?>" checked="checked">
+        <?php echo $this->Form->end(); ?>
     </div>
 
     <?php echo $this->cell('Comments', [$node->id]); ?>

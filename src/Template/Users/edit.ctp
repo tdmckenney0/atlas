@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<ul class="">
+<ul class="menu-list">
     <li class=""><?= $this->Html->link(__('Overview'), ['action' => 'view', $user->id], ['class' => '']) ?></li>
     <li class=""><?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => '']) ?></li>
     <li class="">
