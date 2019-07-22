@@ -4,17 +4,35 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
-<ul class="menu-list">
-    <li class=""><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => '']) ?></li>
-    <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
-    <li class="">
-        <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Users</a>
-    </li>
-</ul>
+<?php $this->start('actions'); ?>
+    <ul class="menu-list">
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Nodes', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-folder"></i>
+                </span>&nbsp;<?php echo __('List Nodes'); ?>
+            </a>
+        </li>
 
-<hr />
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-file-alt"></i>
+                </span>&nbsp;<?php echo __('List Files'); ?>
+            </a>
+        </li>
 
-<?php echo $this->cell('Breadcrumb'); ?>
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-user"></i>
+                </span>&nbsp;<?php echo __('List Users'); ?>
+            </a>
+        </li>
+    </ul>
+<?php $this->end(); ?>
+
+<h1 class="title is-1"><?php echo __('Users'); ?></h1>
 
 <div class="nodes">
     <div class="list-group">
@@ -38,7 +56,7 @@
     </div>
 
     <nav class="paginator mt-3">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination-list justify-content-center">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>

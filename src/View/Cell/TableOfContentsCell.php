@@ -2,7 +2,7 @@
 namespace App\View\Cell;
 
 use Cake\View\Cell;
-
+use App\Model\Entity\Node;
 /**
  * TableOfContents cell
  */
@@ -18,12 +18,25 @@ class TableOfContentsCell extends Cell
     protected $_validCellOptions = [];
 
     /**
+     *
+     */
+    protected static $currentNode = null;
+
+    /**
      * Initialization logic run at the end of object construction.
      *
      * @return void
      */
     public function initialize()
     {
+    }
+
+    /**
+     * setCurrentNode
+     */
+    public static function setCurrentNode(Node $node)
+    {
+        static::$currentNode = $node;
     }
 
     /**
@@ -43,8 +56,15 @@ class TableOfContentsCell extends Cell
                     ]
                 ],
                 'order' => ['Nodes.name' => 'ASC']
-            ])->toArray();
-            $this->set(compact('nodes'));
+            ])->all();
+
+            $path = null;
+
+            if (!empty(static::$currentNode)) {
+                $path = $this->Nodes->find('path', ['for' => static::$currentNode->id])->all()->extract('id');
+            }
+
+            $this->set(compact('nodes', 'path'));
         }
     }
 
@@ -53,8 +73,8 @@ class TableOfContentsCell extends Cell
      *
      * @return void
      */
-    public function child($nodes)
+    public function child($nodes = null, $path = null)
     {
-        $this->set(compact('nodes'));
+        $this->set(compact('nodes', 'path'));
     }
 }

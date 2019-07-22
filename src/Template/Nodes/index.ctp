@@ -7,18 +7,35 @@
 
 <?php $this->start('actions'); ?>
     <ul class="menu-list">
-        <li class="">
-            <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Nodes</a>
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Nodes', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-folder"></i>
+                </span>&nbsp;<?php echo __('List Nodes'); ?>
+            </a>
         </li>
-        <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
-        <li class=""><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index'], ['class' => '']) ?></li>
+
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-file-alt"></i>
+                </span>&nbsp;<?php echo __('List Files'); ?>
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-user"></i>
+                </span>&nbsp;<?php echo __('List Users'); ?>
+            </a>
+        </li>
     </ul>
 <?php $this->end(); ?>
 
-<?php echo $this->cell('Breadcrumb'); ?>
+<h1 class="title is-1"><?php echo __('Nodes'); ?></h1>
 
 <div class="nodes">
-    <div class="list-group">
         <?php foreach ($nodes as $node): ?>
             <?php echo $this->element('browser_item', [
                 'url' => ['action' => 'view', $node->id],
@@ -36,10 +53,9 @@
             'icon' => 'fas fa-folder-plus',
             'class' => "text-primary"
         ]); ?>
-    </div>
 
     <nav class="paginator mt-3">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination-list">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>

@@ -5,31 +5,35 @@
  */
 ?>
 
-<script type="text/javascript">
-    /* $(function() {
-        $('.atlas-file-add').unbind('click').click(function(event) {
-            event.preventDefault();
-            $('.atlas-file-add-form input[type="file"]').click();
-        });
+<?php $this->start('actions'); ?>
+    <ul class="menu-list">
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Nodes', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-folder"></i>
+                </span>&nbsp;<?php echo __('List Nodes'); ?>
+            </a>
+        </li>
 
-        $('.atlas-file-add-form input[type="file"]').change(function() {
-            if(atlas.think) atlas.think();
-            $(this).parent('form').submit();
-        });
-    }); */
-</script>
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-file-alt"></i>
+                </span>&nbsp;<?php echo __('List Files'); ?>
+            </a>
+        </li>
 
-<ul class="menu-list">
-    <li class=""><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => '']) ?></li>
-    <li class="">
-        <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">List Files</a>
-    </li>
-    <li class=""><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index'], ['class' => '']) ?></li>
-</ul>
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-user"></i>
+                </span>&nbsp;<?php echo __('List Users'); ?>
+            </a>
+        </li>
+    </ul>
+<?php $this->end(); ?>
 
-<hr />
-
-<?php echo $this->cell('Breadcrumb'); ?>
+<h1 class="title is-1"><?php echo __('Files'); ?></h1>
 
 <div class="files">
     <div class="list-group">
@@ -58,7 +62,7 @@
     </div>
 
     <nav class="paginator mt-3">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination-list justify-content-center">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>

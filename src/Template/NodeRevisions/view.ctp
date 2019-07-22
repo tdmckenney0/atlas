@@ -32,7 +32,7 @@
     </div>
 
     <nav class="p-2">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination-list justify-content-center">
             <?php if(!empty($nodeRevision->parent_id)): ?>
 
                 <?php if(!empty($first)): ?>

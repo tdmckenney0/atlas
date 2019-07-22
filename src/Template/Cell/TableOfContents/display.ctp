@@ -25,7 +25,7 @@
         </script>
 
         <ul class="menu-list">
-            <?php echo $this->cell('TableOfContents::child', [$nodes]); ?>
+            <?php echo $this->cell('TableOfContents::child', [$nodes, $path]); ?>
         </ul>
     </div>
 <?php endif; ?>

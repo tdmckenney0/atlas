@@ -1,9 +1,10 @@
 <?php if (!empty($nodes)): ?>
     <?php foreach($nodes as $node): ?>
         <li>
-            <a class="table-of-contents-node"><i class="fas fa-folder"></i>&nbsp;<?php echo __($node->name); ?></a>
-            <ul class="menu-list is-hidden table-of-contents-list">
-                <?php if(!empty($node->children)) echo $this->cell('TableOfContents::child', [$node->children]); ?>
+            <?php $active = (!empty($path) ? $path->contains($node->id) : false); ?>
+            <a class="table-of-contents-node"><i class="fas <?php echo $active ? 'fa-folder-open' : 'fa-folder'; ?>"></i>&nbsp;<?php echo __($node->name); ?></a>
+            <ul class="menu-list <?php echo $active ? '' : 'is-hidden'; ?> table-of-contents-list">
+                <?php if(!empty($node->children)) echo $this->cell('TableOfContents::child', [$node->children, $path]); ?>
 
                 <?php if(!empty($node->files)): ?>
                     <?php foreach($node->files as $file): ?>

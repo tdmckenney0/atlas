@@ -43,7 +43,7 @@
         </tbody>
     </table>
     <div class="paginator">
-        <ul class="pagination">
+        <ul class="pagination-list">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>

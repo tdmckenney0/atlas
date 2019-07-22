@@ -36,7 +36,7 @@
     <?php endif; ?>
 
     <nav class="paginator mt-3">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination-list justify-content-center">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>
