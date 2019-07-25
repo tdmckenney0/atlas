@@ -13,16 +13,30 @@ use App\Controller\AppController;
 class NodesController extends AppController
 {
     /**
+     * Pagination Settings
+     */
+    public $paginate = [];
+
+    /**
      * Index method
      *
      * @return \Cake\Http\Response|void
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['ParentNodes'],
-            'conditions' => ['Nodes.parent_id IS' => null]
-        ];
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $search = '%' . trim($search) . '%';
+            $this->paginate['conditions'] = [
+                'OR' => [
+                    'Nodes.name LIKE' => $search,
+                    'Nodes.description LIKE' => $search
+                ]
+            ];
+        } else {
+            $this->paginate['conditions'] = ['Nodes.parent_id IS' => null];
+        }
+
         $nodes = $this->paginate($this->Nodes);
 
         $this->set(compact('nodes'));

@@ -17,7 +17,7 @@
 <html>
 <head>
     <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
     <title>
         <?php echo __('Atlas: Collaboration System'); ?>:
         <?= $this->fetch('title') ?>
@@ -74,8 +74,8 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="columns" style="min-height: 100vh !important;">
-        <aside class="column is-3 has-background-primary" role="navigation" aria-label="main navigation" style="padding-bottom: 0em;">
+    <div class="columns" style="min-height: 100vh !important; margin: 0 !important;">
+        <aside class="column is-3 has-background-primary" role="navigation" aria-label="main navigation" style="padding: 0;">
             <nav class="navbar is-primary">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="<?php echo $this->Url->build('/'); ?>">
@@ -110,7 +110,7 @@
                 <?php echo $this->cell('TableOfContents'); ?>
             </div>
         </aside>
-        <main class="column is-9 has-background-white" style="padding: 1em;">
+        <main class="column is-9 has-background-white" style="">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
             <?php echo $this->element('thinking'); ?>

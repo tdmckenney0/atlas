@@ -33,26 +33,48 @@
     </ul>
 <?php $this->end(); ?>
 
-<h1 class="title is-1"><?php echo __('Nodes'); ?></h1>
 
-<div class="nodes">
+
+<div class="nodes container">
+    <h1 class="title is-1"><?php echo __('Nodes'); ?></h1>
+
+    <div class="box">
+        <form method="GET">
+            <div class="field has-addons is-horizontal">
+                <p class="control has-icons-left is-expanded">
+                    <input class="input" type="text" name="search" placeholder="Search" value="<?php echo h($_GET['search']); ?>">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </p>
+                <p class="control">
+                    <button type="submit" class="button is-primary">Search</button>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <div class="columns is-vcentered is-multiline">
         <?php foreach ($nodes as $node): ?>
-            <?php echo $this->element('browser_item', [
-                'url' => ['action' => 'view', $node->id],
-                'title' => $node->name,
-                'body' => substr($node->description, 0, 200),
-                'icon' => 'fas fa-folder',
-                'class' => ""
-            ]); ?>
+            <article class="column is-one-third">
+                <div class="box">
+                    <a href="<?php echo $this->Url->build(['action' => 'view', $node->id]); ?>" class="has-text-primary">
+                        <div class="columns is-vcentered is-mobile">
+                            <div class="column is-narrow">
+                                <span class="icon is-large">
+                                    <i class="fas fa-folder fa-3x"></i>
+                                </span>
+                            </div>
+                            <div class="column is-clipped">
+                                <strong style="white-space: nowrap;"><?php echo h($node->name); ?></strong><br />
+                                <small><?php echo h($node->created); ?></small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </article>
         <?php endforeach; ?>
-
-        <?php echo $this->element('browser_item', [
-            'url' => ['action' => 'add'],
-            'title' => __('Add Node'),
-            'body' => __('Add a new top-level Node'),
-            'icon' => 'fas fa-folder-plus',
-            'class' => "text-primary"
-        ]); ?>
+    </div>
 
     <nav class="paginator mt-3">
         <ul class="pagination-list">
