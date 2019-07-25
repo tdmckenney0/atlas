@@ -33,42 +33,22 @@
     </ul>
 <?php $this->end(); ?>
 
-<h1 class="title is-1"><?php echo __('Files'); ?></h1>
 
-<div class="files">
-    <div class="list-group">
-        <?php foreach ($files as $file): ?>
-            <?php echo $this->element('browser_item', [
-                    'url' => ['controller' => 'files', 'action' => 'view', $file->id],
-                    'title' => $file->name,
-                    'body' => __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type),
-                    'icon' => 'fas fa-file-alt',
-                    'class' => ""
-                ]); ?>
-        <?php endforeach; ?>
 
-        <?php echo $this->element('browser_item', [
-                'url' => ['controller' => 'Files', 'action' => 'add'],
-                'title' => __('Add File'),
-                'body' => __('Upload a new top-level file.'),
-                'icon' => 'fas fa-plus-circle',
-                'class' => "text-primary atlas-file-add"
-            ]); ?>
+<div class="container">
+    <h1 class="title is-1"><?php echo __('Files'); ?></h1>
 
-        <?php echo $this->Form->create(null, ['url' => ['controller' => 'Files', 'action' => 'add'], 'type' => 'file', 'class' => 'atlas-file-add-form d-none']) ?>
-            <?php $this->Form->unlockField('file'); ?>
-            <input type="file" name="file" class="custom-file-input" id="customFile">
-        <?php echo $this->Form->end(); ?>
-    </div>
+    <?php echo $this->cell('Browser', [function() use ($files) {
+        foreach($files as $file) {
+            $entry = new stdClass;
+            $entry->title = $file->name;
+            $entry->subtitle = __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type);
+            $entry->icon = 'fa-file-alt';
+            $entry->href = $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id]);
 
-    <nav class="paginator mt-3">
-        <ul class="pagination-list justify-content-center">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p class="text-center text-muted"><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </nav>
+            yield $entry;
+        }
+    }]); ?>
+
+    <?php echo $this->element('pager'); ?>
 </div>

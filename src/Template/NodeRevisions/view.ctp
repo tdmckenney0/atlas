@@ -69,21 +69,4 @@
             <?php endif; ?>
         </ul>
     </nav>
-
-    <?php if (!empty($nodeRevision->child_node_revisions) && count($nodeRevision->child_node_revisions) > 1): ?>
-        <div class="my-3">
-            <h2><?php echo __('Branch Split'); ?></h2>
-            <div class="list-group">
-                <?php foreach ($nodeRevision->child_node_revisions as $child): ?>
-                    <?php echo $this->element('browser_item', [
-                        'url' => ['action' => 'view', $child->id],
-                        'title' => $child->name,
-                        'body' => substr($child->description, 0, 200),
-                        'icon' => 'fas fa-folder',
-                        'class' => ""
-                    ]); ?>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    <?php endif; ?>
 </div>

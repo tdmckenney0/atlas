@@ -32,37 +32,20 @@
     </ul>
 <?php $this->end(); ?>
 
-<h1 class="title is-1"><?php echo __('Users'); ?></h1>
+<div class="container">
+    <h1 class="title is-1"><?php echo __('Users'); ?></h1>
 
-<div class="nodes">
-    <div class="list-group">
-        <?php foreach ($users as $user): ?>
-            <?php echo $this->element('browser_item', [
-                'url' => ['action' => 'view', $user->id],
-                'title' => $user->email,
-                'body' => substr($user->email, 0, 200),
-                'icon' => 'fas fa-user',
-                'class' => ""
-            ]); ?>
-        <?php endforeach; ?>
+    <?php echo $this->cell('Browser', [function() use ($users) {
+        foreach($users as $user) {
+            $entry = new stdClass;
+            $entry->title = $user->email;
+            $entry->subtitle = $user->created;
+            $entry->icon = 'fa-user';
+            $entry->href = $this->Url->build(['action' => 'view', $user->id]);
 
-        <?php echo $this->element('browser_item', [
-            'url' => ['action' => 'add'],
-            'title' => __('Add User'),
-            'body' => __('Add a new User'),
-            'icon' => 'fas fa-user-plus',
-            'class' => "text-primary"
-        ]); ?>
-    </div>
+            yield $entry;
+        }
+    }]); ?>
 
-    <nav class="paginator mt-3">
-        <ul class="pagination-list justify-content-center">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p class="text-center text-muted"><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </nav>
+    <?php echo $this->element('pager'); ?>
 </div>

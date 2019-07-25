@@ -18,31 +18,18 @@
 
 <?php echo $this->cell('Breadcrumb', [$node->id, __('Revisions')]) ; ?>
 
-<div class="nodeRevisions">
-    <?php if(!$nodeRevisions->isEmpty()): ?>
-        <div class="list-group">
-            <?php foreach ($nodeRevisions as $nodeRevision): ?>
-                <?php echo $this->element('browser_item', [
-                    'url' => ['action' => 'view', $nodeRevision->id],
-                    'title' => $nodeRevision->created,
-                    'body' => __('Created By: {0}', (!empty($nodeRevision->user->email) ? $nodeRevision->user->email : 'Atlas')),
-                    'icon' => 'fas fa-clock',
-                    'class' => ""
-                ]); ?>
-            <?php endforeach; ?>
-        </div>
-    <?php else: ?>
-        <div class="alert alert-info"><?php echo __('There are no revisions for this node. Edit it to create one!'); ?></div>
-    <?php endif; ?>
+<div class="container">
+    <?php echo $this->cell('Browser', [function() use ($nodeRevisions) {
+        foreach($nodeRevisions as $nodeRevision) {
+            $entry = new stdClass;
+            $entry->title = $nodeRevision->created;
+            $entry->subtitle = __('Created By: {0}', (!empty($nodeRevision->user->email) ? $nodeRevision->user->email : 'Atlas'));
+            $entry->icon = 'fa-clock';
+            $entry->href = $this->Url->build(['action' => 'view', $nodeRevision->id]);
 
-    <nav class="paginator mt-3">
-        <ul class="pagination-list justify-content-center">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p class="text-center text-muted"><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </nav>
+            yield $entry;
+        }
+    }]); ?>
+
+    <?php echo $this->element('pager'); ?>
 </div>
