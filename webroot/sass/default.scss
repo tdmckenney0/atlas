@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+$primary: #2800bc;
+$text-light: #EEE;
+
+// Menu
+$menu-item-color: $text-light;
+$menu-list-link-padding: 0.75em;
+
+@import "../bulma-0.7.5/bulma.sass";

@@ -2,13 +2,13 @@
     <div class="table-of-contents">
         <script type="text/javascript">
             document.addEventListener('readystatechange', docReady => {
-                if (event.target.readyState === 'complete') {
+                if (docReady.target.readyState === 'complete') {
                     const nodes = document.querySelectorAll('.table-of-contents .table-of-contents-node');
 
                     nodes.forEach((v, i, o) => {
                         const icon = v.querySelector('i.fas');
                         v.addEventListener('click', (click) => {
-                            event.preventDefault();
+                            // click.preventDefault();
                             v.nextElementSibling.classList.toggle('is-hidden');
 
                             if(icon) {

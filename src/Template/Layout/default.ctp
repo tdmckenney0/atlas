@@ -67,7 +67,7 @@
 
     </style>
 
-    <?php echo $this->Html->css('bulma-0.7.5/css/bulma.min'); ?>
+    <?php echo $this->Html->css('default'); ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

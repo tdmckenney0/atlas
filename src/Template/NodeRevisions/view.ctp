@@ -16,18 +16,18 @@
     </ul>
 <?php $this->end(); ?>
 
-<?php echo $this->cell('Breadcrumb', [$nodeRevision->node_id, [
-    $this->Html->link(__('Revisions'), ['action' => 'index', $nodeRevision->node_id]),
-    $nodeRevision->created
-]]); ?>
+<div class="container">
 
-<div class="nodes">
+    <?php echo $this->cell('Breadcrumb', [$nodeRevision->node_id, [
+        $this->Html->link(__('Revisions'), ['action' => 'index', $nodeRevision->node_id]),
+        $nodeRevision->created
+    ]]); ?>
 
-    <h1 class="overflow-hidden"><?= h($nodeRevision->name) ?></h1>
+    <h1 class="title is-1"><?= h($nodeRevision->name) ?></h1>
 
     <small class="text-muted"> <?= __('Created: {0}, by: {1}', $nodeRevision->created, $nodeRevision->has('user') ? $nodeRevision->user->email : __('Atlas')) ?></small>
 
-    <div class="text-justify">
+    <div class="is-justified content">
         <?php echo $this->cell('Markdown', [$nodeRevision->description]); ?>
     </div>
 
