@@ -12,7 +12,16 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+    /**
+     * Pagination Settings
+     */
+    public $paginate = [];
 
+    /**
+     * Login Method
+     *
+     * @return \Cake\Http\Response|void
+     */
     public function login()
     {
         $this->layout = 'login';
@@ -33,6 +42,16 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $search = '%' . trim($search) . '%';
+            $this->paginate['conditions'] = [
+                'OR' => [
+                    'Users.email LIKE' => $search
+                ]
+            ];
+        }
+
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));

@@ -14,9 +14,13 @@ use Cake\Filesystem\File as CakeFile;
 class FilesController extends AppController
 {
 
+    /**
+     * Pagination Settings
+     */
     public $paginate = [
-        'limit' => 10
+        'limit' => 20
     ];
+
     /**
      * Index method
      *
@@ -24,9 +28,20 @@ class FilesController extends AppController
      */
     public function index()
     {
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $search = '%' . trim($search) . '%';
+            $this->paginate['conditions'] = [
+                'OR' => [
+                    'Files.name LIKE' => $search
+                ]
+            ];
+        }
+
         $files = $this->paginate($this->Files);
 
         $this->set(compact('files'));
+        $this->set('_serialize', 'files');
     }
 
     /**

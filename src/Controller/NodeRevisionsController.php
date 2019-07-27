@@ -14,8 +14,8 @@ class NodeRevisionsController extends AppController
 {
 
     public $paginate = [
-        'limit' => 10,
-        'contain' => ['Users'],
+        'contain' => ['Users', 'Nodes'],
+        'conditions' => [],
         'order' => ['NodeRevisions.created' => 'DESC']
     ];
 
@@ -26,11 +26,23 @@ class NodeRevisionsController extends AppController
      */
     public function index($node_id = null)
     {
-        $node = $this->NodeRevisions->Nodes->get($node_id);
+        $search = $this->request->getQuery('search');
+        $node = null;
+        if (!empty($search)) {
+            $search = '%' . trim($search) . '%';
+            $this->paginate['conditions'] = [
+                'OR' => [
+                    'NodeRevisions.name LIKE' => $search,
+                    'NodeRevisions.description LIKE' => $search
+                ]
+            ];
+        }
 
-        $this->paginate = array_merge($this->paginate, [
-            'conditions' => ['NodeRevisions.node_id' => $node->id]
-        ]);
+        if (!empty($node_id)) {
+            $node = $this->NodeRevisions->Nodes->get($node_id);
+            $this->paginate['conditions'] = array_merge($this->paginate['conditions'], ['NodeRevisions.node_id' => $node->id]);
+        }
+
         $nodeRevisions = $this->paginate($this->NodeRevisions);
 
         $this->set(compact('nodeRevisions', 'node'));

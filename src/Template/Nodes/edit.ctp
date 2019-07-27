@@ -17,7 +17,7 @@
 
 <?php echo $this->cell('Breadcrumb', [$node->id, __('Edit')]); ?>
 
-<div class="nodes form large-9 medium-8 columns content">
+<div class="container">
     <?= $this->Form->create($node) ?>
     <fieldset>
         <legend><?= __('Edit Node') ?></legend>

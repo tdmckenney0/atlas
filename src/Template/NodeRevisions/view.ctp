@@ -11,7 +11,8 @@
         <li class="">
             <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
         </li>
-        <li class=""><?= $this->Html->link(__('Export to PDF'), ['action' => 'view', $nodeRevision->id, '_ext' => 'pdf'], ['class' => '']) ?></li>
+        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-pdf']) . '&nbsp;' . __('Export to PDF'), ['action' => 'view', $nodeRevision->id, '_ext' => 'pdf'], ['escape' => false]) ?></li>
+        <li><?= $this->Form->postLink($this->Html->tag('i', '', ['class' => 'fas fa-trash']) . '&nbsp;' . __('Delete Node'), ['action' => 'delete', $node->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete {0}?', $nodeRevision->created), 'class' => ' text-danger border border-danger']) ?></li>
         <li class=""><?= $this->Form->postLink(__('Delete Revision'), ['action' => 'delete', $nodeRevision->id], ['confirm' => __('Are you sure you want to delete # {0}?', $nodeRevision->id), 'class' => ' text-danger border border-danger']) ?></li>
     </ul>
 <?php $this->end(); ?>
