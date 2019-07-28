@@ -35,18 +35,17 @@
                 const sidebarToggle = document.querySelector('#sidebar-toggle');
                 const sidebarMenu = document.querySelector('#sidebar-menu');
 
-                /* document.querySelectorAll('textarea').forEach(function(v, k, o) {
-                    console.log(v);
-                    v.EasyMDE = new EasyMDE({
-                        element: v
-                    });
-                }); */
-
                 if (sidebarToggle != null && sidebarMenu != null) {
                     sidebarToggle.addEventListener('click', sidebarToggleClick => {
                         sidebarMenu.classList.toggle('is-hidden-mobile');
                     });
                 }
+
+                document.querySelectorAll('textarea').forEach(function(v, k, o) {
+                    v.EasyMDE = new EasyMDE({
+                        element: v
+                    });
+                });
             }
         });
     </script>
