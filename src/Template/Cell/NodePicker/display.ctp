@@ -1,47 +1,51 @@
-<script type="text/javascript">
-    /* $(function() {
+<div class="field node-picker">
+    <label class="label">Node Picker</label>
+    <div class="field">
+        <script type="text/javascript">
+            document.addEventListener('readystatechange', docReady => {
+                if (docReady.target.readyState === 'complete') {
+                    const nodes = document.querySelectorAll('.node-picker .node-picker-node');
+                    const inputs = document.querySelectorAll('.node-picker .node-picker-radio');
 
-        $('button.node-picker-select').click(function(e) {
-            $('div.node-picker-field input').val($(this).attr('data-node-id'));
-            $($(this).parents('div.collapse')).collapse('hide');
-            $('.node-picker-toggle')
-                .removeClass('btn-outline-secondary')
-                .addClass('btn-warning')
-                .html($(this).siblings('.node-picker-drop') .html());
-        });
+                    nodes.forEach((v, i, o) => {
+                        const icon = v.querySelector('i.fas');
+                        v.addEventListener('click', (click) => {
+                            if (click.target.tagName.toLowerCase() !== 'input') {
+                                click.preventDefault();
+                                v.nextElementSibling.classList.toggle('is-hidden');
 
-        $('button.node-picker-remove').click(function(e) {
-            $(this).parents('.node-picker-field')
-                .find('input')
-                .val('')
-                .end()
-                .find('.node-picker-toggle')
-                .html(' - TOP LEVEL - ')
-                .removeClass('btn-outline-secondary')
-                .addClass('btn-warning');
-        });
-    }); */
+                                if(icon) {
+                                    if (icon.classList.contains('fa-folder')) {
+                                        icon.classList.replace('fa-folder', 'fa-folder-open');
+                                    } else {
+                                        icon.classList.replace('fa-folder-open', 'fa-folder');
+                                    }
+                                }
+                            }
+                        });
+                    });
 
-</script>
+                    inputs.forEach((v, i, o) => {
+                        v.addEventListener('change', (change) => {
+                            const link = v.closest('.node-picker-node');
 
-<div class="form-group node-picker">
-    <label for="<?php echo $name; ?>"><?php echo $label; ?></label>
-    <div class="btn-group d-flex flex-row">
-        <button type="button" class="w-100 btn btn-outline-secondary btn-block text-nowrap dont-think node-picker-toggle" data-toggle="collapse" href="#node-picker-top">Top Level</button>
-        <button type="button" class="btn btn-danger dont-think px-4 node-picker-remove">Remove</button>
-    </div>
+                            document.querySelectorAll('.node-picker-node.is-active').forEach((node) => {
+                                node.classList.replace('is-active', 'has-text-dark');
+                            });
 
-    <div class="hide node-picker-inputs">
-        <?php if(!empty($selected)): ?>
-            <?php foreach($selected as $value): ?>
-                <?php echo $this->Form->control($name, ['type' => 'hidden', 'value' => $value->id]); ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
+                            if (v.checked) {
+                                link.classList.replace('has-text-dark', 'is-active');
+                            }
+                        });
+                    });
+                }
+            });
+        </script>
 
-    <div class="flex-column collapse" id="node-picker-top">
-        <?php foreach($nodes as $node): ?>
-            <?php echo $this->cell('NodePicker::child', [$node, $current, $selected]); ?>
-        <?php endforeach; ?>
+        <ul class="menu-list">
+            <li class="">
+                <?php echo $this->cell('Nodepicker::child', [$nodes, $path, $field]); ?>
+            </li>
+        </ul>
     </div>
 </div>

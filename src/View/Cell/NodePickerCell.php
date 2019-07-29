@@ -20,6 +20,11 @@ class NodePickerCell extends Cell
     protected $_validCellOptions = [];
 
     /**
+     *
+     */
+    protected static $currentNode = null;
+
+    /**
      * Initialization logic run at the end of object construction.
      *
      * @return void
@@ -30,49 +35,49 @@ class NodePickerCell extends Cell
     }
 
     /**
+     * setCurrentNode
+     */
+    public static function setCurrentNode(Node $node)
+    {
+        static::$currentNode = $node;
+    }
+
+    /**
      * Default display method.
      *
      * @return void
      */
-    public function display(string $name = 'node_id', string $label = 'Node Picker', $value = [], Node $current = null)
+    public function display(string $field = 'node_id')
     {
-        $this->loadModel('Nodes');
+        $user = $this->request->getSession()->read('Auth.User.id');
+        if(!empty($user)) {
+            $this->loadModel('Nodes');
+            $nodes = $this->Nodes->find('threaded', [
+                'contain' => [
+                    'Files' => [
+                        'sort' => ['Files.name' => 'ASC']
+                    ]
+                ],
+                'order' => ['Nodes.name' => 'ASC']
+            ])->all();
 
-        if (is_string($value)) {
-            $value = [$value];
+            $path = null;
+
+            if (!empty(static::$currentNode)) {
+                $path = $this->Nodes->find('path', ['for' => static::$currentNode->id])->all()->extract('id');
+            }
+
+            $this->set(compact('nodes', 'path', 'field'));
         }
-
-        $nodes = $this->Nodes->find('all', [
-            'conditions' => ['Nodes.parent_id IS' => null],
-            'order' => ['Nodes.name' => 'ASC']
-        ])->all();
-
-        $selected = !empty($value) ? $this->Nodes->find('all')->where(['id' => $value], ['id' => 'string[]'])->all() : null;
-
-        $this->set(compact('nodes', 'current', 'selected', 'name', 'label'));
     }
 
     /**
-     * Child display method
-     *
-     * @param Node The node to populate
-     * @param Node The current node, if available; A node cannot be its own parent!
-     * @param ResultSet ResultSet of currently selected nodes.
+     * Child Display Method.
      *
      * @return void
      */
-    public function child(Node $node, Node $current = null, ResultSet $selected = null)
+    public function child($nodes = null, $path = null, string $field = 'node_id')
     {
-        if (empty($node->child_nodes)) {
-            $node->lazyLoad(['ChildNodes']);
-        }
-
-        $is_current = !empty($current) ? ($node->id == $current->id) : false;
-
-        $is_selected = !empty($selected) ? $selected->some(function($v) use ($node) {
-            return $v->id == $node->id;
-        }) : false;
-
-        $this->set(compact('node', 'current', 'selected', 'is_selected', 'is_current'));
+        $this->set(compact('nodes', 'path', 'field'));
     }
 }
