@@ -24,32 +24,9 @@
     </title>
     <?= $this->Html->meta('icon', '/img/xenolith_icon_white.png') ?>
 
-    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
-    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+    <?php $this->Html->script('sidebar', ['block' => true]); ?>
 
-    <script type="text/javascript">
-        document.addEventListener('readystatechange', docReady => {
-            if (event.target.readyState === 'complete') {
-
-                const sidebarToggle = document.querySelector('#sidebar-toggle');
-                const sidebarMenu = document.querySelector('#sidebar-menu');
-
-                if (sidebarToggle != null && sidebarMenu != null) {
-                    sidebarToggle.addEventListener('click', sidebarToggleClick => {
-                        sidebarMenu.classList.toggle('is-hidden-mobile');
-                    });
-                }
-
-                document.querySelectorAll('textarea').forEach(function(v, k, o) {
-                    v.EasyMDE = new EasyMDE({
-                        element: v
-                    });
-                });
-            }
-        });
-    </script>
-
-    <?php echo $this->Html->css(['default', 'fontawesome', 'microgramma'], ['block' => true]); ?>
+    <?php $this->Html->css(['default', 'fontawesome', 'microgramma'], ['block' => true]); ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
