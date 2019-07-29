@@ -18,9 +18,8 @@
 <?php echo $this->cell('Breadcrumb', [$node->id, __('Edit')]); ?>
 
 <div class="container">
+    <h1 class="title is-1"><?= __('Edit {0}', $node->name) ?></h1>
     <?= $this->Form->create($node) ?>
-    <fieldset>
-        <legend><?= __('Edit Node') ?></legend>
         <?php $this->Form->unlockField('parent_id'); ?>
         <?php echo $this->cell('NodePicker', ['parent_id', 'Parent', $node->parent_id, $node]); ?>
         <?php
@@ -28,7 +27,6 @@
             echo $this->Form->control('description');
             echo $this->Form->control('files._ids', ['options' => $files]);
         ?>
-    </fieldset>
     <div><?= $this->Form->button(__('Save')) ?></div>
     <?= $this->Form->end() ?>
 </div>

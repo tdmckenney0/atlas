@@ -24,25 +24,7 @@
     </title>
     <?= $this->Html->meta('icon', '/img/xenolith_icon_white.png') ?>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <style type="text/css">
-
-        @font-face {
-            font-family: 'microgramma-bold';
-            src: url('/font/microgramma-bold.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        h1,h2,h3,legend, .mg-bold,.menu-label {
-            font-family: "microgramma-bold", system-ui, sans-serif;
-            letter-spacing: 0.05em;
-        }
-
-    </style>
-
-    <?php echo $this->Html->css('default'); ?>
+    <?php echo $this->Html->css(['default', 'fontawesome', 'microgramma'], ['block' => true]); ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

@@ -58,7 +58,7 @@
 
 <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
-<div class="nodes">
+<div class="container">
     <h1 class="title is-1"><?= h($node->name) ?></h1>
 
     <div>

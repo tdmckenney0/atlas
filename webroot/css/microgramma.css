@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'microgramma-bold';
+    src: url('/font/microgramma-bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1,h2,h3,legend, .mg-bold,.menu-label {
+    font-family: "microgramma-bold", system-ui, sans-serif;
+    letter-spacing: 0.05em;
+}
