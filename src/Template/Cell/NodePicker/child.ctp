@@ -9,7 +9,7 @@
                     </span>&nbsp;<?php echo __($node->name); ?>
 
                     <div class="is-pulled-right">
-                        <input type="checkbox" class="node-picker-radio" name="<?php echo $field; ?>" value="<?php echo $node->id; ?>">
+                        <input type="radio" class="node-picker-radio" name="<?php echo $field; ?>" value="<?php echo $node->id; ?>">
                     </div>
                 </div>
             </a>
