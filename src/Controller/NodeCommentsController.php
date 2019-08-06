@@ -52,11 +52,10 @@ class NodeCommentsController extends AppController
     public function add($node_id, $parent_id = null)
     {
         $nodeComment = $this->NodeComments->newEntity();
+        $parentComment = $this->NodeComments->findById($parent_id)->first();
         if ($this->request->is('post')) {
 
             $parentNode = $this->NodeComments->Nodes->get($node_id);
-            $parentComment = $this->NodeComments->findById($parent_id)->first();
-
             $nodeComment = $this->NodeComments->patchEntity($nodeComment, $this->request->getData());
 
             $nodeComment->user_id = $this->Auth->user('id');
@@ -73,7 +72,7 @@ class NodeCommentsController extends AppController
             }
             $this->Flash->error(__('The node comment could not be saved. Please, try again.'));
         }
-        $this->set(compact('nodeComment'));
+        $this->set(compact('nodeComment', 'parentComment'));
     }
 
     /**

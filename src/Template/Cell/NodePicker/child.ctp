@@ -14,9 +14,11 @@
                 </div>
             </a>
 
-            <ul class="<?php echo $active ? '' : 'is-hidden'; ?> node-picker-list">
-                <?php if(!empty($node->children)) echo $this->cell('NodePicker::child', [$node->children, $path, $field]); ?>
-            </ul>
+            <?php if(!empty($node->children)): ?>
+                <ul class="<?php echo $active ? '' : 'is-hidden'; ?> node-picker-list">
+                    <?php echo $this->cell('NodePicker::child', [$node->children, $path, $field]); ?>
+                </ul>
+            <?php endif; ?>
         </li>
     <?php endforeach; ?>
 <?php endif; ?>

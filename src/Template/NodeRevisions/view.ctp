@@ -32,42 +32,46 @@
         <?php echo $this->cell('Markdown', [$nodeRevision->description]); ?>
     </div>
 
-    <nav class="p-2">
-        <ul class="pagination-list justify-content-center">
-            <?php if(!empty($nodeRevision->parent_id)): ?>
 
-                <?php if(!empty($first)): ?>
-                    <li class="page-item">
-                        <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', $first->id]); ?>" aria-label="First">
-                            <span aria-hidden="true"><span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('First'); ?></span>
+    <div class="box">
+        <nav class="pagination is-centered">
+            <ul class="pagination-list" role="navigation" aria-label="pagination">
+                <?php if(!empty($nodeRevision->parent_id)): ?>
+                    <?php if(!empty($first)): ?>
+                        <li>
+                            <a class="pagination-link" href="<?php echo $this->Url->build(['action' => 'view', $first->id]); ?>" aria-label="First">
+                                <span aria-hidden="true"><span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('Earliest'); ?></span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
+                    <li>
+                        <a class="pagination-link" href="<?php echo $this->Url->build(['action' => 'view', $nodeRevision->parent_id]); ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('Prev'); ?>
                         </a>
                     </li>
                 <?php endif; ?>
 
                 <li class="page-item">
-                    <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', $nodeRevision->parent_id]); ?>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>&nbsp;<?php echo __('Prev'); ?>
-                    </a>
-                </li>
-            <?php endif; ?>
-            <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Current"><?php echo h($nodeRevision->created); ?></a>
-            </li>
-            <?php if(!empty($nodeRevision->child_node_revisions) && count($nodeRevision->child_node_revisions) == 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', reset($nodeRevision->child_node_revisions)->id]); ?>" aria-label="Next">
-                        <?php echo __('Next'); ?>&nbsp;<span aria-hidden="true">&raquo;</span>
-                    </a>
+                    <a class="pagination-link is-current" aria-label="Current"><?php echo h($nodeRevision->created); ?></a>
                 </li>
 
-                <?php if(!empty($last)): ?>
-                    <li class="page-item">
-                        <a class="page-link" href="<?php echo $this->Url->build(['action' => 'view', $last->id]); ?>" aria-label="Last">
-                            <span aria-hidden="true"><?php echo __('Last'); ?>&nbsp;<span aria-hidden="true">&raquo;</span></span>
+                <?php if(!empty($nodeRevision->child_node_revisions) && count($nodeRevision->child_node_revisions) == 1): ?>
+                    <li>
+                        <a class="pagination-link" href="<?php echo $this->Url->build(['action' => 'view', reset($nodeRevision->child_node_revisions)->id]); ?>" aria-label="Next">
+                            <?php echo __('Next'); ?>&nbsp;<span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
+
+                    <?php if(!empty($last)): ?>
+                        <li>
+                            <a class="pagination-link" href="<?php echo $this->Url->build(['action' => 'view', $last->id]); ?>" aria-label="Last">
+                                <span aria-hidden="true"><?php echo __('Latest'); ?>&nbsp;<span aria-hidden="true">&raquo;</span></span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 <?php endif; ?>
-            <?php endif; ?>
-        </ul>
-    </nav>
+            </ul>
+        </nav>
+    </div>
 </div>
