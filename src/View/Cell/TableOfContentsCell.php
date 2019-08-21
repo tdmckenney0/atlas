@@ -55,7 +55,10 @@ class TableOfContentsCell extends Cell
                         'sort' => ['Files.name' => 'ASC']
                     ]
                 ],
-                'order' => ['Nodes.name' => 'ASC']
+                'order' => [
+                    'Nodes.sort' => 'ASC',
+                    'Nodes.name' => 'ASC'
+                ]
             ])->all();
 
             $path = null;

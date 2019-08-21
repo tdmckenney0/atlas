@@ -136,6 +136,27 @@ class NodesTable extends Table
         }
     }
 
+    public function enforceSortOrder(Node &$node = null)
+    {
+        if (!empty($node->id) && !empty($node->parent_id)) {
+            $sort = 1;
+            $siblings = $this->find()
+                                ->where(['parent_id' => $node->parent_id])
+                                ->order([
+                                    'Nodes.sort' => 'ASC',
+                                    'Nodes.name' => 'ASC'
+                                ]);
+
+            foreach ($siblings as $sibling) {
+                \Cake\Log\Log::debug($sibling);
+                $sibling->sort = $sort;
+                $this->save($sibling);
+                $sort++;
+            }
+        }
+        return $this;
+    }
+
     public function beforeSave(Event $event, Node $node, \ArrayObject $options)
     {
         $this->createRevision($node, (!empty($options['User']) ? $options['User'] : null));

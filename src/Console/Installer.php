@@ -18,6 +18,10 @@ if (!defined('STDIN')) {
     define('STDIN', fopen('php://stdin', 'r'));
 }
 
+if (!defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
+
 use Cake\Utility\Security;
 use Composer\Script\Event;
 use Exception;
@@ -44,6 +48,13 @@ class Installer
     ];
 
     /**
+     * ['source' => 'destination']
+     */
+    const VENDOR_FILES = [
+        'vendor' . DS . 'fortawesome' . DS . 'font-awesome' . DS . 'css' . DS . 'all.min.css' => 'webroot' . DS . 'css' . DS . 'fontawesome.css'
+    ];
+
+    /**
      * Does some routine installation tasks so people don't have to.
      *
      * @param \Composer\Script\Event $event The composer event file.
@@ -58,6 +69,7 @@ class Installer
 
         static::createAppConfig($rootDir, $io);
         static::createWritableDirectories($rootDir, $io);
+        static::linkVendorFiles($rootDir, $io);
 
         // ask if the permissions should be changed
         if ($io->isInteractive()) {
@@ -86,6 +98,43 @@ class Installer
         $class = 'Cake\Codeception\Console\Installer';
         if (class_exists($class)) {
             $class::customizeCodeceptionBinary($event);
+        }
+    }
+
+    /**
+     * Housekeeping operations after composer update.
+     *
+     * @param \Composer\Script\Event $event The composer event file.
+     * @throws \Exception Exception raised by validator.
+     * @return void
+     *
+     */
+    public static function postUpdate(Event $event)
+    {
+        $io = $event->getIO();
+        $rootDir = dirname(dirname(__DIR__));
+
+        static::linkVendorFiles($rootDir, $io);
+    }
+
+    /**
+     *
+     */
+    public static function linkVendorFiles($dir, $io)
+    {
+        foreach (static::VENDOR_FILES as $from => $to) {
+            $from = new \SplFileInfo($dir . DS . $from);
+            $to = new \SplFileInfo($dir . DS . $to);
+
+            if(file_exists($to)) {
+                unlink($to);
+            }
+
+            if (file_exists($from)) {
+                if(!copy($from, $to)) {
+                    throw new Exception(sprintf('Could not link %s -> %s!', $from, $to));
+                }
+            }
         }
     }
 

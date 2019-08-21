@@ -40,6 +40,8 @@ class Node extends Entity
         'parent_id' => true,
         'lft' => true,
         'rght' => true,
+        'sort' => true,
+        'print' => true,
         'name' => true,
         'description' => true,
         'created' => true,
@@ -109,7 +111,9 @@ class Node extends Entity
         }
 
         foreach($this->child_nodes as $node) {
-            $buffer .= $node->consolidate();
+            if ($node->print) {
+                $buffer .= $node->consolidate();
+            }
         }
 
         return $buffer;

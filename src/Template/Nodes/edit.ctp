@@ -27,6 +27,8 @@
         <?php echo $this->cell('NodePicker', ['parent_id', 'Parent', $node->parent_id, $node]); ?>
         <?php
             echo $this->Form->control('name');
+            echo $this->Form->control('sort');
+            echo $this->Form->control('print');
             echo $this->Form->control('description');
             echo $this->Form->control('files._ids', ['options' => $files]);
         ?>
