@@ -9,8 +9,15 @@ at-cake() {
     popd;
 }
 
+at-composer() {
+    pushd $DIR;
+    docker-compose run --rm atlas composer $*;
+    popd;
+}
+
 at-mysql() {
     pushd $DIR;
     docker exec -it atlas_mysql_1 mysql $*;
     popd;
 }
+
