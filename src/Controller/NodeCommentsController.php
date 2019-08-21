@@ -96,10 +96,7 @@ class NodeCommentsController extends AppController
             }
             $this->Flash->error(__('The node comment could not be saved. Please, try again.'));
         }
-        $users = $this->NodeComments->Users->find('list', ['limit' => 200]);
-        $nodes = $this->NodeComments->Nodes->find('list', ['limit' => 200]);
-        $parentNodeComments = $this->NodeComments->ParentNodeComments->find('list', ['limit' => 200]);
-        $this->set(compact('nodeComment', 'users', 'nodes', 'parentNodeComments'));
+        $this->set(compact('nodeComment'));
     }
 
     /**

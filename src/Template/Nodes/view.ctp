@@ -24,6 +24,9 @@
     });
 </script>
 
+<?php $this->Html->css(['https://unpkg.com/easymde/dist/easymde.min.css'], ['block' => true]); ?>
+<?php $this->Html->script(['https://unpkg.com/easymde/dist/easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
+
 <?php $this->start('actions'); ?>
     <ul class="menu-list">
         <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-clock']) . '&nbsp;' . __('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['escape' => false]) ?></li>
@@ -58,16 +61,18 @@
 
 <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
-<div class="container">
-    <h1 class="title is-1"><?= h($node->name) ?></h1>
+<div class="container-fluid">
+    <div class="box">
+        <h1 class="title is-1"><?= h($node->name) ?></h1>
 
-    <div>
-        <small class="text-muted"> <?= __('Created: ') . h($node->created) ?></small>
-        <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
-    </div>
+        <div>
+            <small class="text-muted"> <?= __('Created: ') . h($node->created) ?></small>
+            <small class="text-muted"> <?= __('Updated: ') . h($node->modified) ?></small>
+        </div>
 
-    <div class="has-text-justified content">
-        <?php echo $this->cell('Markdown', [$node->description]); ?>
+        <div class="has-text-justified content">
+            <?php echo $this->cell('Markdown', [$node->description]); ?>
+        </div>
     </div>
 
     <div class="is-hidden">
@@ -79,5 +84,16 @@
         <?php echo $this->Form->end(); ?>
     </div>
 
-    <?php echo $this->cell('Comments', [$node->id]); ?>
+    <div class="box">
+        <h2 class="title is-3"><?php echo __('Comments'); ?></h2>
+        <?php echo $this->cell('Comments', [$node->id]); ?>
+    </div>
+
+    <div class="box">
+        <h2 class="title is-3"><?= __('Add Comment') ?></h3>
+        <?= $this->Form->create($nodeComment, ['url' => ['controller' => 'NodeComments', 'action' => 'add', $node->id]]) ?>
+            <?php echo $this->Form->control('body', ['label' => false]);  ?>
+            <?= $this->Form->button(__('Submit')) ?>
+        <?= $this->Form->end() ?>
+    </div>
 </div>

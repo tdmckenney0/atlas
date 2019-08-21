@@ -5,38 +5,27 @@
  */
 ?>
 
+<?php $this->start('actions'); ?>
+    <ul class="menu-list">
+        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-clock']) . '&nbsp;' . __('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['escape' => false]) ?></li>
+        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-edit']) . '&nbsp;' . __('Edit Node'), ['action' => 'edit', $node->id], ['escape' => false]) ?></li>
+        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-pdf']) . '&nbsp;' . __('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['escape' => false, 'download' => 'download']) ?></li>
+        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-archive']) . '&nbsp;' . __('Export to Zip'), ['action' => 'view', $node->id, '_ext' => 'zip'], ['escape' => false, 'download' => 'download']) ?></li>
+        <li><?= $this->Form->postLink($this->Html->tag('i', '', ['class' => 'fas fa-trash']) . '&nbsp;' . __('Delete Node'), ['action' => 'delete', $node->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => ' text-danger border border-danger']) ?></li>
+    </ul>
+<?php $this->end(); ?>
+
 <?php $this->Html->css(['https://unpkg.com/easymde/dist/easymde.min.css'], ['block' => true]); ?>
 <?php $this->Html->script(['https://unpkg.com/easymde/dist/easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $nodeComment->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $nodeComment->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Node Comments'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Node'), ['controller' => 'Nodes', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Parent Node Comments'), ['controller' => 'NodeComments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Parent Node Comment'), ['controller' => 'NodeComments', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="nodeComments form large-9 medium-8 columns content">
-    <?= $this->Form->create($nodeComment) ?>
-    <fieldset>
-        <legend><?= __('Edit Node Comment') ?></legend>
-        <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('node_id', ['options' => $nodes]);
-            echo $this->Form->control('parent_id', ['options' => $parentNodeComments, 'empty' => true]);
-            echo $this->Form->control('body');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="container">
+    <div class="box">
+        <?= $this->Form->create($nodeComment) ?>
+        <fieldset>
+            <h1 class="title"><?= __('Edit Comment') ?></h1>
+            <?php echo $this->Form->control('body', ['label' => false]); ?>
+        </fieldset>
+        <?= $this->Form->button(__('Submit')) ?>
+        <?= $this->Form->end() ?>
+    </div>
 </div>

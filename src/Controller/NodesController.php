@@ -53,6 +53,7 @@ class NodesController extends AppController
     public function view($id = null)
     {
         $ext = $this->request->getParam('_ext');
+        $nodeComment = $this->Nodes->NodeComments->newEntity();
         $node = $this->Nodes->get($id, [
             'contain' => ['ParentNodes', 'Files', 'ChildNodes']
         ]);
@@ -60,12 +61,12 @@ class NodesController extends AppController
         if($ext == 'zip') {
             $file = $node->toZip();
             return $this->response->withFile($file->path, [
-		'download' => true,
-		'name' => (trim($node->name) . '.zip')
-	    ]);
+                'download' => true,
+                'name' => (trim($node->name) . '.zip')
+            ]);
         }
 
-        $this->set('node', $node);
+        $this->set(compact('node', 'nodeComment'));
         $this->set('_serialize', 'node');
     }
 
