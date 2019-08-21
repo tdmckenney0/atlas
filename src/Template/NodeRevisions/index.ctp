@@ -68,7 +68,7 @@
 
     <?php echo $this->element('search'); ?>
 
-    <?php echo $this->cell('Browser', [function() use ($nodeRevisions, $node) {
+    <?php echo $this->cell('Browser', [function() use (&$nodeRevisions, $node) {
         foreach($nodeRevisions as $nodeRevision) {
             $entry = new stdClass;
 

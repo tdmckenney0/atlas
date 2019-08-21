@@ -54,7 +54,7 @@
 
     <?php echo $this->element('search'); ?>
 
-    <?php echo $this->cell('Browser', [function() use ($files) {
+    <?php echo $this->cell('Browser', [function() use (&$files) {
         foreach($files as $file) {
             $entry = new stdClass;
             $entry->title = $file->name;

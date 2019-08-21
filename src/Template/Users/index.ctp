@@ -53,7 +53,7 @@
 
     <?php echo $this->element('search'); ?>
 
-    <?php echo $this->cell('Browser', [function() use ($users) {
+    <?php echo $this->cell('Browser', [function() use (&$users) {
         foreach($users as $user) {
             $entry = new stdClass;
             $entry->title = $user->email;

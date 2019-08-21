@@ -54,7 +54,7 @@
 
     <?php echo $this->element('search'); ?>
 
-    <?php echo $this->cell('Browser', [function() use ($nodes) {
+    <?php echo $this->cell('Browser', [function() use (&$nodes) {
         foreach($nodes as $node) {
             $entry = new stdClass;
             $entry->title = $node->name;
