@@ -43,7 +43,7 @@
         </script>
 
         <ul class="menu-list">
-            <li class="">
+            <li>
                 <?php echo $this->cell('Nodepicker::child', [$nodes, $path, $field]); ?>
             </li>
         </ul>

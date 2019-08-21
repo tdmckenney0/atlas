@@ -5,10 +5,10 @@
  */
 ?>
 <ul class="menu-list">
-    <li class=""><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => '']) ?></li>
-    <li class=""><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => '']) ?></li>
-    <li class=""><?= $this->Html->link(__('List Files'), ['action' => 'index'], ['class' => '']) ?></li>
-    <li class="">
+    <li><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => '']) ?></li>
+    <li><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => '']) ?></li>
+    <li><?= $this->Html->link(__('List Files'), ['action' => 'index'], ['class' => '']) ?></li>
+    <li>
         <a class=" active dont-think" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo __('Add File'); ?></a>
     </li>
 </ul>

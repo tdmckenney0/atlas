@@ -7,12 +7,12 @@
 
 <div class="users">
     <ul class="menu-list">
-        <li class="">
+        <li>
             <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
         </li>
-        <li class=""><?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => '']) ?></li>
-        <li class=""><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id], ['class' => '']) ?></li>
-        <li class=""><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => ' text-danger border border-danger']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => '']) ?></li>
+        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id], ['class' => '']) ?></li>
+        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => ' text-danger border border-danger']) ?></li>
     </ul>
 
     <hr />

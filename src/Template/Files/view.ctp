@@ -6,14 +6,14 @@
 ?>
 <?php $this->start('actions'); ?>
     <ul class="menu-list">
-        <li class=""><?= $this->Html->link(__('Download File'), ['controller' => 'files', 'action' => 'get', $file->id], ['class' => ' dont-think', 'download' => (\Cake\Utility\Text::slug(strtolower($file->name)) . '.' . $file->file_extension)]) ?></li>
-        <li class=""><?= $this->Html->link(__('Edit File'), ['controller' => 'Files', 'action' => 'edit', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
+        <li><?= $this->Html->link(__('Download File'), ['controller' => 'files', 'action' => 'get', $file->id], ['class' => ' dont-think', 'download' => (\Cake\Utility\Text::slug(strtolower($file->name)) . '.' . $file->file_extension)]) ?></li>
+        <li><?= $this->Html->link(__('Edit File'), ['controller' => 'Files', 'action' => 'edit', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
         <?php if($file->isCompressed()): ?>
-            <li class=""><?= $this->Html->link(__('Extract File'), ['controller' => 'Files', 'action' => 'extract', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
+            <li><?= $this->Html->link(__('Extract File'), ['controller' => 'Files', 'action' => 'extract', $file->id, (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
         <?php endif; ?>
-        <li class=""><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
-        <li class=""><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add', (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
-        <li class=""><?= $this->Form->postLink(__('Delete File'), ['action' => 'delete', $file->id, (!empty($node->id) ? $node->id : null)], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id), 'class' => ' border border-danger text-danger']) ?></li>
+        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
+        <li><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add', (!empty($node->id) ? $node->id : null)], ['class' => '']) ?></li>
+        <li><?= $this->Form->postLink(__('Delete File'), ['action' => 'delete', $file->id, (!empty($node->id) ? $node->id : null)], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id), 'class' => ' border border-danger text-danger']) ?></li>
     </ul>
 <?php $this->end(); ?>
 
