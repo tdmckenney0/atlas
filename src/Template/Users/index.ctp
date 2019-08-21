@@ -37,6 +37,14 @@
                 </span>&nbsp;<?php echo __('List Revisions'); ?>
             </a>
         </li>
+
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'NodeComments', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-comments"></i>
+                </span>&nbsp;<?php echo __('List Comments'); ?>
+            </a>
+        </li>
     </ul>
 <?php $this->end(); ?>
 

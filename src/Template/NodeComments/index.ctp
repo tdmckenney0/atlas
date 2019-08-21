@@ -4,17 +4,51 @@
  * @var \App\Model\Entity\NodeComment[]|\Cake\Collection\CollectionInterface $nodeComments
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Node Comment'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Node'), ['controller' => 'Nodes', 'action' => 'add']) ?></li>
+<?php $this->start('actions'); ?>
+    <ul class="menu-list">
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Nodes', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-folder"></i>
+                </span>&nbsp;<?php echo __('List Nodes'); ?>
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-file-alt"></i>
+                </span>&nbsp;<?php echo __('List Files'); ?>
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-user"></i>
+                </span>&nbsp;<?php echo __('List Users'); ?>
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'NodeRevisions', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-clock"></i>
+                </span>&nbsp;<?php echo __('List Revisions'); ?>
+            </a>
+        </li>
+
+        <li>
+            <a href="<?php echo $this->Url->build(['controller' => 'NodeComments', 'action' => 'index']); ?>">
+                <span class="icon">
+                    <i class="fas fa-comments"></i>
+                </span>&nbsp;<?php echo __('List Comments'); ?>
+            </a>
+        </li>
     </ul>
-</nav>
-<div class="nodeComments index large-9 medium-8 columns content">
+<?php $this->end(); ?>
+
+<div class="container-fluid">
     <h3><?= __('Node Comments') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
