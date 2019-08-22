@@ -53,7 +53,6 @@ class NodesController extends AppController
     public function view($id = null)
     {
         $ext = $this->request->getParam('_ext');
-        $nodeComment = $this->Nodes->NodeComments->newEntity();
         $node = $this->Nodes->get($id, [
             'contain' => ['ParentNodes', 'Files', 'ChildNodes']
         ]);
@@ -66,7 +65,13 @@ class NodesController extends AppController
             ]);
         }
 
-        $this->set(compact('node', 'nodeComment'));
+        $nodeComment = $this->Nodes->NodeComments->newEntity();
+        $comments = $this->Nodes->NodeComments->find('threaded', [
+            'conditions' => ['node_id' => $node->id],
+            'contain' => ['Users']
+        ]);
+
+        $this->set(compact('node', 'nodeComment', 'comments'));
         $this->set('_serialize', 'node');
     }
 

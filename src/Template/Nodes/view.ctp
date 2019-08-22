@@ -84,10 +84,14 @@
         <?php echo $this->Form->end(); ?>
     </div>
 
-    <div class="box">
-        <h2 class="title is-3"><?php echo __('Comments'); ?></h2>
-        <?php echo $this->cell('Comments', [$node->id]); ?>
-    </div>
+    <?php if(!empty($comments)): ?>
+        <div class="box">
+            <h2 class="title is-3"><?php echo __('Comments'); ?></h2>
+            <?php foreach($comments as $comment): ?>
+                <?php echo $this->cell('Comments', [$comment]); ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
     <div class="box">
         <h2 class="title is-3"><?= __('Add Comment') ?></h3>

@@ -2,6 +2,7 @@
 namespace App\View\Cell;
 
 use Cake\View\Cell;
+use App\Model\Entity\NodeComment;
 
 /**
  * Comments cell
@@ -30,27 +31,17 @@ class CommentsCell extends Cell
      * Default display method.
      *
      * @return void
-     */
-    public function display($node_id = null)
+    */
+    public function display(NodeComment $comment)
     {
-        if(!empty($node_id)) {
-            $this->loadModel('NodeComments');
-            $nodeComment = $this->NodeComments->newEntity();
-            $comments = $this->NodeComments->find('threaded', [
-                'conditions' => ['node_id' => $node_id],
-                'contain' => ['Users']
-            ]);
-            $this->set(compact('comments', 'nodeComment', 'node_id'));
-        }
-    }
+        $children = [];
 
-    /**
-     * Comment display method.
-     *
-     * @return void
-     */
-    public function comment($comments = null)
-    {
-        $this->set(compact('comments'));
+        if (!empty($comment->children)) {
+            $children =& $comment->children;
+        } else if (!empty($comment->child_node_comments)) {
+            $children =& $comment->child_node_comments;
+        }
+
+        $this->set(compact('comment', 'children'));
     }
 }

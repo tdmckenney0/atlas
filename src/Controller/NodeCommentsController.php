@@ -12,7 +12,12 @@ use App\Controller\AppController;
  */
 class NodeCommentsController extends AppController
 {
-
+    /**
+     * Paginate Options
+     */
+    public $paginate = [
+        'contain' => ['Users', 'Nodes', 'ParentNodeComments']
+    ];
     /**
      * Index method
      *
@@ -20,9 +25,6 @@ class NodeCommentsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Nodes', 'ParentNodeComments']
-        ];
         $nodeComments = $this->paginate($this->NodeComments);
 
         $this->set(compact('nodeComments'));
