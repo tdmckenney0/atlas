@@ -4,6 +4,13 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
+
+<?php $this->start('actions'); ?>
+    <ul class="menu-list">
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-user-plus', 'text' => 'Add User', 'link' => ['action' => 'add']]); ?>
+    </ul>
+<?php $this->end(); ?>
+
 <div class="container">
     <h1 class="title is-1"><?php echo __('Users'); ?></h1>
 

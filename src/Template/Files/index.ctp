@@ -4,6 +4,11 @@
  * @var \App\Model\Entity\File[]|\Cake\Collection\CollectionInterface $files
  */
 ?>
+<?php $this->start('actions'); ?>
+    <ul class="menu-list">
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-medical', 'text' => 'Add File', 'link' => ['action' => 'add']]); ?>
+    </ul>
+<?php $this->end(); ?>
 
 <div class="container">
     <h1 class="title is-1"><?php echo __('Files'); ?></h1>

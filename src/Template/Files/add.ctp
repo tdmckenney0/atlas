@@ -4,43 +4,26 @@
  * @var \App\Model\Entity\File $file
  */
 ?>
-<ul class="menu-list">
-    <li><?= $this->Html->link(__('List Nodes'), ['controller' => 'Nodes', 'action' => 'index'], ['class' => '']) ?></li>
-    <li><?= $this->Html->link(__('Add Node'), ['controller' => 'Nodes', 'action' => 'add'], ['class' => '']) ?></li>
-    <li><?= $this->Html->link(__('List Files'), ['action' => 'index'], ['class' => '']) ?></li>
-    <li>
-        <a class=" active dont-think" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo __('Add File'); ?></a>
-    </li>
-</ul>
 
-<hr />
+<?php if(!empty($node)): ?>
+    <?php $this->start('actions'); ?>
+        <ul class="menu-list">
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['controller' => 'Nodes', 'action' => 'add', $node->id]]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $node->id]]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-clock', 'text' => 'List Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $node->id]]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-edit', 'text' => 'Edit Node', 'link' => ['controller' => 'Nodes', 'action' => 'edit', $node->id]]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-pdf', 'text' => 'Export to PDF', 'link' => ['controller' => 'Nodes', 'action' => 'view', $node->id, '_ext' => 'pdf'], 'linkOptions' => ['download' => 'download']]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-archive', 'text' => 'Export to Zip', 'link' => ['controller' => 'Nodes', 'action' => 'view', $node->id, '_ext' => 'zip'], 'linkOptions' => ['download' => 'download']]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete Node', 'postLink' => ['controller' => 'Nodes', 'action' => 'delete', $node->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $node->name)]]); ?>
+        </ul>
+    <?php $this->end(); ?>
+<?php endif; ?>
 
 <?php echo $this->cell('Breadcrumb', [!empty($node->id) ? $node->id : null, __('Add File')]); ?>
-<div class="files">
+<div class="container box">
     <?= $this->Form->create($file, ['type' => 'file']) ?>
         <h1><?= __('Add File') ?></h1>
-        <?php $this->Form->unlockField('file'); ?>
-        <?php $this->Form->unlockField('nodes._ids'); ?>
-
-        <div class="custom-file my-3">
-            <input type="file" name="file" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
-
-        <h2 class="my-3"><?= __('Add to Nodes') ?></h2>
-
-        <ul class="list-group my-3">
-            <?php foreach($nodes as $id => $name): ?>
-
-            <li class="list-group-item">
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" name="nodes[_ids][]" class="custom-control-input" value="<?php echo $id; ?>" <?php echo (!empty($node->id) && $id == $node->id ? 'checked="checked"' : ''); ?> id="node-<?php echo $id; ?>">
-                    <label class="custom-control-label" for="node-<?php echo $id; ?>"><?php echo $name; ?></label>
-                </div>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-
+        <?php echo $this->Form->control('file', ['type' => 'file']); ?>
         <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

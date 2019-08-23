@@ -1,36 +1,40 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Node $node
+ * @var \App\Model\Entity\Node $parent
  */
 ?>
-<?php $this->start('actions'); ?>
-<ul class="menu-list">
-    <li><?= $this->Html->link(__('List Nodes'), ['action' => 'index'], ['class' => '']) ?></li>
-    <li>
-        <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">New Node</a>
-    </li>
+<?php if(!empty($parent)): ?>
+    <?php $this->start('actions'); ?>
+        <ul class="menu-list">
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['action' => 'add', $parent->id]]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $parent->id]]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-clock', 'text' => 'List Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $parent->id]]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-edit', 'text' => 'Edit Node', 'link' => ['action' => 'edit', $parent->id]]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-pdf', 'text' => 'Export to PDF', 'link' => ['action' => 'view', $parent->id, '_ext' => 'pdf'], 'linkOptions' => ['download' => 'download']]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-archive', 'text' => 'Export to Zip', 'link' => ['action' => 'view', $parent->id, '_ext' => 'zip'], 'linkOptions' => ['download' => 'download']]); ?>
+            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete Node', 'postLink' => ['action' => 'delete', $parent->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $parent->name)]]); ?>
+        </ul>
+    <?php $this->end(); ?>
+<?php endif; ?>
 
-    <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index'], ['class' => '']) ?></li>
-    <li><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add'], ['class' => '']) ?></li>
-</ul>
-<?php $this->end(); ?>
+<?php $this->Html->css(['https://unpkg.com/easymde/dist/easymde.min.css'], ['block' => true]); ?>
+<?php $this->Html->script(['https://unpkg.com/easymde/dist/easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
 
-<?php echo $this->cell('Breadcrumb', [$parent_id, __('Add')]); ?>
+<?php echo $this->cell('Breadcrumb', [$parent->id, __('Add')]); ?>
 
-<div class="nodes form large-9 medium-8 columns content">
+<div class="container box">
     <?= $this->Form->create($node) ?>
 
         <div class="overflow-hidden">
             <h1 class="overflow-hidden"><?= __('Add Node') ?></h1>
         </div>
 
-        <?php $this->Form->unlockField('parent_id'); ?>
-        <?php // echo $this->cell('NodePicker', [null, ['label' => 'Parent', 'name' => 'parent_id', 'value' => $parent_id]]); ?>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('description', ['required' => false]);
-            echo $this->Form->control('files._ids', ['options' => $files]);
+            echo $this->Form->control('sort');
+            echo $this->Form->control('print');
+            echo $this->Form->control('description');
         ?>
 
         <?= $this->Form->button(__('Submit')) ?>

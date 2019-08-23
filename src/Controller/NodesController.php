@@ -85,6 +85,8 @@ class NodesController extends AppController
         if(!empty($parent_id)) {
             $parent = $this->Nodes->get($parent_id);
             $parent_id = $parent->id;
+        } else {
+            $parent = null;
         }
         $node = $this->Nodes->newEntity();
         if ($this->request->is('post')) {
@@ -96,8 +98,7 @@ class NodesController extends AppController
             }
             $this->Flash->error(__('The node could not be saved. Please, try again.'));
         }
-        $files = $this->Nodes->Files->find('list', ['limit' => 200, 'order' => ['Files.name' => 'ASC']]);
-        $this->set(compact('node', 'files', 'parent_id'));
+        $this->set(compact('node', 'parent'));
     }
 
     /**

@@ -4,60 +4,40 @@
  * @var \App\Model\Entity\Node $node
  */
 ?>
-<script type="text/javascript">
-    document.addEventListener('readystatechange', docReady => {
-        if (event.target.readyState === 'complete') {
-            const fileLink = document.querySelector('#add-file-to-node');
-            const fileInput = document.querySelector('#add-file-to-node-input');
-            const fileForm = document.querySelector('#add-file-to-node-form');
-
-            fileLink.addEventListener('click', event => {
-                event.preventDefault();
-                fileInput.dispatchEvent(new MouseEvent('click'));
-            });
-
-            fileInput.addEventListener('input', event => {
-                event.preventDefault();
-                fileForm.submit();
-            });
-        }
-    });
-</script>
-
 <?php $this->Html->css(['https://unpkg.com/easymde/dist/easymde.min.css'], ['block' => true]); ?>
 <?php $this->Html->script(['https://unpkg.com/easymde/dist/easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
 
 <?php $this->start('actions'); ?>
     <ul class="menu-list">
-        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-clock']) . '&nbsp;' . __('List Revisions'), ['controller' => 'NodeRevisions', 'action' => 'index', $node->id], ['escape' => false]) ?></li>
-        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-edit']) . '&nbsp;' . __('Edit Node'), ['action' => 'edit', $node->id], ['escape' => false]) ?></li>
-        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-pdf']) . '&nbsp;' . __('Export to PDF'), ['action' => 'view', $node->id, '_ext' => 'pdf'], ['escape' => false]) ?></li>
-        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-archive']) . '&nbsp;' . __('Export to Zip'), ['action' => 'view', $node->id, '_ext' => 'zip'], ['escape' => false]) ?></li>
-        <li><?= $this->Form->postLink($this->Html->tag('i', '', ['class' => 'fas fa-trash']) . '&nbsp;' . __('Delete Node'), ['action' => 'delete', $node->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => ' text-danger border border-danger']) ?></li>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['action' => 'add', $node->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $node->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-clock', 'text' => 'List Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $node->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-edit', 'text' => 'Edit Node', 'link' => ['action' => 'edit', $node->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-pdf', 'text' => 'Export to PDF', 'link' => ['action' => 'view', $node->id, '_ext' => 'pdf'], 'linkOptions' => ['download' => 'download']]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-archive', 'text' => 'Export to Zip', 'link' => ['action' => 'view', $node->id, '_ext' => 'zip'], 'linkOptions' => ['download' => 'download']]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete Node', 'postLink' => ['action' => 'delete', $node->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $node->name)]]); ?>
     </ul>
 <?php $this->end(); ?>
 
-<?php $this->start('nodes'); ?>
-    <ul class="menu-list">
-        <?php if (!empty($node->child_nodes)): ?>
+<?php if (!empty($node->child_nodes)): ?>
+    <?php $this->start('nodes'); ?>
+        <ul class="menu-list">
             <?php foreach ($node->child_nodes as $child): ?>
-                <li><a href="<?php echo $this->Url->build(['action' => 'view', $child->id]); ?>"><i class="fas fa-book"></i>&nbsp;<?php echo h($child->name); ?></a></li>
+                <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book', 'text' => $child->name, 'link' => ['action' => 'view', $child->id]]); ?>
             <?php endforeach; ?>
-        <?php endif; ?>
-        <li><a href="<?php echo $this->Url->build(['action' => 'add', $node->id]); ?>"><i class="fas fa-book-plus" ></i>&nbsp;<?php echo __('Add Node'); ?></a></li>
-    </ul>
-<?php $this->end(); ?>
+        </ul>
+    <?php $this->end(); ?>
+<?php endif; ?>
 
-<?php $this->start('files'); ?>
-    <ul class="menu-list">
-        <?php if (!empty($node->child_nodes)): ?>
+<?php if (!empty($node->files)): ?>
+    <?php $this->start('files'); ?>
+        <ul class="menu-list">
             <?php foreach ($node->files as $file): ?>
-                <li><a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>"><i class="fas fa-file"></i>&nbsp;<?php echo h($file->name); ?></a></li>
+                <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file', 'text' => $file->name, 'link' => ['controller' => 'files', 'action' => 'view', $file->id, $node->id]]); ?>
             <?php endforeach; ?>
-        <?php endif; ?>
-        <li><a id="add-file-to-node" title="<?php echo __('Add a new Node to {0}', $node->name); ?>" href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'add', $node->id]); ?>"><i class="fas fa-file-upload"></i>&nbsp;<?php echo __('Add File'); ?></a></li>
-    </ul>
-<?php $this->end(); ?>
+        </ul>
+    <?php $this->end(); ?>
+<?php endif; ?>
 
 <?php echo $this->cell('Breadcrumb', [$node->id]); ?>
 
@@ -83,15 +63,6 @@
             <input type="checkbox" name="nodes[_ids][]" value="<?= h($node->id) ?>" checked="checked">
         <?php echo $this->Form->end(); ?>
     </div>
-
-    <?php if(count($comments) > 0): ?>
-        <div class="box">
-            <h2 class="title is-3"><?php echo __('Comments'); ?></h2>
-            <?php foreach($comments as $comment): ?>
-                <?php echo $this->cell('Comments', [$comment]); ?>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
 
     <div class="box">
         <h2 class="title is-3"><?= __('Add Comment') ?></h3>
