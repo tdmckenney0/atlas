@@ -3,7 +3,7 @@
     <li>
         <a href="<?php echo $this->Url->build(['controller' => 'Nodes', 'action' => 'index']); ?>">
             <span class="icon">
-                <i class="fas fa-folder"></i>
+                <i class="fas fa-book"></i>
             </span>&nbsp;<?php echo __('List Nodes'); ?>
         </a>
     </li>
@@ -11,7 +11,7 @@
     <li>
         <a href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'index']); ?>">
             <span class="icon">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-file"></i>
             </span>&nbsp;<?php echo __('List Files'); ?>
         </a>
     </li>

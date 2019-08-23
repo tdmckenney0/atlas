@@ -2,13 +2,13 @@
     <?php foreach($nodes as $node): ?>
         <li>
             <?php $active = (!empty($path) ? $path->contains($node->id) : false); ?>
-            <a class="table-of-contents-node"><i class="fas <?php echo $active ? 'fa-folder-open' : 'fa-folder'; ?>"></i>&nbsp;<?php echo __($node->name); ?></a>
+            <a class="table-of-contents-node"><i class="fas <?php echo $active ? 'fa-book-open' : 'fa-book'; ?>"></i>&nbsp;<?php echo __($node->name); ?></a>
             <ul class="menu-list <?php echo $active ? '' : 'is-hidden'; ?> table-of-contents-list">
                 <?php if(!empty($node->children)) echo $this->cell('TableOfContents::child', [$node->children, $path]); ?>
 
                 <?php if(!empty($node->files)): ?>
                     <?php foreach($node->files as $file): ?>
-                        <li><a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>"><i class="fas fa-file-alt"></i>&nbsp;<?php echo h($file->name); ?></a></li>
+                        <li><a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>"><i class="fas fa-file"></i>&nbsp;<?php echo h($file->name); ?></a></li>
                     <?php endforeach; ?>
                 <?php endif; ?>
 

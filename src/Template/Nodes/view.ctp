@@ -41,10 +41,10 @@
     <ul class="menu-list">
         <?php if (!empty($node->child_nodes)): ?>
             <?php foreach ($node->child_nodes as $child): ?>
-                <li><a href="<?php echo $this->Url->build(['action' => 'view', $child->id]); ?>"><i class="fas fa-folder"></i>&nbsp;<?php echo h($child->name); ?></a></li>
+                <li><a href="<?php echo $this->Url->build(['action' => 'view', $child->id]); ?>"><i class="fas fa-book"></i>&nbsp;<?php echo h($child->name); ?></a></li>
             <?php endforeach; ?>
         <?php endif; ?>
-        <li><a href="<?php echo $this->Url->build(['action' => 'add', $node->id]); ?>"><i class="fas fa-folder-plus" ></i>&nbsp;<?php echo __('Add Node'); ?></a></li>
+        <li><a href="<?php echo $this->Url->build(['action' => 'add', $node->id]); ?>"><i class="fas fa-book-plus" ></i>&nbsp;<?php echo __('Add Node'); ?></a></li>
     </ul>
 <?php $this->end(); ?>
 

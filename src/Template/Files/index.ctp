@@ -15,7 +15,7 @@
             $entry = new stdClass;
             $entry->title = $file->name;
             $entry->subtitle = __('Created: {0}, Modified: {1}, MIME Type: {2}', '?', '?', $file->mime_type);
-            $entry->icon = 'fa-file-alt';
+            $entry->icon = 'fa-file';
             $entry->href = $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id]);
 
             yield $entry;

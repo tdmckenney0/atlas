@@ -5,7 +5,7 @@
             <a class="node-picker-node has-text-dark">
                 <div class="">
                     <span class="icon">
-                        <i class="fas <?php echo $active ? 'fa-folder-open' : 'fa-folder'; ?>"></i>
+                        <i class="fas <?php echo $active ? 'fa-book-open' : 'fa-book'; ?>"></i>
                     </span>&nbsp;<?php echo __($node->name); ?>
 
                     <div class="is-pulled-right">

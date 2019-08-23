@@ -21,7 +21,7 @@
     <ul class="menu-list">
         <?php if (!empty($file->nodes)): ?>
             <?php foreach ($file->nodes as $child): ?>
-                <li><a href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'view', $child->id]); ?>"><i class="fas fa-folder"></i>&nbsp;<?php echo h($child->name); ?></a></li>
+                <li><a href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'view', $child->id]); ?>"><i class="fas fa-book"></i>&nbsp;<?php echo h($child->name); ?></a></li>
             <?php endforeach; ?>
         <?php endif; ?>
     </ul>

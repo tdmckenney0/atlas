@@ -15,7 +15,7 @@
             $entry = new stdClass;
             $entry->title = $node->name;
             $entry->subtitle = $node->created;
-            $entry->icon = 'fa-folder';
+            $entry->icon = 'fa-book';
             $entry->href = $this->Url->build(['action' => 'view', $node->id]);
 
             yield $entry;

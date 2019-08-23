@@ -15,10 +15,10 @@
                                 v.nextElementSibling.classList.toggle('is-hidden');
 
                                 if(icon) {
-                                    if (icon.classList.contains('fa-folder')) {
-                                        icon.classList.replace('fa-folder', 'fa-folder-open');
+                                    if (icon.classList.contains('fa-book')) {
+                                        icon.classList.replace('fa-book', 'fa-book-open');
                                     } else {
-                                        icon.classList.replace('fa-folder-open', 'fa-folder');
+                                        icon.classList.replace('fa-book-open', 'fa-book');
                                     }
                                 }
                             }

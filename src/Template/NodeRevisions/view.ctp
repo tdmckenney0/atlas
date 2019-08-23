@@ -8,7 +8,7 @@
 
 <?php $this->start('actions'); ?>
     <ul class="menu-list">
-        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-folder']) . '&nbsp;' . __('Show Node'), ['controller' => 'Nodes', 'action' => 'view', $nodeRevision->node->id], ['escape' => false]) ?></li>
+        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-book']) . '&nbsp;' . __('Show Node'), ['controller' => 'Nodes', 'action' => 'view', $nodeRevision->node->id], ['escape' => false]) ?></li>
         <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-pdf']) . '&nbsp;' . __('Export to PDF'), ['action' => 'view', $nodeRevision->id, '_ext' => 'pdf'], ['escape' => false]) ?></li>
         <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-edit']) . '&nbsp;' . __('Edit Node'), ['action' => 'edit', $nodeRevision->node->id], ['escape' => false]) ?></li>
         <li><?= $this->Form->postLink($this->Html->tag('i', '', ['class' => 'fas fa-trash']) . '&nbsp;' . __('Delete Node'), ['action' => 'delete', $nodeRevision->node->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete {0}?', $nodeRevision->created), 'class' => ' text-danger border border-danger']) ?></li>
