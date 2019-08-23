@@ -84,7 +84,7 @@
         <?php echo $this->Form->end(); ?>
     </div>
 
-    <?php if(!empty($comments)): ?>
+    <?php if(count($comments) > 0): ?>
         <div class="box">
             <h2 class="title is-3"><?php echo __('Comments'); ?></h2>
             <?php foreach($comments as $comment): ?>

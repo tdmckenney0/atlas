@@ -16,7 +16,8 @@ class NodeCommentsController extends AppController
      * Paginate Options
      */
     public $paginate = [
-        'contain' => ['Users', 'Nodes', 'ParentNodeComments']
+        'contain' => ['Users', 'Nodes', 'ParentNodeComments'],
+        'limit' => 10
     ];
     /**
      * Index method
