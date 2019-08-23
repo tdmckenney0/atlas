@@ -67,6 +67,8 @@
 
                 <p class="menu-label">Navigation</p>
                 <?php echo $this->cell('TableOfContents'); ?>
+
+                <?php echo $this->element('mainmenu'); ?>
             </div>
         </aside>
         <main class="column is-9 has-background-white" style="">

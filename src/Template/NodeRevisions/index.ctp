@@ -4,8 +4,9 @@
  * @var \App\Model\Entity\NodeRevision[]|\Cake\Collection\CollectionInterface $nodeRevisions
  */
 ?>
-<?php $this->start('actions'); ?>
-    <?php if(!empty($node)): ?>
+
+<?php if(!empty($node)): ?>
+    <?php $this->start('actions'); ?>
         <ul class="menu-list">
             <li><?= $this->Html->link(__('Overview'), ['controller' => 'Nodes', 'action' => 'view', $node->id], ['class' => '']) ?></li>
             <li>
@@ -15,50 +16,8 @@
             <li><?= $this->Html->link(__('Export to PDF'), ['controller' => 'Nodes', 'action' => 'view', $node->id, '_ext' => 'pdf'], ['class' => '']) ?></li>
             <li><?= $this->Form->postLink(__('Delete Node'), ['controller' => 'Nodes', 'action' => 'delete', $node->id], ['confirm' => __('Are you sure you want to delete # {0}?', $node->id), 'class' => ' text-danger border border-danger']) ?></li>
         </ul>
-    <?php else: ?>
-        <ul class="menu-list">
-            <li>
-                <a href="<?php echo $this->Url->build(['controller' => 'Nodes', 'action' => 'index']); ?>">
-                    <span class="icon">
-                        <i class="fas fa-folder"></i>
-                    </span>&nbsp;<?php echo __('List Nodes'); ?>
-                </a>
-            </li>
-
-            <li>
-                <a href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'index']); ?>">
-                    <span class="icon">
-                        <i class="fas fa-file-alt"></i>
-                    </span>&nbsp;<?php echo __('List Files'); ?>
-                </a>
-            </li>
-
-            <li>
-                <a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'index']); ?>">
-                    <span class="icon">
-                        <i class="fas fa-user"></i>
-                    </span>&nbsp;<?php echo __('List Users'); ?>
-                </a>
-            </li>
-
-            <li>
-                <a href="<?php echo $this->Url->build(['controller' => 'NodeRevisions', 'action' => 'index']); ?>">
-                    <span class="icon">
-                        <i class="fas fa-clock"></i>
-                    </span>&nbsp;<?php echo __('List Revisions'); ?>
-                </a>
-            </li>
-
-            <li>
-                <a href="<?php echo $this->Url->build(['controller' => 'NodeComments', 'action' => 'index']); ?>">
-                    <span class="icon">
-                        <i class="fas fa-comments"></i>
-                    </span>&nbsp;<?php echo __('List Comments'); ?>
-                </a>
-            </li>
-        </ul>
-    <?php endif; ?>
-<?php $this->end(); ?>
+    <?php $this->end(); ?>
+<?php endif; ?>
 
 <div class="container">
 
