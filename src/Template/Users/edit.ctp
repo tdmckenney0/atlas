@@ -15,8 +15,6 @@
     </ul>
 <?php echo $this->end(); ?>
 
-<?php echo $this->cell('Breadcrumb', [null, $user->id]); ?>
-
 <div class="container">
     <h1 class="is-1 title"><?= __('Edit {0}', $user->email) ?></h1>
     <?= $this->Form->create($user) ?>

@@ -90,6 +90,16 @@ class Node extends Entity
     }
 
     /**
+     * gets the current nodes path
+     *
+     * @return array The path
+     */
+    public function getPath()
+    {
+        return $this->_getTable()->find('path', ['for' => $this->id]);
+    }
+
+    /**
      * consolidate
      *
      * Grabs all child nodes and files and concatenates them together into a single markdown stream.

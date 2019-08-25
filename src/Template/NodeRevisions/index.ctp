@@ -20,8 +20,7 @@
 <?php endif; ?>
 
 <div class="container">
-
-    <?php echo $this->cell('Breadcrumb', [$node->id, __('Revisions')]) ; ?>
+    <?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Revisions')]]) ; ?>
 
     <h1 class="title is-1"><?php echo __('Revisions'); ?></h1>
 

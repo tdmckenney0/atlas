@@ -19,7 +19,7 @@
     <?php $this->end(); ?>
 <?php endif; ?>
 
-<?php echo $this->cell('Breadcrumb', [!empty($node->id) ? $node->id : null, __('Add File')]); ?>
+<?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Add File')]]); ?>
 <div class="container box">
     <?= $this->Form->create($file, ['type' => 'file']) ?>
         <h1><?= __('Add File') ?></h1>

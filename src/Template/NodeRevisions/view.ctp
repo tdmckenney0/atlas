@@ -8,19 +8,21 @@
 
 <?php $this->start('actions'); ?>
     <ul class="menu-list">
-        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-book']) . '&nbsp;' . __('Show Node'), ['controller' => 'Nodes', 'action' => 'view', $nodeRevision->node->id], ['escape' => false]) ?></li>
-        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-file-pdf']) . '&nbsp;' . __('Export to PDF'), ['action' => 'view', $nodeRevision->id, '_ext' => 'pdf'], ['escape' => false]) ?></li>
-        <li><?= $this->Html->link($this->Html->tag('i', '', ['class' => 'fas fa-edit']) . '&nbsp;' . __('Edit Node'), ['action' => 'edit', $nodeRevision->node->id], ['escape' => false]) ?></li>
-        <li><?= $this->Form->postLink($this->Html->tag('i', '', ['class' => 'fas fa-trash']) . '&nbsp;' . __('Delete Node'), ['action' => 'delete', $nodeRevision->node->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete {0}?', $nodeRevision->created), 'class' => ' text-danger border border-danger']) ?></li>
-        <li><?= $this->Form->postLink($this->Html->tag('i', '', ['class' => 'fas fa-copy']) . '&nbsp;' . __('Restore to Node'), ['action' => 'restore', $nodeRevision->id], ['escape' => false, 'confirm' => __('Are you sure you want to restore {0}?', $nodeRevision->created), 'class' => ' text-danger border border-danger']) ?></li>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['action' => 'add', $nodeRevision->node->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $nodeRevision->node->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-clock', 'text' => 'List Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $nodeRevision->node->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-edit', 'text' => 'Edit Node', 'link' => ['action' => 'edit', $nodeRevision->node->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-pdf', 'text' => 'Export to PDF', 'link' => ['action' => 'view', $nodeRevision->node->id, '_ext' => 'pdf'], 'linkOptions' => ['download' => 'download']]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-archive', 'text' => 'Export to Zip', 'link' => ['action' => 'view', $nodeRevision->node->id, '_ext' => 'zip'], 'linkOptions' => ['download' => 'download']]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete Node', 'postLink' => ['action' => 'delete', $nodeRevision->node->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $nodeRevision->node->name)]]); ?>
     </ul>
 <?php $this->end(); ?>
 
 <div class="container-fluid">
 
-    <?php echo $this->cell('Breadcrumb', [$nodeRevision->node_id, [
-        $this->Html->link(__('Revisions'), ['action' => 'index', $nodeRevision->node_id]),
-        $nodeRevision->created
+    <?php echo $this->cell('Breadcrumb::fromNode', [$nodeRevision->node, [
+        'Revisions' => ['action' => 'index', $nodeRevision->node_id],
+        $nodeRevision->created->i18nFormat()
     ]]); ?>
 
     <div class="box">

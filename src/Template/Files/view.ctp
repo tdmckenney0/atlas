@@ -17,17 +17,21 @@
     </ul>
 <?php $this->end(); ?>
 
-<?php $this->start('nodes'); ?>
-    <ul class="menu-list">
-        <?php if (!empty($file->nodes)): ?>
+<?php if (!empty($file->nodes)): ?>
+    <?php $this->start('nodes'); ?>
+        <ul class="menu-list">
             <?php foreach ($file->nodes as $child): ?>
-                <li><a href="<?php echo $this->Url->build(['controller' => 'nodes', 'action' => 'view', $child->id]); ?>"><i class="fas fa-book"></i>&nbsp;<?php echo h($child->name); ?></a></li>
+                <?php echo $this->element('menulistitem', [
+                    'icon' => 'fas fa-book',
+                    'text' => $child->name,
+                    'link' => ['controller' => 'nodes', 'action' => 'view', $child->id]
+                ]); ?>
             <?php endforeach; ?>
-        <?php endif; ?>
-    </ul>
-<?php $this->end(); ?>
+        </ul>
+    <?php $this->end(); ?>
+<?php endif; ?>
 
-<?php echo $this->cell('Breadcrumb', [ (!empty($node->id) ? $node->id : null), $file->name ]); ?>
+<?php echo $this->cell('Breadcrumb::fromNode', [ $node, [$file->name] ]); ?>
 
 <div class="content">
     <h1 class="title is-1"><?= h($file->name) ?></h1>

@@ -21,7 +21,7 @@
 <?php $this->Html->css(['https://unpkg.com/easymde/dist/easymde.min.css'], ['block' => true]); ?>
 <?php $this->Html->script(['https://unpkg.com/easymde/dist/easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
 
-<?php echo $this->cell('Breadcrumb', [$parent->id, __('Add')]); ?>
+<?php echo $this->cell('Breadcrumb::fromNode', [$parent, [__('Add')]]); ?>
 
 <div class="container box">
     <?= $this->Form->create($node) ?>

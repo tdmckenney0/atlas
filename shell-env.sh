@@ -21,3 +21,4 @@ at-mysql() {
     popd;
 }
 
+alias at-serveo='ssh -R 80:localhost:4000 serveo.net'

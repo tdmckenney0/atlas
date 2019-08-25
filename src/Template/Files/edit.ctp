@@ -17,7 +17,25 @@
     </ul>
 <?php $this->end(); ?>
 
-<?php echo $this->cell('Breadcrumb', [!empty($node->id) ? $node->id : null, __('Edit {0}', $file->name)]); ?>
+<?php if (!empty($file->nodes)): ?>
+    <?php $this->start('nodes'); ?>
+        <ul class="menu-list">
+            <?php foreach ($file->nodes as $child): ?>
+                <?php echo $this->element('menulistitem', [
+                    'icon' => 'fas fa-book',
+                    'text' => $child->name,
+                    'link' => ['controller' => 'nodes', 'action' => 'view', $child->id]
+                ]); ?>
+            <?php endforeach; ?>
+        </ul>
+    <?php $this->end(); ?>
+<?php endif; ?>
+
+<?php echo $this->cell('Breadcrumb::fromNode', [$node, [
+    $file->name => ['action' => 'view', $file->id, $node->id ?? null],
+    __('Edit')
+]]); ?>
+
 <div class="container">
     <div class="overflow-hidden">
         <h1 class="overflow-hidden"><?= __('Edit {0}', $file->name) ?></h1>

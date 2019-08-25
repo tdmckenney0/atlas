@@ -39,7 +39,7 @@
     <?php $this->end(); ?>
 <?php endif; ?>
 
-<?php echo $this->cell('Breadcrumb', [$node->id]); ?>
+<?php echo $this->cell('Breadcrumb::fromNode', [$node]); ?>
 
 <div class="container-fluid">
     <div class="box">

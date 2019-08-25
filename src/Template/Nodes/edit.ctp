@@ -17,7 +17,7 @@
     </ul>
 <?php $this->end(); ?>
 
-<?php echo $this->cell('Breadcrumb', [$node->id, __('Edit')]); ?>
+<?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Edit')]]); ?>
 
 <?php $this->Html->css(['https://unpkg.com/easymde/dist/easymde.min.css'], ['block' => true]); ?>
 <?php $this->Html->script(['https://unpkg.com/easymde/dist/easymde.min.js', 'enable-easymde'], ['block' => true]); ?>

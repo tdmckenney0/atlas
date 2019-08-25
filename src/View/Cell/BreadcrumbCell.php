@@ -2,6 +2,7 @@
 namespace App\View\Cell;
 
 use Cake\View\Cell;
+use App\Model\Entity\Node;
 
 /**
  * Breadcrumb cell
@@ -31,14 +32,36 @@ class BreadcrumbCell extends Cell
      *
      * @return void
      */
-    public function display($id = null, $append = null)
+    public function display(array $items = [])
     {
-        if(!empty($id)) {
-            $this->loadModel('Nodes');
-            $nodes = $this->Nodes->find('path', ['for' => $id]);
-            $this->set('nodes', $nodes);
-            $this->set('last_node', $nodes->last());
+        $this->set('items', $items);
+        $this->set('last', end($items));
+    }
+
+    /**
+     *  Start with a trace up to the top-level node.
+     *
+     *  @param Node The node to start tracing from.
+     *  @param array Additional items to be appended.
+     */
+    public function fromNode(Node $node = null, array $append = [])
+    {
+        $items = [];
+
+        if (!empty($node)) {
+            $path = $node->getPath();
+
+            if (count($path) > 0) {
+                foreach ($path as $node) {
+                    $items[$node->name] = ['controller' => 'nodes', 'action' => 'view', $node->id];
+                }
+            }
         }
-        $this->set('append', $append);
+
+        $items += $append;
+        $last = end($items);
+
+        $this->template = 'display';
+        $this->set(compact('items', 'last'));
     }
 }
