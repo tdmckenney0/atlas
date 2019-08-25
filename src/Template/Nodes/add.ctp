@@ -33,7 +33,7 @@
         <?php
             echo $this->Form->control('name');
             echo $this->Form->control('sort');
-            echo $this->Form->control('print');
+            echo $this->Form->control('print', ['type' => 'select', 'options' => ['No', 'Yes']]);
             echo $this->Form->control('description');
         ?>
 

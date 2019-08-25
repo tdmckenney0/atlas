@@ -44,12 +44,7 @@
     <?php echo $this->cell('File', [$file->id]); ?>
 
     <?= $this->Form->create($file, ['type' => 'file']) ?>
-
-        <?php $this->Form->unlockField('nodes._ids'); ?>
-
         <?php echo $this->Form->control('name'); ?>
-        <?php echo $this->cell('NodePicker', ['nodes._ids', 'Nodes', $children, null]); ?>
-
         <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

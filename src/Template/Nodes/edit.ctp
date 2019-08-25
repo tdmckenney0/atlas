@@ -25,12 +25,10 @@
 <div class="container box">
     <h1 class="title is-1"><?= __('Edit {0}', $node->name) ?></h1>
     <?= $this->Form->create($node) ?>
-        <?php $this->Form->unlockField('parent_id'); ?>
-        <?php echo $this->cell('NodePicker', ['parent_id', 'Parent', $node->parent_id, $node]); ?>
         <?php
             echo $this->Form->control('name');
             echo $this->Form->control('sort');
-            echo $this->Form->control('print');
+            echo $this->Form->control('print', ['type' => 'select', 'options' => ['No', 'Yes']]);
             echo $this->Form->control('description');
         ?>
     <div><?= $this->Form->button(__('Save')) ?></div>
