@@ -7,23 +7,28 @@
 
 <?php if(!empty($node)): ?>
     <?php $this->start('actions'); ?>
-        <ul class="menu-list">
-            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['controller' => 'Nodes', 'action' => 'add', $node->id]]); ?>
-            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $node->id]]); ?>
-            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-clock', 'text' => 'List Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $node->id]]); ?>
-            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-edit', 'text' => 'Edit Node', 'link' => ['controller' => 'Nodes', 'action' => 'edit', $node->id]]); ?>
-            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-pdf', 'text' => 'Export to PDF', 'link' => ['controller' => 'Nodes', 'action' => 'view', $node->id, '_ext' => 'pdf'], 'linkOptions' => ['download' => 'download']]); ?>
-            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-archive', 'text' => 'Export to Zip', 'link' => ['controller' => 'Nodes', 'action' => 'view', $node->id, '_ext' => 'zip'], 'linkOptions' => ['download' => 'download']]); ?>
-            <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete Node', 'postLink' => ['controller' => 'Nodes', 'action' => 'delete', $node->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $node->name)]]); ?>
-        </ul>
+        <?php echo $this->element('Nodes/actions', ['node' => $node]); ?>
     <?php $this->end(); ?>
 <?php endif; ?>
 
 <?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Add File')]]); ?>
 <div class="container box">
+    <h1 class="title is-1"><?= __('Add File') ?></h1>
     <?= $this->Form->create($file, ['type' => 'file']) ?>
-        <h1><?= __('Add File') ?></h1>
-        <?php echo $this->Form->control('file', ['type' => 'file']); ?>
+        <div class="file field">
+            <label class="file-label">
+                <?php echo $this->Form->control('file', ['type' => 'file', 'label' => false, 'div' => false]); ?>
+                <span class="file-cta">
+                    <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                        Choose a file…
+                    </span>
+                </span>
+            </label>
+        </div>
+
         <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
