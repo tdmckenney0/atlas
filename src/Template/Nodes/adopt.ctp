@@ -33,9 +33,7 @@
     <?php echo $this->cell('Breadcrumb::fromNode', [$adoptee, [__('Change Parent')]]); ?>
 
     <div class="box">
-        <?php echo $this->Form->create(null, ['url' => ['action' => 'adopt', $adoptee->id]]); ?>
-            <input class="button is-fullwidth" type="submit" value="Remove Parent" />
-        <?php echo $this->Form->end(); ?>
+        <?php echo $this->Form->postLink('Move to Top Level', ['action' => 'adopt', $adoptee->id], ['class' => 'button is-warning is-fullwidth']); ?>
     </div>
 
     <?php echo $this->element('search'); ?>

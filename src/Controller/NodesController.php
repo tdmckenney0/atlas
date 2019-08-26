@@ -17,7 +17,8 @@ class NodesController extends AppController
      * Pagination Settings
      */
     public $paginate = [
-        'order' => 'name'
+        'order' => 'name',
+        'conditions' => []
     ];
 
     /**
@@ -168,6 +169,14 @@ class NodesController extends AppController
                 $this->Flash->error(__('The node could not be saved. Please, try again.'));
             }
         }
+
+        // Exclude all child nodes.
+        $exclude = $this->Nodes->find('children', ['for' => $adoptee->id])->extract('id')->toArray();
+
+        // Exclude current node.
+        $exclude = array_merge($exclude, [$adoptee->id]);
+
+        $this->paginate['conditions'] += ['Nodes.id NOT IN' => $exclude]; $this->log($this->paginate);
 
         $nodes = $this->paginate($this->Nodes);
 
