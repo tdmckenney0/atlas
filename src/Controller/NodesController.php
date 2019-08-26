@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Nodes Controller
@@ -15,15 +16,18 @@ class NodesController extends AppController
     /**
      * Pagination Settings
      */
-    public $paginate = [];
+    public $paginate = [
+        'order' => 'name'
+    ];
 
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
+     * Callbacks
      */
-    public function index()
+    public function beforeFilter(Event $event)
     {
+        parent::beforeFilter($event);
+
+        // Search Setup
         $search = $this->request->getQuery('search');
         if (!empty($search)) {
             $search = '%' . trim($search) . '%';
@@ -33,7 +37,17 @@ class NodesController extends AppController
                     'Nodes.description LIKE' => $search
                 ]
             ];
-        } else {
+        }
+    }
+
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|void
+     */
+    public function index()
+    {
+        if(empty( $this->paginate['conditions'])) {
             $this->paginate['conditions'] = ['Nodes.parent_id IS' => null];
         }
 
@@ -119,14 +133,45 @@ class NodesController extends AppController
             if ($this->Nodes->save($node)) {
                 $this->Nodes->enforceSortOrder($node);
                 $this->Flash->success(__('The node has been saved.'));
-
-                // return $this->redirect(['action' => 'view', $node->id]);
             } else {
                 $this->Flash->error(__('The node could not be saved. Please, try again.'));
             }
         }
         $files = $this->Nodes->Files->find('list', ['limit' => 200, 'order' => ['Files.name' => 'ASC']]);
         $this->set(compact('node', 'files'));
+    }
+
+    /**
+     * Adopt Method - Changes the parent node
+     *
+     * @param string|null $adoptee_id The Node to change the parent of
+     * @param string|null $adoptor_id The new parent node
+     */
+    public function adopt($adoptee_id = null, $adopter_id = null)
+    {
+        $adoptee = $this->Nodes->get($adoptee_id);
+        $adopter = null;
+        if (!empty($adopter_id)) {
+            $adopter = $this->Nodes->get($adopter_id);
+        }
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            if(!empty($adopter->id)) {
+                $adoptee->parent_id = $adopter->id;
+            } else {
+                $adoptee->parent_id = null;
+            }
+            if ($this->Nodes->save($adoptee)) {
+                $this->Flash->success(__('The node parent has been changed.'));
+
+                return $this->redirect(['action' => 'view', $adoptee->id]);
+            } else {
+                $this->Flash->error(__('The node could not be saved. Please, try again.'));
+            }
+        }
+
+        $nodes = $this->paginate($this->Nodes);
+
+        $this->set(compact('adoptee', 'adopter', 'nodes'));
     }
 
     /**
