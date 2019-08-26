@@ -33,7 +33,7 @@
     <?php echo $this->cell('Breadcrumb::fromNode', [$adoptee, [__('Change Parent')]]); ?>
 
     <div class="box">
-        <?php echo $this->Form->postLink('Move to Top Level', ['action' => 'adopt', $adoptee->id], ['class' => 'button is-warning is-fullwidth']); ?>
+        <?php echo $this->Form->postLink('Move to Top Level', ['action' => 'adopt', $adoptee->id], ['class' => 'button is-warning is-fullwidth', 'confirm' => __('Are you sure you want to send this node top level?')]); ?>
     </div>
 
     <?php echo $this->element('search'); ?>

@@ -34,6 +34,12 @@
 <?php echo $this->cell('Breadcrumb::fromNode', [$node]); ?>
 
 <div class="container-fluid">
+    <?php if(empty($node->print)): ?>
+        <article class="message is-info" role="error">
+            <div class="message-body"><?php echo __('This node will not be printed'); ?></div>
+        </article>
+    <?php endif; ?>
+
     <div class="box">
         <h1 class="title is-1"><?= h($node->name) ?></h1>
 
