@@ -1,10 +1,10 @@
 <div class="container">
     <?php if($file->isImageEmbeddable()): ?>
-        <?php echo $this->cell('File::image', [$file]); ?>
+        <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('image'); echo $cell; ?>
     <?php elseif($file->isAudio()): ?>
-        <?php echo $this->cell('File::audio', [$file]); ?>
+        <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('audio'); echo $cell; ?>
     <?php elseif($file->isCSV()): ?>
-        <?php echo $this->cell('File::csv', [$file]); ?>
+        <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('csv'); echo $cell; ?>
     <?php elseif($file->isText()): ?>
         <?php echo $this->cell('Markdown', [$file->File->read()]); ?>
     <?php elseif($file->isCompressed()): ?>
