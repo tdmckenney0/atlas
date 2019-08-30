@@ -18,10 +18,26 @@ use Cake\Filesystem\Folder;
  */
 class File extends Entity
 {
-       /**
+    /**
      * Absolute path to file storage.
      */
     const STORAGE = (ROOT . DS . 'files' . DS);
+
+    /**
+     * Image Types that can be displayed by a web browser.
+     */
+    const DISPLAYABLE_IMAGES = [
+        'image/jpeg',
+        'image/webp',
+        'image/gif',
+        'image/png',
+        'image/tiff',
+        'image/tiff-fx',
+        'image/bmp',
+        'image/x-bmp',
+        'image/x-icon',
+        'image/apng',
+    ];
 
     /**
      * File Object.
@@ -107,6 +123,11 @@ class File extends Entity
     public function isImage()
     {
         return (strpos($this->mime_type, 'image/') !== false);
+    }
+
+    public function isImageEmbeddable()
+    {
+        return in_array($this->mime_type, self::DISPLAYABLE_IMAGES);
     }
 
     public function isText()

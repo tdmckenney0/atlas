@@ -1,24 +1,10 @@
 <div class="container">
-    <?php if($file->isImage()): ?>
-        <figure class="image">
-            <?php echo $this->Html->image($this->Url->build(['controller' => 'files', 'action' => 'get', $file->id]), ['class' => 'img-fluid']); ?>
-        </figure>
+    <?php if($file->isImageEmbeddable()): ?>
+        <?php echo $this->cell('File::image', [$file]); ?>
     <?php elseif($file->isAudio()): ?>
-        <div class="p-3">
-            <audio controls style="width: 100%;" src="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'get', $file->id]); ?>">Your browser does not support the <code>audio</code> element.</audio>
-        </div>
+        <?php echo $this->cell('File::audio', [$file]); ?>
     <?php elseif($file->isCSV()): ?>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <?php while($row = $file->readlineCSV()): ?>
-                    <tr>
-                        <?php foreach($row as $column): ?>
-                            <td><?php echo h($column); ?></td>
-                        <?php endforeach; ?>
-                    </tr>
-                <?php endwhile; ?>
-            </table>
-        </div>
+        <?php echo $this->cell('File::csv', [$file]); ?>
     <?php elseif($file->isText()): ?>
         <?php echo $this->cell('Markdown', [$file->File->read()]); ?>
     <?php elseif($file->isCompressed()): ?>

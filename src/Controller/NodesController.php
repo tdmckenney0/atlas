@@ -72,6 +72,7 @@ class NodesController extends AppController
             'contain' => ['ParentNodes', 'Files', 'ChildNodes']
         ]);
 
+        // Compress if requested zip.
         if($ext == 'zip') {
             $file = $node->toZip();
             return $this->response->withFile($file->path, [
@@ -80,13 +81,19 @@ class NodesController extends AppController
             ]);
         }
 
+        // Comments and new comments
         $nodeComment = $this->Nodes->NodeComments->newEntity();
         $comments = $this->Nodes->NodeComments->find('threaded', [
             'conditions' => ['node_id' => $node->id],
             'contain' => ['Users']
         ])->all();
 
-        $this->set(compact('node', 'nodeComment', 'comments'));
+        // Only embeddable images.
+        $files = collection($node->files)->filter(function($file, $key) {
+            return $file->isImageEmbeddable();
+        })->chunk(3);
+
+        $this->set(compact('node', 'nodeComment', 'comments', 'files'));
         $this->set('_serialize', 'node');
     }
 

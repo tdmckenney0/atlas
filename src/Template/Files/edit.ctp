@@ -38,7 +38,7 @@
 <div class="container">
     <div class="box">
         <h1 class="title is-1"><?= h($file->name) ?></h1>
-        <?php echo $this->cell('File', [$file->id]); ?>
+        <?php echo $this->cell('File', [$file]); ?>
     </div>
 
     <div class="box">

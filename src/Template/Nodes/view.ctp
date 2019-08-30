@@ -53,14 +53,23 @@
         </div>
     </div>
 
-    <div class="is-hidden">
-        <?php echo $this->Form->create(null, ['url' => ['controller' => 'Files', 'action' => 'add', $node->id], 'type' => 'file', 'id' => 'add-file-to-node-form']) ?>
-            <?php $this->Form->unlockField('file'); ?>
-            <?php $this->Form->unlockField('nodes._ids'); ?>
-            <input type="file" name="file" id="add-file-to-node-input">
-            <input type="checkbox" name="nodes[_ids][]" value="<?= h($node->id) ?>" checked="checked">
-        <?php echo $this->Form->end(); ?>
-    </div>
+    <?php if(count($files) > 0): ?>
+        <?php foreach($files as $row): ?>
+            <div class="tile is-ancestor">
+                <?php foreach($row as $file): ?>
+                    <div class="tile is-parent is-4">
+                        <article class="tile is-child box">
+                            <a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>">
+                                <?php echo $this->cell('File::image', [$file]); ?>
+                            </a>
+                            <hr />
+                            <p class="subtitle"><?php echo h($file->name); ?></p>
+                        </article>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
     <div class="box">
         <h2 class="title is-3"><?= __('Add Comment') ?></h3>

@@ -34,5 +34,5 @@
 
 <div class="content box">
     <h1 class="title is-1"><?= h($file->name) ?></h1>
-    <?php echo $this->cell('File', [$file->id]); ?>
+    <?php echo $this->cell('File', [$file]); ?>
 </div>

@@ -2,6 +2,7 @@
 namespace App\View\Cell;
 
 use Cake\View\Cell;
+use App\Model\Entity\File;
 
 /**
  * File cell
@@ -31,12 +32,32 @@ class FileCell extends Cell
      *
      * @return void
      */
-    public function display($file_id = null)
+    public function display(File $file)
     {
-        if(!empty($file_id)) {
-            $this->loadModel('Files');
-            $file = $this->Files->get($file_id);
-            $this->set('file', $file);
-        }
+        $this->set('file', $file);
+    }
+
+    /**
+     *
+     */
+    public function image(File $file)
+    {
+        $this->set('file', $file);
+    }
+
+    /**
+     *
+     */
+    public function csv(File $file)
+    {
+        $this->set('file', $file);
+    }
+
+    /**
+     *
+     */
+    public function audio(File $file)
+    {
+        $this->set('file', $file);
     }
 }
