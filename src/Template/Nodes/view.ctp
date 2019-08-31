@@ -71,6 +71,14 @@
         <?php endforeach; ?>
     <?php endif; ?>
 
+    <?php if(count($comments) > 0): ?>
+        <div class="box">
+            <?php foreach($comments as $comment): ?>
+                <?php echo $this->cell('comments', [$comment]); ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
     <div class="box">
         <h2 class="title is-3"><?= __('Add Comment') ?></h3>
         <?= $this->Form->create($nodeComment, ['url' => ['controller' => 'NodeComments', 'action' => 'add', $node->id]]) ?>
