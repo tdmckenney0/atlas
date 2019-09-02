@@ -3,6 +3,8 @@
         <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('image'); echo $cell; ?>
     <?php elseif($file->isAudio()): ?>
         <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('audio'); echo $cell; ?>
+    <?php elseif($file->isVideo()): ?>
+        <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('video'); echo $cell; ?>
     <?php elseif($file->isCSV()): ?>
         <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('csv'); echo $cell; ?>
     <?php elseif($file->isText()): ?>
