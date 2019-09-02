@@ -53,23 +53,69 @@
         </div>
     </div>
 
-    <?php if(count($files) > 0): ?>
-        <?php foreach($files as $row): ?>
-            <div class="tile is-ancestor">
-                <?php foreach($row as $file): ?>
-                    <div class="tile is-parent is-4">
-                        <article class="tile is-child box">
-                            <a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>">
-                                <?php echo $this->cell('File::image', [$file]); ?>
-                            </a>
-                            <hr />
-                            <p class="subtitle"><?php echo h($file->name); ?></p>
-                        </article>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endforeach; ?>
+    <?php if(!$images->isEmpty()): ?>
+        <?php echo $this->element('accordion', [
+            'id' => 'images',
+            'title' => 'Images'
+        ]); ?>
+
+        <div id="images">
+            <?php foreach($images as $row): ?>
+                <div class="tile is-ancestor">
+                    <?php foreach($row as $file): ?>
+                        <div class="tile is-parent is-4">
+                            <article class="tile is-child box">
+                                <a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>">
+                                    <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('image'); echo $cell; ?>
+                                </a>
+                                <hr />
+                                <p class="subtitle"><?php echo h($file->name); ?></p>
+                            </article>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
     <?php endif; ?>
+
+    <?php if(!$audio->isEmpty()): ?>
+        <?php echo $this->element('accordion', [
+            'id' => 'audio',
+            'title' => 'Audio'
+        ]); ?>
+
+        <div id="audio">
+            <?php foreach($audio as $clip): ?>
+                <div class="audio box">
+                    <?php $cell = $this->cell('File', [$clip]); $cell->viewBuilder()->setTemplate('audio'); echo $cell; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if(!$videos->isEmpty()): ?>
+        <?php echo $this->element('accordion', [
+            'id' => 'videos',
+            'title' => 'Videos'
+        ]); ?>
+
+        <div id="videos">
+            <?php foreach($videos as $video): ?>
+                <div class="video box">
+                    <?php $cell = $this->cell('File', [$video]); $cell->viewBuilder()->setTemplate('video'); echo $cell; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php echo $this->element('accordion', [
+        'id' => 'other',
+        'title' => 'Others'
+    ]); ?>
+
+    <div class="tab-content box" id="other">
+        <p>other</p>
+    </div>
 
     <?php if(count($comments) > 0): ?>
         <div class="box">

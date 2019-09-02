@@ -88,12 +88,28 @@ class NodesController extends AppController
             'contain' => ['Users']
         ])->all();
 
-        // Only embeddable images.
-        $files = collection($node->files)->filter(function($file, $key) {
+        // Seperate the Files out.
+        $files = collection($node->files);
+
+        $images = $files->filter(function($file, $key) {
             return $file->isImageEmbeddable();
         })->chunk(3);
 
-        $this->set(compact('node', 'nodeComment', 'comments', 'files'));
+        $videos = $files->filter(function($file, $key) {
+            return $file->isVideo();
+        });
+
+        $audio = $files->filter(function($file, $key) {
+            return $file->isAudio();
+        })->chunk(3);
+
+        $other = $files->filter(function($file, $key) {
+            return !$file->isImageEmbeddable() && !$file->isVideo() && !$file->isAudio();
+        })->chunk(3);
+
+        // Only embeddable images.
+
+        $this->set(compact('node', 'nodeComment', 'comments', 'images', 'videos', 'audio', 'other'));
         $this->set('_serialize', 'node');
     }
 
