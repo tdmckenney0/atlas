@@ -9,7 +9,6 @@ use App\Model\Entity\File;
  */
 class FileCell extends Cell
 {
-
     /**
      * List of valid options that can be passed into this
      * cell's constructor.
@@ -32,32 +31,21 @@ class FileCell extends Cell
      *
      * @return void
      */
-    public function display(File $file)
+    public function display(File $file, string $template = null)
     {
-        $this->set('file', $file);
-    }
+        if (empty($template)) {
+            if($file->isImageEmbeddable()) {
+                $template = 'image';
+            } else if ($file->isAudio()) {
+                $template = 'audio';
+            } else if ($file->isVideo()) {
+                $template = 'video';
+            } else if ($file->isCSV()) {
+                $template = 'csv';
+            }
+        }
 
-    /**
-     *
-     */
-    public function image(File $file)
-    {
-        $this->set('file', $file);
-    }
-
-    /**
-     *
-     */
-    public function csv(File $file)
-    {
-        $this->set('file', $file);
-    }
-
-    /**
-     *
-     */
-    public function audio(File $file)
-    {
+        $this->viewBuilder()->setTemplate($template);
         $this->set('file', $file);
     }
 }
