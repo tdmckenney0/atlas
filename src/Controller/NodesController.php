@@ -101,15 +101,13 @@ class NodesController extends AppController
 
         $audio = $files->filter(function($file, $key) {
             return $file->isAudio();
-        })->chunk(3);
+        });
 
-        $other = $files->filter(function($file, $key) {
-            return !$file->isImageEmbeddable() && !$file->isVideo() && !$file->isAudio();
-        })->chunk(3);
+        $charts = $files->filter(function($file, $key) {
+            return $file->isCSV();
+        });
 
-        // Only embeddable images.
-
-        $this->set(compact('node', 'nodeComment', 'comments', 'images', 'videos', 'audio', 'other'));
+        $this->set(compact('node', 'nodeComment', 'comments', 'images', 'videos', 'audio', 'charts'));
         $this->set('_serialize', 'node');
     }
 

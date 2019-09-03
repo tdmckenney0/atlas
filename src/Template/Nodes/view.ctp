@@ -56,7 +56,7 @@
     <?php if(!$images->isEmpty()): ?>
         <?php echo $this->element('accordion', [
             'id' => 'images',
-            'title' => 'Images'
+            'title' => __('Images')
         ]); ?>
 
         <div id="images">
@@ -65,11 +65,10 @@
                     <?php foreach($row as $file): ?>
                         <div class="tile is-parent is-4">
                             <article class="tile is-child box">
+                                <h2 class="title is-5"><?php echo h($file->name); ?></h2>
                                 <a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>">
                                     <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('image'); echo $cell; ?>
                                 </a>
-                                <hr />
-                                <p class="subtitle"><?php echo h($file->name); ?></p>
                             </article>
                         </div>
                     <?php endforeach; ?>
@@ -81,12 +80,13 @@
     <?php if(!$audio->isEmpty()): ?>
         <?php echo $this->element('accordion', [
             'id' => 'audio',
-            'title' => 'Audio'
+            'title' => __('Audio')
         ]); ?>
 
         <div id="audio">
             <?php foreach($audio as $clip): ?>
                 <div class="audio box">
+                    <h2 class="title is-5"><?php echo h($clip->name); ?></h2>
                     <?php $cell = $this->cell('File', [$clip]); $cell->viewBuilder()->setTemplate('audio'); echo $cell; ?>
                 </div>
             <?php endforeach; ?>
@@ -96,26 +96,34 @@
     <?php if(!$videos->isEmpty()): ?>
         <?php echo $this->element('accordion', [
             'id' => 'videos',
-            'title' => 'Videos'
+            'title' => __('Videos')
         ]); ?>
 
         <div id="videos">
             <?php foreach($videos as $video): ?>
                 <div class="video box">
+                    <h2 class="title is-5"><?php echo h($video->name); ?></h2>
                     <?php $cell = $this->cell('File', [$video]); $cell->viewBuilder()->setTemplate('video'); echo $cell; ?>
                 </div>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
 
-    <?php echo $this->element('accordion', [
-        'id' => 'other',
-        'title' => 'Others'
-    ]); ?>
+    <?php if(!$charts->isEmpty()): ?>
+        <?php echo $this->element('accordion', [
+            'id' => 'charts',
+            'title' => __('Charts')
+        ]); ?>
 
-    <div class="tab-content box" id="other">
-        <p>other</p>
-    </div>
+        <div id="charts">
+            <?php foreach($charts as $chart): ?>
+                <div class="video box">
+                    <h2 class="title is-5"><?php echo h($chart->name); ?></h2>
+                    <?php $cell = $this->cell('File', [$chart]); $cell->viewBuilder()->setTemplate('csv'); echo $cell; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
     <?php if(count($comments) > 0): ?>
         <div class="box">
