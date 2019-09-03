@@ -59,7 +59,7 @@
             'title' => __('Images')
         ]); ?>
 
-        <div id="images">
+        <div id="images" style="margin-bottom: 1em;">
             <?php foreach($images as $row): ?>
                 <div class="tile is-ancestor">
                     <?php foreach($row as $file): ?>
