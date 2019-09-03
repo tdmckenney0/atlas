@@ -25,7 +25,7 @@
             <h1 class="title"><?= __('Edit Comment') ?></h1>
             <?php echo $this->Form->control('body', ['label' => false]); ?>
         </fieldset>
-        <?= $this->Form->button(__('Submit')) ?>
+        <?= $this->Form->submit(__('Submit')) ?>
         <?= $this->Form->end() ?>
     </div>
 </div>

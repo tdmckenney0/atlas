@@ -137,7 +137,7 @@
         <h2 class="title is-3"><?= __('Add Comment') ?></h3>
         <?= $this->Form->create($nodeComment, ['url' => ['controller' => 'NodeComments', 'action' => 'add', $node->id]]) ?>
             <?php echo $this->Form->control('body', ['label' => false]);  ?>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->submit(__('Submit')) ?>
         <?= $this->Form->end() ?>
     </div>
 </div>

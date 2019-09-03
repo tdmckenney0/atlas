@@ -23,6 +23,6 @@
             echo $this->Form->control('print', ['type' => 'select', 'options' => ['No', 'Yes']]);
             echo $this->Form->control('description');
         ?>
-    <div><?= $this->Form->button(__('Save')) ?></div>
+    <div><?= $this->Form->submit(__('Save')) ?></div>
     <?= $this->Form->end() ?>
 </div>
