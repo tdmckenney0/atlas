@@ -67,7 +67,7 @@
                             <article class="tile is-child box">
                                 <h2 class="title is-5"><?php echo h($file->name); ?></h2>
                                 <a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>">
-                                    <?php $cell = $this->cell('File', [$file]); $cell->viewBuilder()->setTemplate('image'); echo $cell; ?>
+                                    <?php echo $this->cell('File', [$file, 'thumbnail']); ?>
                                 </a>
                             </article>
                         </div>
