@@ -49,7 +49,7 @@ class BreadcrumbCell extends Cell
         $items = [];
 
         if (!empty($node)) {
-            $path = $node->getPath();
+            $path = $node->getPath()->toArray();
 
             if (count($path) > 0) {
                 foreach ($path as $node) {
