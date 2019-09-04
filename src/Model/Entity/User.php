@@ -32,6 +32,10 @@ class User extends Entity
         'password' => true,
         'created' => true,
         'modified' => true,
+        'name' => true,
+        'location' => true,
+        'timezone' => true,
+        'about' => true,
         'node_comments' => true
     ];
 
