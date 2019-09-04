@@ -5,6 +5,7 @@ use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\Filesystem\File as CakeFile;
 use Cake\Filesystem\Folder;
+use App\Model\Entity\Traits\LazyLoad;
 
 /**
  * Node Entity
@@ -26,6 +27,10 @@ use Cake\Filesystem\Folder;
  */
 class Node extends Entity
 {
+    /**
+     * Lazy Loader!
+     */
+    use LazyLoad;
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -52,30 +57,6 @@ class Node extends Entity
         'child_nodes' => true,
         'files' => true
     ];
-
-    /**
-     * _getTable
-     *
-     * Gets the Table object for this Entity.
-     *
-     * @return App\Model\Table\NodesTable
-     */
-    protected function _getTable()
-    {
-        return TableRegistry::getTableLocator()->get('Nodes');
-    }
-
-    /**
-     * lazyLoad
-     *
-     * @param Array An array to feed into App\Model\Table\NodesTable::loadInto's second arg.
-     *
-     * @return EntityInterface|array
-     */
-    public function lazyLoad(Array $contain = [])
-    {
-        return $this->_getTable()->loadInto($this, $contain);
-    }
 
     /**
      * getLevel()

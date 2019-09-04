@@ -36,6 +36,10 @@ class CommentsCell extends Cell
     {
         $children = [];
 
+        if (empty($comment->user)) {
+            $comment->lazyLoad(['Users']);
+        }
+
         if (!empty($comment->children)) {
             $children =& $comment->children;
         } else if (!empty($comment->child_node_comments)) {

@@ -5,6 +5,7 @@ use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
 use Cake\Filesystem\File as CakeFile;
 use Cake\Filesystem\Folder;
+use App\Model\Entity\Traits\LazyLoad;
 
 /**
  * NodeComment Entity
@@ -24,6 +25,10 @@ use Cake\Filesystem\Folder;
  */
 class NodeComment extends Entity
 {
+    /**
+     * Lazy Loader!
+     */
+    use LazyLoad;
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
