@@ -12,8 +12,8 @@
 <?php endif; ?>
 
 <?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Add File')]]); ?>
-<div class="container-fluid">
-    <h1 class="title is-1"><?= __('Add File') ?></h1>
+<div class="container-fluid box">
+    <h1 class="title"><?= __('Add File') ?></h1>
     <?= $this->Form->create($file, ['type' => 'file']) ?>
         <div class="file field">
             <label class="file-label">

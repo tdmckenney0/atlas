@@ -15,7 +15,7 @@
 <?php $this->Html->script(['https://unpkg.com/easymde/dist/easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
 
 <div class="container box">
-    <h1 class="title is-1"><?= __('Edit {0}', $node->name) ?></h1>
+    <h1 class="title"><?= __('Edit {0}', $node->name) ?></h1>
     <?= $this->Form->create($node) ?>
         <?php
             echo $this->Form->control('name');

@@ -5,7 +5,7 @@
  */
 ?>
 <div class="container-fluid">
-    <h1 class="title is-1"><?= __('Comments') ?></h1>
+    <h1 class="title"><?= __('Comments') ?></h1>
 
     <?php foreach ($nodeComments as $nodeComment): ?>
         <div class="box">
