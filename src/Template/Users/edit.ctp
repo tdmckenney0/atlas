@@ -11,15 +11,22 @@
         <?php echo $this->element('menulistitem', ['icon' => 'fas fa-user', 'text' => 'Show User', 'link' => ['action' => 'view', $user->id]]); ?>
         <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete User', 'postLink' => ['action' => 'delete', $user->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $user->email)]]); ?>
     </ul>
-<?php echo $this->end(); ?>
+<?php $this->end(); ?>
+
+<?php $this->Html->css(['https://unpkg.com/easymde/dist/easymde.min.css'], ['block' => true]); ?>
+<?php $this->Html->script(['https://unpkg.com/easymde/dist/easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
 
 <div class="container-fluid">
     <div class="box">
-        <h1 class="title"><?= __('Edit {0}', $user->email) ?></h1>
+        <h1 class="title"><?= __('Edit {0}', $user->name) ?></h1>
         <?= $this->Form->create($user) ?>
             <?php
+                echo $this->Form->control('name');
                 echo $this->Form->control('email');
+                echo $this->Form->control('location');
+                echo $this->Form->control('timezone');
                 echo $this->Form->control('password');
+                echo $this->Form->control('about');
             ?>
         <?= $this->Form->submit(__('Submit')) ?>
         <?= $this->Form->end() ?>
