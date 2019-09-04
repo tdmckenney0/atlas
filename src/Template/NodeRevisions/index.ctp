@@ -11,7 +11,7 @@
     <?php $this->end(); ?>
 <?php endif; ?>
 
-<div class="container">
+<div class="container-fluid">
     <?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Revisions')]]) ; ?>
 
     <h1 class="title is-1"><?php echo __('Revisions'); ?></h1>

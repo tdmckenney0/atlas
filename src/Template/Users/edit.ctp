@@ -15,7 +15,7 @@
     </ul>
 <?php echo $this->end(); ?>
 
-<div class="container">
+<div class="container-fluid">
     <h1 class="is-1 title"><?= __('Edit {0}', $user->email) ?></h1>
     <?= $this->Form->create($user) ?>
         <?php

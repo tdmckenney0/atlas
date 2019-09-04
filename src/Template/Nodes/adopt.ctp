@@ -2,7 +2,7 @@
     <?php echo $this->element('Nodes/actions', ['node' => $adoptee]); ?>
 <?php $this->end(); ?>
 
-<div class="container">
+<div class="container-fluid">
     <h1 class="title is-1"><?php echo __('Change Parent'); ?></h1>
 
     <?php if(!empty($adopter)): ?>

@@ -35,7 +35,7 @@
     __('Edit')
 ]]); ?>
 
-<div class="container">
+<div class="container-fluid">
     <div class="box">
         <h1 class="title is-1"><?= h($file->name) ?></h1>
         <?php echo $this->cell('File', [$file]); ?>
