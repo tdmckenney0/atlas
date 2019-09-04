@@ -7,10 +7,14 @@
     <div class="media-content">
         <div class="content">
             <p>
-                <strong><?php echo h($comment->user->email); ?></strong>
+                <?php echo $this->Html->link($comment->user->email, ['controller' => 'users', 'action' => 'view', $comment->user->id]); ?>
 
                 <?php if(!empty($comment->node)): ?>
                     <span>on <?php echo $this->Html->link($comment->node->name, ['controller' => 'Nodes', 'action' => 'view', $comment->node->id]); ?></span>
+                <?php endif; ?>
+
+                <?php if(!empty($comment->created)): ?>
+                    <span>at <?php echo $comment->created->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]); ?></span>
                 <?php endif; ?>
                 <br>
                 <?php echo $this->cell('Markdown', [$comment->body]); ?>

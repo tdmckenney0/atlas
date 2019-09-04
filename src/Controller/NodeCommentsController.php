@@ -17,7 +17,8 @@ class NodeCommentsController extends AppController
      */
     public $paginate = [
         'contain' => ['Users', 'Nodes', 'ParentNodeComments'],
-        'limit' => 10
+        'limit' => 10,
+        'order' => ['NodeComments.modified DESC']
     ];
     /**
      * Index method
@@ -55,14 +56,14 @@ class NodeCommentsController extends AppController
     public function add($node_id, $parent_id = null)
     {
         $nodeComment = $this->NodeComments->newEntity();
-        $parentComment = $this->NodeComments->findById($parent_id)->first();
-        if ($this->request->is('post')) {
+        $parentComment = $this->NodeComments->findById($parent_id)->contain('Users')->first();
+        $node = $this->NodeComments->Nodes->get($node_id);
 
-            $parentNode = $this->NodeComments->Nodes->get($node_id);
+        if ($this->request->is('post')) {
             $nodeComment = $this->NodeComments->patchEntity($nodeComment, $this->request->getData());
 
             $nodeComment->user_id = $this->Auth->user('id');
-            $nodeComment->node_id = $parentNode->id;
+            $nodeComment->node_id = $node->id;
 
             if(!empty($parentComment->id)) {
                 $nodeComment->parent_id = $parentComment->id;
@@ -75,7 +76,7 @@ class NodeCommentsController extends AppController
             }
             $this->Flash->error(__('The node comment could not be saved. Please, try again.'));
         }
-        $this->set(compact('nodeComment', 'parentComment'));
+        $this->set(compact('nodeComment', 'node', 'parentComment'));
     }
 
     /**
@@ -88,7 +89,7 @@ class NodeCommentsController extends AppController
     public function edit($id = null)
     {
         $nodeComment = $this->NodeComments->get($id, [
-            'contain' => []
+            'contain' => ['Nodes', 'ParentNodeComments']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $nodeComment = $this->NodeComments->patchEntity($nodeComment, $this->request->getData());
