@@ -42,6 +42,7 @@ class NodeCommentsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Timestamp');
         $this->addBehavior('Tree');
 
         $this->belongsTo('Users', [
