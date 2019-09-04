@@ -33,7 +33,7 @@
 <body>
     <section class="hero is-primary is-fullheight">
         <div class="hero-body">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="columns is-vcentered">
                     <div class="column is-two-thirds">
                         <h1 class="title">
