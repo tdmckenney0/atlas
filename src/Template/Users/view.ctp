@@ -5,33 +5,33 @@
  */
 ?>
 
-<div class="users">
+<?php $this->start('actions'); ?>
     <ul class="menu-list">
-        <li>
-            <a class=" active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overview</a>
-        </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => '']) ?></li>
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id], ['class' => '']) ?></li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => ' text-danger border border-danger']) ?></li>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-user-plus', 'text' => 'Add User', 'link' => ['action' => 'add']]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-user-edit', 'text' => 'Edit User', 'link' => ['action' => 'edit', $user->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-user', 'text' => 'Show User', 'link' => ['action' => 'view', $user->id]]); ?>
+        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete User', 'postLink' => ['action' => 'delete', $user->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $user->email)]]); ?>
     </ul>
+<?php echo $this->end(); ?>
 
-    <hr />
-
-    <div class="users view large-9 medium-8 columns content">
-        <h3><?= h($user->email) ?></h3>
-        <table class="vertical-table">
-            <tr>
-                <th scope="row"><?= __('Email') ?></th>
-                <td><?= h($user->email) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Created') ?></th>
-                <td><?= h($user->created) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Modified') ?></th>
-                <td><?= h($user->modified) ?></td>
-            </tr>
+<div class="container-fluid">
+    <div class="box">
+        <h1 class="title"><?= h($user->email) ?></h1>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th scope="row"><?= __('Email') ?></th>
+                    <td><?= h($user->email) ?></td>
+                </tr>
+                <tr>
+                    <th scope="row"><?= __('Created') ?></th>
+                    <td><?= h($user->created) ?></td>
+                </tr>
+                <tr>
+                    <th scope="row"><?= __('Modified') ?></th>
+                    <td><?= h($user->modified) ?></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>

@@ -6,6 +6,7 @@
 ?>
 
 <div class="container box">
+    <h1 class="is-1 title"><?= __('Add User') ?></h1>
     <?= $this->Form->create($user) ?>
         <?php
             echo $this->Form->control('email');

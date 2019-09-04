@@ -38,7 +38,6 @@
                     <div class="column is-two-thirds">
                         <h1 class="title">
                             Atlas
-                            <!-- <?php echo $this->Html->image('atlas_white.png'); ?> -->
                         </h1>
                         <h2 class="subtitle">
                             Xenolith Collaboration System
