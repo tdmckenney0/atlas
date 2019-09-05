@@ -15,7 +15,9 @@ class UsersController extends AppController
     /**
      * Pagination Settings
      */
-    public $paginate = [];
+    public $paginate = [
+        'order' => ['Users.name']
+    ];
 
     /**
      * Login Method
