@@ -7,7 +7,7 @@
     <div class="media-content">
         <div class="content">
             <p>
-                <?php echo $this->Html->link($comment->user->email, ['controller' => 'users', 'action' => 'view', $comment->user->id]); ?>
+                <?php echo $this->Html->link($comment->user->name, ['controller' => 'users', 'action' => 'view', $comment->user->id]); ?>
 
                 <?php if(!empty($comment->node)): ?>
                     <span>on <?php echo $this->Html->link($comment->node->name, ['controller' => 'Nodes', 'action' => 'view', $comment->node->id]); ?></span>

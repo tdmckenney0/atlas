@@ -53,4 +53,16 @@
             <?php echo $this->cell('Markdown', [$user->about]); ?>
         </div>
     <?php endif; ?>
+
+    <div class="box">
+        <h2 class="title"><?php echo __('Current Local Time'); ?></h2>
+        <?php echo $this->cell('LocalTime', [$user]); ?>
+    </div>
+
+    <?php if (!empty($current_user)): ?>
+        <div class="box">
+            <h2 class="title"><?php echo __('Your Local Time'); ?></h2>
+            <?php echo $this->cell('LocalTime', [$current_user]); ?>
+        </div>
+    <?php endif; ?>
 </div>
