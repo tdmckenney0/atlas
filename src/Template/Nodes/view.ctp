@@ -128,7 +128,7 @@
     <?php if(count($comments) > 0): ?>
         <div class="box">
             <?php foreach($comments as $comment): ?>
-                <?php echo $this->cell('comments', [$comment]); ?>
+                <?php echo $this->cell('Comments', [$comment]); ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
