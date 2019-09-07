@@ -127,6 +127,11 @@ class NodesController extends AppController
         $node = $this->Nodes->newEntity();
         if ($this->request->is('post')) {
             $node = $this->Nodes->patchEntity($node, $this->request->getData());
+            if (!empty($parent)) {
+                $node->parent_id = $parent->id;
+            } else {
+                $node->parent_id = null;
+            }
             if ($this->Nodes->save($node)) {
                 $this->Flash->success(__('The node has been saved.'));
 
