@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Node;
 use Cake\Event\Event;
 
 /**
@@ -108,6 +109,47 @@ class NodesController extends AppController
         });
 
         $this->set(compact('node', 'nodeComment', 'comments', 'images', 'videos', 'audio', 'charts'));
+        $this->set('_serialize', 'node');
+    }
+
+    /**
+     * Reader Method
+     * 
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     */
+    public function reader($id = null) 
+    {
+        $node = $this->Nodes->get($id, [
+            'contain' => ['ParentNodes', 'Files', 'ChildNodes']
+        ]);
+
+        $node->children = $this->Nodes->find('children', [
+            'for' => $node->id, 
+            'contain' => [
+                'Files' => [
+                    'sort' => ['Files.name' => 'ASC']
+                ]
+            ],
+            'order' => [
+                'Nodes.sort' => 'ASC',
+                'Nodes.name' => 'ASC'
+            ]
+        ])->find('threaded')->toArray();
+        
+        // So we know where to start. 
+        $topLevel = $node->getLevel();
+        
+        // Generator used by the view
+        $generator = function(Node &$node) use (&$generator) {
+            yield $node; 
+            if (!empty($node->children)) {
+                foreach ($node->children as $child) {
+                    yield from $generator($child);
+                }
+            }
+        };
+
+        $this->set(compact('node', 'children', 'generator', 'topLevel'));
         $this->set('_serialize', 'node');
     }
 

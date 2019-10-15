@@ -42,6 +42,8 @@ class FileCell extends Cell
                 $template = 'video';
             } else if ($file->isCSV()) {
                 $template = 'csv';
+            } else {
+                $template = 'display';
             }
         }
 
