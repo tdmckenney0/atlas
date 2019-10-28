@@ -2,8 +2,8 @@
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-eye', 'text' => 'View Node', 'link' => ['controller' => 'Nodes', 'action' => 'view', $node->id]]); ?>
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['controller' => 'Nodes', 'action' => 'add', $node->id]]); ?>
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $node->id]]); ?>
-    <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-reader', 'text' => 'Reader Mode', 'link' => ['controller' => 'Nodes', 'action' => 'reader', $node->id]]); ?>
-    <?php echo $this->element('menulistitem', ['icon' => 'fas fa-clock', 'text' => 'List Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $node->id]]); ?>
+    <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-reader', 'text' => 'Read Node', 'link' => ['controller' => 'Nodes', 'action' => 'reader', $node->id]]); ?>
+    <?php echo $this->element('menulistitem', ['icon' => 'fas fa-clock', 'text' => 'Show Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $node->id]]); ?>
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-edit', 'text' => 'Edit Node', 'link' => ['controller' => 'Nodes', 'action' => 'edit', $node->id]]); ?>
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-exchange-alt', 'text' => 'Change Parent', 'link' => ['controller' => 'Nodes', 'action' => 'adopt', $node->id]]); ?>
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-pdf', 'text' => 'Export to PDF', 'link' => ['controller' => 'Nodes', 'action' => 'view', $node->id, '_ext' => 'pdf'], 'linkOptions' => ['target' => '_blank']]); ?>
