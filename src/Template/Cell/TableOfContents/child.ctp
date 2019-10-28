@@ -8,7 +8,7 @@
                 </span>&nbsp;<?php echo __($node->name); ?>
             </a>
             <ul class="menu-list <?php echo $active ? '' : 'is-hidden'; ?> table-of-contents-list">
-                <?php echo $this->element('menulistitem', ['icon' => 'fas fa-edit', 'text' => "Overview", 'link' => ['controller' => 'nodes', 'action' => 'view', $node->id]]); ?>
+                <?php echo $this->element('menulistitem', ['icon' => 'fas fa-eye', 'text' => __("View {0}", $node->name), 'link' => ['controller' => 'nodes', 'action' => 'view', $node->id]]); ?>
 
                 <?php if(!empty($node->children)) echo $this->cell('TableOfContents::child', [$node->children, $path]); ?>
 

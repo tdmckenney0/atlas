@@ -1,4 +1,5 @@
 <ul class="menu-list">
+    <?php echo $this->element('menulistitem', ['icon' => 'fas fa-eye', 'text' => 'View Node', 'link' => ['controller' => 'Nodes', 'action' => 'view', $node->id]]); ?>
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['controller' => 'Nodes', 'action' => 'add', $node->id]]); ?>
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $node->id]]); ?>
     <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-reader', 'text' => 'Reader Mode', 'link' => ['controller' => 'Nodes', 'action' => 'reader', $node->id]]); ?>
