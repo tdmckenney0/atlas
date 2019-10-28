@@ -33,6 +33,15 @@ class Node extends Entity
     use LazyLoad;
 
     /**
+     * Pandoc constants.
+     */
+    const PANDOC_LOG_PATH = LOGS . DS . 'pandoc.log';
+    const PANDOC_MARGIN = '0.5in';
+    const PANDOC_DOC_CLASS = 'report';
+    const PANDOC_DOC_COMMAND = 'PATH=/usr/bin: pandoc -V documentclass:%s -V geometry:margin=%s --toc -f markdown -o %s';
+    const PANDOC_HTML_COMMAND = 'pandoc -f markdown -t html';
+
+    /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
      * Note that when '*' is set to true, this allows all unspecified fields to
@@ -190,5 +199,39 @@ class Node extends Entity
         $folder->delete();
 
         return $zipFile;
+    }
+
+    /**
+     * toPdf
+     * 
+     * Generates a PDF from the node and its children.
+     * 
+     * @return CakeFile
+     */
+    public function toPdf()
+    {
+        $consolidated = $this->consolidate();
+        $file = new CakeFile(TMP . $this->id . '.pdf', false);
+        $pipes = [];
+
+        $cmd = sprintf(self::PANDOC_DOC_COMMAND, self::PANDOC_DOC_CLASS, self::PANDOC_MARGIN, $file->path);
+
+        $res = proc_open($cmd, [
+            ["pipe", "r"],
+            ["pipe", "w"],
+            ["file", self::PANDOC_LOG_PATH, 'a']
+        ], $pipes, TMP);
+
+        if(is_resource($res)) {
+
+            fwrite($pipes[0], $consolidated);
+
+            fclose($pipes[0]);
+            fclose($pipes[1]);
+
+            proc_close($res);
+        }
+
+        return $file;
     }
 }

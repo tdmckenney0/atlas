@@ -64,12 +64,7 @@ class AppController extends Controller
         ]);
 
         $this->loadComponent('RequestHandler', [
-            'enableBeforeRedirect' => false,
-            'viewClassMap' => [
-                'docx' => 'Markdown',
-                'pdf' => 'Markdown',
-                'epub' => 'Markdown'
-            ]
+            'enableBeforeRedirect' => false
         ]);
 
         $this->loadComponent('Flash');

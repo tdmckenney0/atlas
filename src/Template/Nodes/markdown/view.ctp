@@ -1,1 +1,0 @@
-<?php echo $node->consolidate();

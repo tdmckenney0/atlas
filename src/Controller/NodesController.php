@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use App\Model\Entity\Node;
 use Cake\Event\Event;
+use Cake\Http\Exception\NotFoundException;
 
 /**
  * Nodes Controller
@@ -68,19 +69,9 @@ class NodesController extends AppController
      */
     public function view($id = null)
     {
-        $ext = $this->request->getParam('_ext');
         $node = $this->Nodes->get($id, [
             'contain' => ['ParentNodes', 'Files', 'ChildNodes']
         ]);
-
-        // Compress if requested zip.
-        if($ext == 'zip') {
-            $file = $node->toZip();
-            return $this->response->withFile($file->path, [
-                'download' => true,
-                'name' => (trim($node->name) . '.zip')
-            ]);
-        }
 
         // Comments and new comments
         $nodeComment = $this->Nodes->NodeComments->newEntity();
@@ -273,5 +264,43 @@ class NodesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Export method
+     *
+     * @param string|null $id Node id.
+     * @return \Cake\Http\Response|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function export($id = null)
+    {
+        $file = null;
+        $ext = $this->request->getParam('_ext');
+        $node = $this->Nodes->get($id, [
+            'contain' => ['ParentNodes', 'Files', 'ChildNodes']
+        ]);
+
+        switch ($ext) {
+            case 'zip':
+                $file = $node->toZip();
+            break;
+
+            case 'pdf':
+                $file = $node->toPdf();
+            break;
+
+            default:
+                throw new NotFoundException(__('Could not export to specified file type.'));
+            break;
+        }
+
+        $created = $this->Nodes->Files->importFromFile($file, $node, [
+            'name' => (trim($node->name) . '.' . $ext)
+        ]);
+
+        $file->delete();
+
+        $this->redirect(['controller' => 'files', 'action' => 'view', $created->id]);
     }
 }
