@@ -2,6 +2,8 @@
     <?php echo $this->element('Nodes/actions', ['node' => $node]); ?>
 <?php $this->end(); ?>
 
+<?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Read')]]); ?>
+
 <div class="container-fluid">
     <?php foreach($generator($node) as $child): ?>
         <?php $level = ($child->getLevel() - $topLevel) + 1; ?>
