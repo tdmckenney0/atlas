@@ -1,7 +1,5 @@
 #start with our base image (the foundation) - version 7.1.5
-FROM php:7.1.5-apache
-
-RUN sed -i '/jessie-updates/d' /etc/apt/sources.list
+FROM php:7.2-apache
 
 #install all the system dependencies and enable PHP modules
 RUN apt-get update && apt-get install -y \
@@ -12,16 +10,18 @@ RUN apt-get update && apt-get install -y \
       texlive-latex-recommended \
       texlive-fonts-recommended \
       libmcrypt-dev \
-      mysql-client \
+      default-mysql-client \
       git \
+      zlib1g-dev \
       zip \
       unzip \
     && rm -r /var/lib/apt/lists/* \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+    && pecl install mcrypt-1.0.2 \
+    && docker-php-ext-enable mcrypt \
     && docker-php-ext-install \
       intl \
       mbstring \
-      mcrypt \
       pcntl \
       pdo_mysql \
       pdo_pgsql \
