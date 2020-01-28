@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.2",
-        "cakephp/cakephp": "3.7.*",
+        "cakephp/cakephp": "3.8.*",
         "cakephp/migrations": "^2.0.0",
         "cakephp/plugin-installer": "^1.0",
         "fortawesome/font-awesome": "^5.9",
