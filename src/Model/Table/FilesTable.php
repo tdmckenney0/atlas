@@ -128,7 +128,7 @@ class FilesTable extends Table
             if($this->exists($data)) {
                 $entity = $this->get($data['id']);
             } else {
-                $data['name'] = $options['name'] ?? $file->name() . '.' . $file->ext();
+                $data['name'] = $options['name'] ?? $file->name();
                 $data['mime_type'] = $options['mime_type'] ?? $file->mime();
                 $data['file_extension'] = $options['file_extension'] ?? $file->ext();
 
