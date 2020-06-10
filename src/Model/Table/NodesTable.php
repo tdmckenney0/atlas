@@ -148,9 +148,10 @@ class NodesTable extends Table
                                 ]);
 
             foreach ($siblings as $sibling) {
-                \Cake\Log\Log::debug($sibling);
-                $sibling->sort = $sort;
-                $this->save($sibling);
+                if ($sibling->sort != $sort) {
+                    $sibling->sort = $sort;
+                    $this->save($sibling);
+                }
                 $sort++;
             }
         }

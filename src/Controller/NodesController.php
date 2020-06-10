@@ -191,7 +191,6 @@ class NodesController extends AppController
             $this->loadComponent('UserInjection');
             $node = $this->Nodes->patchEntity($node, $this->request->getData());
             if ($this->Nodes->save($node)) {
-                $this->Nodes->enforceSortOrder($node);
                 $this->Flash->success(__('The node has been saved.'));
             } else {
                 $this->Flash->error(__('The node could not be saved. Please, try again.'));
