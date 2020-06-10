@@ -14,28 +14,24 @@
 <div class="container-fluid">
     <?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Revisions')]]) ; ?>
 
-    <h1 class="title is-1"><?php echo __('Revisions'); ?></h1>
+    <h1 class="title is-1"><?php echo __('Latest'); ?></h1>
 
     <?php echo $this->element('search'); ?>
 
-    <?php echo $this->cell('Browser', [function() use (&$nodeRevisions, $node) {
-        foreach($nodeRevisions as $nodeRevision) {
-            $entry = new stdClass;
-
-            if (!empty($node)) {
-                $entry->title = $nodeRevision->created;
-                $entry->subtitle = __('Created By: {0}', (!empty($nodeRevision->user->email) ? $nodeRevision->user->email : 'Atlas'));
-            } else {
-                $entry->title = $nodeRevision->node->name;
-                $entry->subtitle = $nodeRevision->created;
-            }
-
-            $entry->icon = 'fa-clock';
-            $entry->href = $this->Url->build(['action' => 'view', $nodeRevision->id]);
-
-            yield $entry;
-        }
-    }]); ?>
+    <?php foreach($nodeRevisions as $nodeRevision): ?>
+        <div class="box" style="break-inside: avoid;">
+            <h2 class="title is-2"><?php echo $nodeRevision->name; ?></h1>
+            <div class="has-text-justified content" style="break-inside: avoid;">
+                <?php echo $this->cell('Markdown', [$nodeRevision->description]); ?>
+            </div>
+            <div class="is-italic">
+                <span><?php echo __('Revised By: '); ?></span>
+                <?php echo $this->Html->link($nodeRevision->user->name, ['controller' => 'users', 'action' => 'view', $nodeRevision->user->id]); ?>
+                <span><?php echo __('on'); ?></span>
+                <?php echo $this->Html->link($nodeRevision->created->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]), ['controller' => 'node_revisions', 'action' => 'view', $nodeRevision->id]); ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
 
     <?php echo $this->element('pager'); ?>
 </div>
