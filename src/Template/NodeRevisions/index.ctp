@@ -25,7 +25,8 @@
                 <?php echo $this->cell('Markdown', [$nodeRevision->description]); ?>
             </div>
             <div class="is-italic">
-                <span><?php echo __('Revised By: '); ?></span>
+                <?php echo $this->Html->link($nodeRevision->node->name, ['controller' => 'nodes', 'action' => 'view', $nodeRevision->node->id]); ?>
+                <span><?php echo __('revised by: '); ?></span>
                 <?php echo $this->Html->link($nodeRevision->user->name, ['controller' => 'users', 'action' => 'view', $nodeRevision->user->id]); ?>
                 <span><?php echo __('on'); ?></span>
                 <?php echo $this->Html->link($nodeRevision->created->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]), ['controller' => 'node_revisions', 'action' => 'view', $nodeRevision->id]); ?>
