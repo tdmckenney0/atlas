@@ -16,7 +16,8 @@ class NodeRevisionsController extends AppController
     public $paginate = [
         'contain' => ['Users', 'Nodes'],
         'conditions' => [],
-        'order' => ['NodeRevisions.created' => 'DESC']
+        'order' => ['NodeRevisions.created' => 'DESC'],
+        'limit' => 10
     ];
 
     /**
