@@ -54,7 +54,7 @@ class AppController extends Controller
                 'action' => 'login'
             ],
             'loginRedirect' => [
-                'controller' => 'Nodes',
+                'controller' => 'NodeRevisions',
                 'action' => 'index'
             ],
              //use isAuthorized in Controllers
