@@ -19,7 +19,7 @@ class NodesController extends AppController
      * Pagination Settings
      */
     public $paginate = [
-        'order' => 'name',
+        'order' => ['name'],
         'conditions' => []
     ];
 
