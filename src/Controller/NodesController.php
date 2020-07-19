@@ -234,7 +234,7 @@ class NodesController extends AppController
         // Exclude current node.
         $exclude = array_merge($exclude, [$adoptee->id]);
 
-        $this->paginate['conditions'] += ['Nodes.id NOT IN' => $exclude]; $this->log($this->paginate);
+        $this->paginate['conditions'] += ['Nodes.id NOT IN' => $exclude];
 
         $nodes = $this->paginate($this->Nodes);
 
