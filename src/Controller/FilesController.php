@@ -18,6 +18,7 @@ class FilesController extends AppController
      * Pagination Settings
      */
     public $paginate = [
+        'conditions' => [],
         'limit' => 20
     ];
 
@@ -188,5 +189,62 @@ class FilesController extends AppController
             return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $node->id]);
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Attach a File to a Node. 
+     * 
+     * @param string The File ID
+     * @param string The Node ID
+     */
+    public function attach($id = null, $node_id = null) 
+    {
+        $file = $this->Files->get($id);
+        $node = null;        
+
+        if (!empty($node_id)) {
+            $node = $this->Files->Nodes->get($node_id);
+        }
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            if(!empty($node->id)) {
+                $this->Files->Nodes->link($file, [$node]);                
+
+                $this->Flash->success(__('The File has been attached to "{0}"', $node->name));
+
+                return $this->redirect(['action' => 'view', $file->id]);
+            } else {
+                $this->Flash->error(__('The File could not be attached. Please, try again.'));
+            }
+        }
+
+        // Load Attached Nodes. 
+        $this->Files->loadInto($file, ['Nodes']);
+
+        // Exclude all nodes already attached.
+        $exclude = collection($file->nodes)->extract('id')->toArray();
+
+        // Node Conditions
+        $pagination = [
+            'order' => ['name'],
+            'conditions' => [
+                ['Nodes.id NOT IN' => $exclude]
+            ]
+        ];
+
+        // Search Setup
+        $search = $this->request->getQuery('search');
+
+        if (!empty($search)) {
+            $search = '%' . trim($search) . '%';
+            $pagination['conditions']['OR'] = [
+                'Nodes.name LIKE' => $search,
+                'Nodes.description LIKE' => $search
+            ];
+        }
+        
+        $nodes = $this->paginate($this->Files->Nodes->getTarget(), $pagination);        
+
+        $this->set(compact('file', 'node', 'nodes'));
     }
 }
