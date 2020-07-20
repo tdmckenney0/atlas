@@ -18,6 +18,7 @@ class FilesController extends AppController
      * Pagination Settings
      */
     public $paginate = [
+        'order' => ['modified DESC', 'created DESC'],
         'conditions' => [],
         'limit' => 20
     ];
