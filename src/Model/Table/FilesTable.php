@@ -109,6 +109,14 @@ class FilesTable extends Table
     }
 
     /**
+     * beforeDelete
+     */
+    public function beforeDelete(Event $event, File $entity, ArrayObject $options)
+    {
+        return $entity->File->delete();
+    }
+
+    /**
      * importFromFile
      *
      * @param CakeFile The CakeFile object you want to import.
@@ -160,21 +168,5 @@ class FilesTable extends Table
             return $entity;
         }
         return null;
-    }
-
-    /**
-     * beforeMarshal
-     */
-    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
-    {
-
-    }
-
-    /**
-     * beforeDelete
-     */
-    public function beforeDelete(Event $event, File $entity, ArrayObject $options)
-    {
-        return $entity->File->delete();
     }
 }
