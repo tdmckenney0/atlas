@@ -23,6 +23,36 @@ class FilesController extends AppController
     ];
 
     /**
+     * Searchs and Pages Nodes for interactions between the two. 
+     * 
+     * @param array List of Query options.
+     */
+    protected function getNodes(array $options = [])
+    {
+        if (empty($options['order'])) {
+            $options['order'] = ['name'];
+        }
+
+        // Search Setup
+        $search = $this->request->getQuery('search');
+
+        if (!empty($search)) {
+            $search = '%' . trim($search) . '%';
+
+            if (empty($options['conditions']['OR']) || !is_array($options['conditions']['OR'])) {
+                $options['conditions']['OR'] = [];
+            }
+
+            $options['conditions']['OR'] += [
+                'Nodes.name LIKE' => $search,
+                'Nodes.description LIKE' => $search
+            ];
+        }
+
+        return $this->paginate($this->Files->Nodes->getTarget(), $options);
+    }
+
+    /**
      * Index method
      *
      * @return \Cake\Http\Response|void
@@ -224,26 +254,12 @@ class FilesController extends AppController
         // Exclude all nodes already attached.
         $exclude = collection($file->nodes)->extract('id')->toArray();
 
-        // Node Conditions
-        $pagination = [
-            'order' => ['name'],
+        // Get Nodes to List and search for. 
+        $nodes = $this->getNodes([
             'conditions' => [
                 ['Nodes.id NOT IN' => $exclude]
             ]
-        ];
-
-        // Search Setup
-        $search = $this->request->getQuery('search');
-
-        if (!empty($search)) {
-            $search = '%' . trim($search) . '%';
-            $pagination['conditions']['OR'] = [
-                'Nodes.name LIKE' => $search,
-                'Nodes.description LIKE' => $search
-            ];
-        }
-        
-        $nodes = $this->paginate($this->Files->Nodes->getTarget(), $pagination);        
+        ]);
 
         $this->set(compact('file', 'node', 'nodes'));
     }
@@ -278,29 +294,15 @@ class FilesController extends AppController
         // Load Attached Nodes. 
         $this->Files->loadInto($file, ['Nodes']);
 
-        // Exclude all nodes already attached.
+        // Only nodes already attached.
         $only = collection($file->nodes)->extract('id')->toArray();
 
-        // Node Conditions
-        $pagination = [
-            'order' => ['name'],
+        // Get Nodes to List and search for. 
+        $nodes = $this->getNodes([
             'conditions' => [
                 ['Nodes.id IN' => $only]
             ]
-        ];
-
-        // Search Setup
-        $search = $this->request->getQuery('search');
-
-        if (!empty($search)) {
-            $search = '%' . trim($search) . '%';
-            $pagination['conditions']['OR'] = [
-                'Nodes.name LIKE' => $search,
-                'Nodes.description LIKE' => $search
-            ];
-        }
-        
-        $nodes = $this->paginate($this->Files->Nodes->getTarget(), $pagination);        
+        ]);
 
         $this->set(compact('file', 'node', 'nodes'));
     } 
