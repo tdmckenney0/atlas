@@ -254,13 +254,18 @@ class FilesController extends AppController
 
         // Exclude all nodes already attached.
         $exclude = collection($file->nodes)->extract('id')->toArray();
+        $conditions = [];
+
+        if (!empty($exclude)) {
+            $conditions = [
+                'conditions' => [
+                    ['Nodes.id NOT IN' => $exclude]
+                ]
+            ];
+        }
 
         // Get Nodes to List and search for. 
-        $nodes = $this->getNodes([
-            'conditions' => [
-                ['Nodes.id NOT IN' => $exclude]
-            ]
-        ]);
+        $nodes = $this->getNodes($conditions);
 
         $this->set(compact('file', 'node', 'nodes'));
     }
@@ -297,13 +302,18 @@ class FilesController extends AppController
 
         // Only nodes already attached.
         $only = collection($file->nodes)->extract('id')->toArray();
+        $conditions = [];
+
+        if (!empty($only)) {
+            $conditions = [
+                'conditions' => [
+                    ['Nodes.id IN' => $only]
+                ]
+            ];
+        }
 
         // Get Nodes to List and search for. 
-        $nodes = $this->getNodes([
-            'conditions' => [
-                ['Nodes.id IN' => $only]
-            ]
-        ]);
+        $nodes = $this->getNodes($conditions);
 
         $this->set(compact('file', 'node', 'nodes'));
     } 
