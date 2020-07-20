@@ -302,14 +302,12 @@ class FilesController extends AppController
 
         // Only nodes already attached.
         $only = collection($file->nodes)->extract('id')->toArray();
-        $conditions = [];
+        $conditions = ['conditions' => []];
 
         if (!empty($only)) {
-            $conditions = [
-                'conditions' => [
-                    ['Nodes.id IN' => $only]
-                ]
-            ];
+            $conditions['conditions'][] = ['Nodes.id IN' => $only];
+        } else {
+            $conditions['conditions'][] = ['Nodes.id' => null];
         }
 
         // Get Nodes to List and search for. 
