@@ -169,4 +169,23 @@ class FilesTable extends Table
         }
         return null;
     }
+
+    /**
+     * Get Recycled Files. 
+     * 
+     * @return QueryBuilder
+     */
+    public function getRecycled()
+    {
+        return $this->find()
+            ->select($this)
+            ->select(function ($q) {
+                return [
+                    'node_count' => $q->func()->count('Nodes.id')
+                ];
+            })
+            ->leftJoinWith('Nodes')
+            ->group('Files.id')
+            ->having(['node_count' => 0]);
+    }
 }
