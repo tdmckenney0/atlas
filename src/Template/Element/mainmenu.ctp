@@ -39,4 +39,12 @@
             </span>&nbsp;<?php echo __('All Comments'); ?>
         </a>
     </li>
+
+    <li>
+        <a href="<?php echo $this->Url->build(['controller' => 'Files', 'action' => 'recycled']); ?>">
+            <span class="icon">
+                <i class="fas fa-recycle"></i>
+            </span>&nbsp;<?php echo __('Recycle Bin'); ?>
+        </a>
+    </li>
 </ul>

@@ -18,7 +18,7 @@ class FilesController extends AppController
      * Pagination Settings
      */
     public $paginate = [
-        'order' => ['modified DESC', 'created DESC'],
+        'order' => ['Files.modified DESC', 'Files.created DESC'],
         'conditions' => [],
         'limit' => 20
     ];
@@ -71,6 +71,30 @@ class FilesController extends AppController
         }
 
         $files = $this->paginate($this->Files);
+
+        $this->set(compact('files'));
+        $this->set('_serialize', 'files');
+    }
+
+    /**
+     * Show Recycled Files. 
+     *
+     * @return \Cake\Http\Response|void
+     */
+    public function recycled()
+    {   
+        $query = $this->Files->getRecycled();
+
+        // Enable Search. 
+        $search = $this->request->getQuery('search');
+
+        if (!empty($search)) {
+            $search = '%' . trim($search) . '%';
+            
+            $query->where(['Files.name LIKE' => $search]);
+        }
+
+        $files = $this->paginate($query, ['model' => 'File']);
 
         $this->set(compact('files'));
         $this->set('_serialize', 'files');
