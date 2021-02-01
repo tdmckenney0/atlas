@@ -132,7 +132,7 @@ class Installer
             $to = new \SplFileInfo($dir . DS . $to);
 
             if (file_exists($to)) {
-                if ($to->isDir()) {
+                if ($to->isDir() && !$to->isLink()) {
                     $walker = function ($dir) use (&$walker) {
                         $files = array_diff(scandir($dir), ['.', '..']);
                         foreach ($files as $file) {
