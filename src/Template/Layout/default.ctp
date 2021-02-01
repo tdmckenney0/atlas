@@ -14,7 +14,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
@@ -24,7 +24,7 @@
     </title>
     <?= $this->Html->meta('icon', '/img/xenolith_icon_white.png') ?>
 
-    <?php $this->Html->script('sidebar', ['block' => true]); ?>
+    <?php $this->Html->script('navbar', ['block' => true]); ?>
 
     <?php $this->Html->css(['default', 'fontawesome', 'microgramma'], ['block' => true]); ?>
 
@@ -33,49 +33,33 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="columns" style="min-height: 100vh !important; margin: 0 !important;">
-        <aside class="column is-3 has-background-primary" role="navigation" aria-label="main navigation" style="padding: 0;">
-            <nav class="navbar is-primary">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="<?php echo $this->Url->build('/'); ?>">
-                        <?php echo $this->Html->image('atlas_white.png'); ?>
-                    </a>
+    <header class="has-background-primary">
+        <nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="<?php echo $this->Url->build('/'); ?>">
+                    <?php echo $this->Html->image('atlas_white.png'); ?>
+                </a>
 
-                    <a id="sidebar-toggle" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
-            </nav>
-            <div class="menu is-hidden-mobile has-text-light is-clipped" id="sidebar-menu" style="padding: 1em;">
-
-                <?php if($this->fetch('actions')): ?>
-                    <p class="menu-label">Actions</p>
-                    <?php echo $this->fetch('actions'); ?>
-                <?php endif; ?>
-
-                <?php if($this->fetch('nodes')): ?>
-                    <p class="menu-label">Nodes</p>
-                    <?php echo $this->fetch('nodes'); ?>
-                <?php endif; ?>
-
-                <?php if($this->fetch('files')): ?>
-                    <p class="menu-label">Files</p>
-                    <?php echo $this->fetch('files'); ?>
-                <?php endif; ?>
-
-                <p class="menu-label">Navigation</p>
-                <?php echo $this->cell('TableOfContents'); ?>
-
-                <?php echo $this->element('mainmenu'); ?>
+                <a id="navbarToggle" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
-        </aside>
-        <main class="column is-9 has-background-white" style="">
+
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <?php echo $this->fetch('navbar'); ?>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="section">
+        <main class="container has-background-white" style="">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
             <?php echo $this->element('thinking'); ?>
         </main>
-    </div>
+    </section>
 </body>
 </html>
