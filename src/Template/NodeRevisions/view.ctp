@@ -6,16 +6,14 @@
  */
 ?>
 
-<?php $this->start('actions'); ?>
-    <ul class="menu-list">
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['action' => 'add', $nodeRevision->node->id]]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $nodeRevision->node->id]]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-clock', 'text' => 'List Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $nodeRevision->node->id]]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-edit', 'text' => 'Edit Node', 'link' => ['action' => 'edit', $nodeRevision->node->id]]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-pdf', 'text' => 'Export to PDF', 'link' => ['action' => 'view', $nodeRevision->node->id, '_ext' => 'pdf'], 'linkOptions' => ['download' => 'download']]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-archive', 'text' => 'Export to Zip', 'link' => ['action' => 'view', $nodeRevision->node->id, '_ext' => 'zip'], 'linkOptions' => ['download' => 'download']]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete Node', 'postLink' => ['action' => 'delete', $nodeRevision->node->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $nodeRevision->node->name)]]); ?>
-    </ul>
+<?php $this->start('navbar'); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['action' => 'add', $nodeRevision->node->id]]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-file-upload', 'text' => 'Add File', 'link' => ['controller' => 'Files', 'action' => 'add', $nodeRevision->node->id]]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-clock', 'text' => 'List Revisions', 'link' => ['controller' => 'NodeRevisions', 'action' => 'index', $nodeRevision->node->id]]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-edit', 'text' => 'Edit Node', 'link' => ['action' => 'edit', $nodeRevision->node->id]]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-file-pdf', 'text' => 'Export to PDF', 'link' => ['action' => 'view', $nodeRevision->node->id, '_ext' => 'pdf'], 'linkOptions' => ['download' => 'download']]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-file-archive', 'text' => 'Export to Zip', 'link' => ['action' => 'view', $nodeRevision->node->id, '_ext' => 'zip'], 'linkOptions' => ['download' => 'download']]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-trash', 'text' => 'Delete Node', 'postLink' => ['action' => 'delete', $nodeRevision->node->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $nodeRevision->node->name)]]); ?>
 <?php $this->end(); ?>
 
 <div class="container-fluid">

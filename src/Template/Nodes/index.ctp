@@ -5,10 +5,8 @@
  */
 ?>
 
-<?php $this->start('actions'); ?>
-    <ul class="menu-list">
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book', 'text' => 'Add Node', 'link' => ['action' => 'add']]); ?>
-    </ul>
+<?php $this->start('navbar'); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-book-medical', 'text' => 'Add Node', 'link' => ['action' => 'add']]); ?>
 <?php $this->end(); ?>
 
 <div class="container-fluid">

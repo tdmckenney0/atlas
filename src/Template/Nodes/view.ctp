@@ -7,29 +7,9 @@
 <?php $this->Html->css('easymde.min.css', ['block' => true]); ?>
 <?php $this->Html->script(['easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
 
-<?php $this->start('actions'); ?>
+<?php $this->start('navbar'); ?>
     <?php echo $this->element('Nodes/actions', ['node' => $node]); ?>
 <?php $this->end(); ?>
-
-<?php if (!empty($node->child_nodes)): ?>
-    <?php $this->start('nodes'); ?>
-        <ul class="menu-list">
-            <?php foreach ($node->child_nodes as $child): ?>
-                <?php echo $this->element('menulistitem', ['icon' => 'fas fa-book', 'text' => $child->name, 'link' => ['action' => 'view', $child->id]]); ?>
-            <?php endforeach; ?>
-        </ul>
-    <?php $this->end(); ?>
-<?php endif; ?>
-
-<?php if (!empty($node->files)): ?>
-    <?php $this->start('files'); ?>
-        <ul class="menu-list">
-            <?php foreach ($node->files as $file): ?>
-                <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file', 'text' => $file->name, 'link' => ['controller' => 'files', 'action' => 'view', $file->id, $node->id]]); ?>
-            <?php endforeach; ?>
-        </ul>
-    <?php $this->end(); ?>
-<?php endif; ?>
 
 <?php echo $this->cell('Breadcrumb::fromNode', [$node]); ?>
 

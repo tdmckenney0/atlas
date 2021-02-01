@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php $this->start('actions'); ?>
+<?php $this->start('navbar'); ?>
     <?php echo $this->element('Nodes/actions', ['node' => $node]); ?>
 <?php $this->end(); ?>
 

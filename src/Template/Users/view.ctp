@@ -5,13 +5,11 @@
  */
 ?>
 
-<?php $this->start('actions'); ?>
-    <ul class="menu-list">
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-user-plus', 'text' => 'Add User', 'link' => ['action' => 'add']]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-user-edit', 'text' => 'Edit User', 'link' => ['action' => 'edit', $user->id]]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-user', 'text' => 'Show User', 'link' => ['action' => 'view', $user->id]]); ?>
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-trash', 'text' => 'Delete User', 'postLink' => ['action' => 'delete', $user->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $user->email)]]); ?>
-    </ul>
+<?php $this->start('navbar'); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-user-plus', 'text' => 'Add User', 'link' => ['action' => 'add']]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-user-edit', 'text' => 'Edit User', 'link' => ['action' => 'edit', $user->id]]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-user', 'text' => 'Show User', 'link' => ['action' => 'view', $user->id]]); ?>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-trash', 'text' => 'Delete User', 'postLink' => ['action' => 'delete', $user->id], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $user->email)]]); ?>
 <?php $this->end(); ?>
 
 <div class="container-fluid">

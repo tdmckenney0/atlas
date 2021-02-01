@@ -5,7 +5,7 @@
  */
 ?>
 <?php if(!empty($parent)): ?>
-    <?php $this->start('actions'); ?>
+    <?php $this->start('navbar'); ?>
         <?php echo $this->element('Nodes/actions', ['node' => $parent]); ?>
     <?php $this->end(); ?>
 <?php endif; ?>

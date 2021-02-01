@@ -4,10 +4,12 @@
  * @var \App\Model\Entity\File[]|\Cake\Collection\CollectionInterface $files
  */
 ?>
-<?php $this->start('actions'); ?>
-    <ul class="menu-list">
-        <?php echo $this->element('menulistitem', ['icon' => 'fas fa-file-medical', 'text' => 'Add File', 'link' => ['action' => 'add']]); ?>
-    </ul>
+<?php $this->start('navbar'); ?>
+    <a class="navbar-item" href="<?php echo $this->Url->build(['action' => 'recycled']); ?>">
+        <span class="icon">
+            <i class="fas fa-recycle"></i>
+        </span>&nbsp;&nbsp;<?php echo __('Recycle Bin'); ?>
+    </a>
 <?php $this->end(); ?>
 
 <div class="container-fluid">
