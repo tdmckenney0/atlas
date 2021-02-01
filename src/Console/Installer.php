@@ -51,6 +51,7 @@ class Installer
      * ['source' => 'destination']
      */
     const VENDOR_FILES = [
+        'vendor' . DS . 'fortawesome' . DS . 'font-awesome' . DS . 'webfonts' => 'webroot' . DS . 'webfonts',
         'vendor' . DS . 'fortawesome' . DS . 'font-awesome' . DS . 'css' . DS . 'all.min.css' => 'webroot' . DS . 'css' . DS . 'fontawesome.css',
         'node_modules' . DS . 'easymde' . DS . 'dist' . DS . 'easymde.min.css' => 'webroot' . DS . 'css' . DS . 'easymde.min.css',
         'node_modules' . DS . 'easymde' . DS . 'dist' . DS . 'easymde.min.js' => 'webroot' . DS . 'js' . DS . 'easymde.min.js'
@@ -130,10 +131,29 @@ class Installer
             $from = new \SplFileInfo($dir . DS . $from);
             $to = new \SplFileInfo($dir . DS . $to);
 
-            if(file_exists($to)) {
-                unlink($to);
-            }
+            if (file_exists($to)) {
+                if ($to->isDir()) {
+                    $walker = function ($dir) use (&$walker) {
+                        $files = array_diff(scandir($dir), ['.', '..']);
+                        foreach ($files as $file) {
+                            $path = $dir . DS. $file;
+            
+                            if (is_dir($path)) {
+                                $walker($path);                                
+                            } else {
+                                unlink($path);
+                            }
+                        }
 
+                        rmdir($dir);
+                    };
+
+                    $walker($to);
+                } else {
+                    unlink($to);
+                }
+            }
+ 
             if (file_exists($from)) {
                 if(!symlink($from, $to)) {
                     throw new Exception(sprintf('Could not link %s -> %s!', $from, $to));
