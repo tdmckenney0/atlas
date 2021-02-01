@@ -52,8 +52,8 @@ class Installer
      */
     const VENDOR_FILES = [
         'vendor' . DS . 'fortawesome' . DS . 'font-awesome' . DS . 'css' . DS . 'all.min.css' => 'webroot' . DS . 'css' . DS . 'fontawesome.css',
-        'node_modules' . DS . 'easymde' . DS . 'src' . DS . 'css' . DS . 'easymde.css' => 'webroot' . DS . 'css' . DS . 'easymde.css',
-        'node_modules' . DS . 'easymde' . DS . 'src' . DS . 'js' . DS . 'easymde.js' => 'webroot' . DS . 'js' . DS . 'easymde.js'
+        'node_modules' . DS . 'easymde' . DS . 'dist' . DS . 'easymde.min.css' => 'webroot' . DS . 'css' . DS . 'easymde.min.css',
+        'node_modules' . DS . 'easymde' . DS . 'dist' . DS . 'easymde.min.js' => 'webroot' . DS . 'js' . DS . 'easymde.min.js'
     ];
 
     /**
