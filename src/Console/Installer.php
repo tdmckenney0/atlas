@@ -51,7 +51,9 @@ class Installer
      * ['source' => 'destination']
      */
     const VENDOR_FILES = [
-        'vendor' . DS . 'fortawesome' . DS . 'font-awesome' . DS . 'css' . DS . 'all.min.css' => 'webroot' . DS . 'css' . DS . 'fontawesome.css'
+        'vendor' . DS . 'fortawesome' . DS . 'font-awesome' . DS . 'css' . DS . 'all.min.css' => 'webroot' . DS . 'css' . DS . 'fontawesome.css',
+        'node_modules' . DS . 'easymde' . DS . 'src' . DS . 'css' . DS . 'easymde.css' => 'webroot' . DS . 'css' . DS . 'easymde.css',
+        'node_modules' . DS . 'easymde' . DS . 'src' . DS . 'js' . DS . 'easymde.js' => 'webroot' . DS . 'js' . DS . 'easymde.js'
     ];
 
     /**
@@ -118,7 +120,9 @@ class Installer
     }
 
     /**
-     *
+     * Link files from NPM and Composer. 
+     * 
+     * @return void
      */
     public static function linkVendorFiles($dir, $io)
     {
@@ -131,7 +135,7 @@ class Installer
             }
 
             if (file_exists($from)) {
-                if(!copy($from, $to)) {
+                if(!symlink($from, $to)) {
                     throw new Exception(sprintf('Could not link %s -> %s!', $from, $to));
                 }
             }
