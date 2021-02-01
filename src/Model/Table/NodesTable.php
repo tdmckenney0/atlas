@@ -66,17 +66,24 @@ class NodesTable extends Table
             'className' => 'Nodes',
             'foreignKey' => 'parent_id',
             'sort' => [
+                'ChildNodes.sort' => 'ASC',
                 'ChildNodes.name' => 'ASC'
             ]
         ]);
 
         $this->hasMany('NodeComments', [
             'dependent' => true,
-            'foreignKey' => 'node_id'
+            'foreignKey' => 'node_id',
+            'sort' => [
+                'NodeComments.modified' => 'DESC'
+            ]
         ]);
         $this->hasMany('NodeRevisions', [
             'dependent' => true,
-            'foreignKey' => 'node_id'
+            'foreignKey' => 'node_id',
+            'sort' => [
+                'NodeRevisions.created' => 'DESC'
+            ]
         ]);
         $this->belongsToMany('Files', [
             'foreignKey' => 'node_id',
