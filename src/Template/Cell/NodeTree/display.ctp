@@ -1,4 +1,4 @@
-<?php if (!empty($node->files) || !empty($node->children)): ?>
+<?php if (!empty($node->files) || !empty($children)): ?>
     <?php echo $this->Html->script('tree'); ?>
 
     <div class="menu">
