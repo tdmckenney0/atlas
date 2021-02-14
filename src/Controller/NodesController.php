@@ -70,11 +70,17 @@ class NodesController extends AppController
     public function view($id = null)
     {
         $node = $this->Nodes->get($id, [
-            'contain' => ['ParentNodes', 'Files', 'ChildNodes']
+            'contain' => [
+                'Files', 
+                'NodeRevisions' => function ($query) {
+                    return $query->contain('Users')->order('NodeRevisions.created DESC')->limit(5);
+                }
+            ]
         ]);
 
         // Comments and new comments
         $nodeComment = $this->Nodes->NodeComments->newEntity();
+        $nodeRevision = $node->node_revisions[0] ?? null;
         $comments = $this->Nodes->NodeComments->find('threaded', [
             'conditions' => ['node_id' => $node->id],
             'contain' => ['Users']
@@ -99,7 +105,7 @@ class NodesController extends AppController
             return $file->isCSV();
         });
 
-        $this->set(compact('node', 'nodeComment', 'comments', 'images', 'videos', 'audio', 'charts'));
+        $this->set(compact('node', 'nodeComment', 'nodeRevision', 'comments', 'images', 'videos', 'audio', 'charts'));
         $this->set('_serialize', 'node');
     }
 
@@ -111,7 +117,12 @@ class NodesController extends AppController
     public function reader($id = null) 
     {
         $node = $this->Nodes->get($id, [
-            'contain' => ['ParentNodes', 'Files', 'ChildNodes']
+            'contain' => [
+                'Files',
+                'NodeRevisions' => function ($query) {
+                    return $query->contain('Users')->order('NodeRevisions.created DESC')->limit(1);
+                }
+            ]
         ]);
 
         $node->children = $this->Nodes->find('children', [
@@ -126,21 +137,10 @@ class NodesController extends AppController
                 'Nodes.name' => 'ASC'
             ]
         ])->find('threaded')->toArray();
-        
-        // So we know where to start. 
-        $topLevel = $node->getLevel();
-        
-        // Generator used by the view
-        $generator = function(Node &$node) use (&$generator) {
-            yield $node; 
-            if (!empty($node->children)) {
-                foreach ($node->children as $child) {
-                    yield from $generator($child);
-                }
-            }
-        };
 
-        $this->set(compact('node', 'children', 'generator', 'topLevel'));
+        $nodeRevision = $node->node_revisions[0] ?? null;
+
+        $this->set(compact('node', 'nodeRevision'));
         $this->set('_serialize', 'node');
     }
 

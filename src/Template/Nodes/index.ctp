@@ -10,21 +10,22 @@
 <?php $this->end(); ?>
 
 <div class="container-fluid">
+
     <h1 class="title is-1"><?php echo __('Nodes'); ?></h1>
 
     <?php echo $this->element('search'); ?>
 
-    <?php echo $this->cell('Browser', [function() use (&$nodes) {
-        foreach($nodes as $node) {
-            $entry = new stdClass;
-            $entry->title = $node->name;
-            $entry->subtitle = $node->created;
-            $entry->icon = 'fa-book';
-            $entry->href = $this->Url->build(['action' => 'view', $node->id]);
+    <?php $size = $nodes->count(); ?>
 
-            yield $entry;
-        }
-    }]); ?>
+    <div class="tile is-ancestor is-align-items-start">
+        <?php foreach ($nodes->chunk(ceil($size / 3)) as $column): ?>
+            <div class="tile is-vertical is-align-items-start">
+                <?php foreach ($column as $node): ?>
+                    <?php echo $this->element('Nodes/tile', compact('node') + ['linkName' => "View Node", 'linkUrl' => ['controller' => 'nodes', 'action' => 'view', $node->id]]); ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
 
     <?php echo $this->element('pager'); ?>
 </div>

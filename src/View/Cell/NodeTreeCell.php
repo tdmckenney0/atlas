@@ -53,33 +53,4 @@ class NodeTreeCell extends Cell
     {
         $this->set(compact('node'));
     }
-
-    /**
-     * Menu Link 
-     * 
-     * @param string Link Name
-     * @param string Font awesome icon. 
-     * @param Array CakePHP Url 
-     * 
-     * @return void
-     */
-    public function menulink(string $name, string $icon, Array $url)
-    {
-        $this->set(compact('name', 'icon', 'url'));
-    }
-
-    /**
-     * Post Menu Link 
-     * 
-     * @param string Link Name
-     * @param string Font awesome icon. 
-     * @param Array CakePHP Url
-     * @param Array Post Link options. 
-     * 
-     * @return void
-     */
-    public function postMenulink(string $name, string $icon, Array $url, Array $options)
-    {
-        $this->set(compact('name', 'icon', 'url', 'options'));
-    }
 }

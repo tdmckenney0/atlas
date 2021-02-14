@@ -2,25 +2,32 @@
     <?php echo $this->element('Nodes/actions', ['node' => $node]); ?>
 <?php $this->end(); ?>
 
-<?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Read')]]); ?>
-
 <div class="container-fluid">
-    <?php foreach($generator($node) as $child): ?>
-        <?php $level = ($child->getLevel() - $topLevel) + 1; ?>
-        <div class="box" style="break-inside: avoid;">
-            <?php printf('<h%s class="title is-%s">%s</h%s>', $level, $level, $child->name, $level); ?>
-            <div class="has-text-justified content" style="break-inside: avoid;">
-                <?php echo $this->cell('Markdown', [$child->description]); ?>
+    <?php echo $this->element('Nodes/section', compact('node', 'nodeRevision') + ['append' => [__('Read')]]); ?>
+
+    <?php if(!empty($node->files)): ?>
+        <?php foreach($node->files as $file): ?>
+            <div class="box" style="break-before: page;">
+                <?php echo $this->cell('File', [$file]); ?>
+
+                <hr />
+
+                <nav class="level is-small">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <?php echo $this->Html->link($file->name, ['controller' => 'files', 'action' => 'view', $file->id]); ?>
+                        </div>
+                    </div>
+                </nav> 
             </div>
-        </div>
-        <?php if(!empty($child->files)): ?>
-            <?php $fileLevel = $level + 1;?>
-            <?php foreach($child->files as $file): ?>
-                <div class="box" style="break-before: page;">
-                    <?php printf('<h%s class="title is-%s">%s</h%s>', $fileLevel, $fileLevel, $file->name, $fileLevel); ?>
-                    <?php echo $this->cell('File', [$file]); ?>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if(!empty($node->children)): ?>
+        <?php foreach($node->children as $child): ?>
+            <div class="block">
+                <?php echo $this->element('Nodes/reader', ['level' => 2, 'node' => $child]); ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>

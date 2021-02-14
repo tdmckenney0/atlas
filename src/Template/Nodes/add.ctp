@@ -13,22 +13,38 @@
 <?php $this->Html->css('easymde.min.css', ['block' => true]); ?>
 <?php $this->Html->script(['easymde.min.js', 'enable-easymde'], ['block' => true]); ?>
 
-<?php echo $this->cell('Breadcrumb::fromNode', [$parent, [__('Add')]]); ?>
+<div class="container-fluid">
+    <section class="section box">
+            <div class="block">
+                <h1 class="is-1 title"><?= __('Add Node') ?></h1>
+            </div>
 
-<div class="container box">
-    <?= $this->Form->create($node) ?>
+            <?= $this->Form->create($node) ?>
 
-        <div class="overflow-hidden">
-            <h1 class="overflow-hidden"><?= __('Add Node') ?></h1>
-        </div>
+            <div class="block">
+                <?php
+                    echo $this->Form->control('name');
+                    echo $this->Form->control('description');
+                    echo $this->Form->control('sort');
+                    echo $this->Form->control('print', ['type' => 'select', 'options' => ['No', 'Yes']]);
+                ?>
+            </div>
 
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('sort');
-            echo $this->Form->control('print', ['type' => 'select', 'options' => ['No', 'Yes']]);
-            echo $this->Form->control('description');
-        ?>
+            <div class="block">
+                <?= $this->Form->submit(__('Submit')) ?>
+            </div>
 
-        <?= $this->Form->submit(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+            <?= $this->Form->end() ?>
+
+            <hr />
+
+            <nav class="level is-small">
+                <div class="level-left">
+                    <div class="level-item">
+                        <?php echo $this->cell('Breadcrumb::fromNode', [$parent, [__('Add')]]); ?>
+                    </div>
+                </div>
+            </nav>
+       
+    </section>
 </div>

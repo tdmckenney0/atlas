@@ -3,8 +3,6 @@
 <?php $this->end(); ?>
 
 <div class="container-fluid">
-    <h1 class="title is-1"><?php echo __('Change Parent'); ?></h1>
-
     <?php if(!empty($adopter)): ?>
         <div class="modal is-active" id="confirmAdoption">
             <div class="modal-background"></div>
@@ -30,7 +28,21 @@
         </div>
     <?php endif; ?>
 
-    <?php echo $this->cell('Breadcrumb::fromNode', [$adoptee, [__('Change Parent')]]); ?>
+    <section class="section box">
+        <div class="block">
+            <h1 class="title is-1"><?php echo __('Change Parent'); ?></h1>
+        </div>
+
+        <hr />
+
+        <nav class="level is-small">
+            <div class="level-left">
+                <div class="level-item">
+                    <?php echo $this->cell('Breadcrumb::fromNode', [$adoptee, [__('Change Parent')]]); ?>
+                </div>
+            </div>
+        </nav>
+    </section>    
 
     <div class="box">
         <?php echo $this->Form->postLink('Move to Top Level', ['action' => 'adopt', $adoptee->id], ['class' => 'button is-warning is-fullwidth', 'confirm' => __('Are you sure you want to send this node top level?')]); ?>
@@ -38,17 +50,17 @@
 
     <?php echo $this->element('search'); ?>
 
-    <?php echo $this->cell('Browser', [function() use (&$nodes, $adoptee) {
-        foreach($nodes as $node) {
-            $entry = new stdClass;
-            $entry->title = $node->name;
-            $entry->subtitle = $node->created;
-            $entry->icon = 'fa-book';
-            $entry->href = $this->Url->build(['action' => 'adopt', $adoptee->id, $node->id]);
+    <?php $size = $nodes->count(); ?>
 
-            yield $entry;
-        }
-    }]); ?>
+    <div class="tile is-ancestor is-align-items-start">
+        <?php foreach ($nodes->chunk(ceil($size / 3)) as $column): ?>
+            <div class="tile is-vertical is-align-items-start">
+                <?php foreach ($column as $node): ?>
+                    <?php echo $this->element('Nodes/tile', compact('node') + ['linkName' => "Change to " . $node->name, 'linkUrl' => ['action' => 'adopt', $adoptee->id, $node->id]]); ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
 
     <?php echo $this->element('pager'); ?>
 </div>

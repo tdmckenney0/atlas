@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-h1,h2,h3,legend, .mg-bold,.menu-label {
+h1,h2,h3,legend, .mg-bold,.menu-label, .title {
     font-family: "microgramma-bold", system-ui, sans-serif;
     letter-spacing: 0.05em;
 }
