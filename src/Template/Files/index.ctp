@@ -5,17 +5,14 @@
  */
 ?>
 <?php $this->start('navbar'); ?>
-    <a class="navbar-item" href="<?php echo $this->Url->build(['action' => 'index']); ?>">
-        <span class="icon">
-            <i class="fas fa-file"></i>
-        </span>&nbsp;&nbsp;<?php echo __('Files'); ?>
-    </a>
+    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-file-medical', 'text' => 'Add File', 'link' => ['action' => 'add']]); ?>
 <?php $this->end(); ?>
 
 <div class="container-fluid">
-    <h1 class="title is-1"><?php echo __('Files'); ?></h1>
-
-    <?php echo $this->element('search'); ?>
+    <div class="box">
+        <h1 class="title is-1"><?php echo __('Files'); ?></h1>
+        <?php echo $this->element('search'); ?>
+    </div> 
 
     <?php echo $this->cell('Browser', [function() use (&$files) {
         foreach($files as $file) {

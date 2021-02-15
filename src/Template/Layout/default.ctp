@@ -49,6 +49,7 @@
 
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-start">
+                    <?php echo $this->element('Navbar/search'); ?>
                     <?php echo $this->fetch('navbar'); ?>
                 </div>
             </div>

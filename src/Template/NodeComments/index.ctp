@@ -5,7 +5,10 @@
  */
 ?>
 <div class="container-fluid">
-    <h1 class="title"><?= __('Comments') ?></h1>
+    <div class="box">
+        <h1 class="title is-1"><?php echo __('Comments'); ?></h1>
+        <?php echo $this->element('search'); ?>
+    </div>
 
     <?php foreach ($nodeComments as $nodeComment): ?>
         <div class="box">

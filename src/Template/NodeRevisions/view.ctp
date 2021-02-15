@@ -34,9 +34,14 @@
             <div class="level-right">
                 <div class="level-item">
                     <div class="is-italic">
-                        <span><?php echo __('Revised by: '); ?></span>
-                        <?php echo $this->Html->link($nodeRevision->user->name, ['controller' => 'users', 'action' => 'view', $nodeRevision->user->id]); ?>
-                        <span><?php echo __('on'); ?></span>
+                        <?php if(!empty($nodeRevision->user)): ?>
+                            <span><?php echo __('Revised by: '); ?></span>
+                            <?php echo $this->Html->link($nodeRevision->user->name, ['controller' => 'users', 'action' => 'view', $nodeRevision->user->id]); ?>
+                            <span><?php echo __('on'); ?></span>
+                        <?php else: ?>
+                            <span><?php echo __('Revised on'); ?></span>
+                        <?php endif; ?>
+                        
                         <?php echo $this->Html->link($nodeRevision->created->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]), ['controller' => 'node_revisions', 'action' => 'view', $nodeRevision->id]); ?>
                     </div>
                 </div>

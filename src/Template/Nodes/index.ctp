@@ -10,10 +10,10 @@
 <?php $this->end(); ?>
 
 <div class="container-fluid">
-
-    <h1 class="title is-1"><?php echo __('Nodes'); ?></h1>
-
-    <?php echo $this->element('search'); ?>
+    <div class="box">
+        <h1 class="title is-1"><?php echo __('Nodes'); ?></h1>
+        <?php echo $this->element('search'); ?>
+    </div> 
 
     <?php $size = $nodes->count(); ?>
 
