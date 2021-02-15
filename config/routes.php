@@ -62,14 +62,14 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'NodeRevisions', 'action' => 'index']);
+    $routes->connect('/', ['controller' => 'Nodes', 'action' => 'index']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-    $routes->setExtensions(['json', 'pdf', 'docx', 'zip']);
+    $routes->setExtensions(['json', 'pdf', 'zip']);
 
     /**
      * Connect catchall routes for all controllers.

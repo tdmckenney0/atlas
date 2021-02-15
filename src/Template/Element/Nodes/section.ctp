@@ -25,7 +25,7 @@
                             <?php echo $this->Html->link($nodeRevision->user->name, ['controller' => 'users', 'action' => 'view', $nodeRevision->user->id]); ?>
                             <span><?php echo __('on'); ?></span>
                         <?php else: ?>
-                            <span><?php echo __('Revised at: '); ?></span>
+                            <span><?php echo __('Revised on: '); ?></span>
                         <?php endif; ?>
                         
                         <?php echo $this->Html->link($nodeRevision->created->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]), ['controller' => 'node_revisions', 'action' => 'view', $nodeRevision->id]); ?>
