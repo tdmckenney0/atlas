@@ -57,7 +57,7 @@
                     <div class="level-item">
                         <div class="is-italic">
                             <?php if(!empty($nodeRevision->user)): ?>
-                                <span><?php echo __('Revised by: '); ?></span>
+                                <span><?php echo __('Revised by '); ?></span>
                                 <?php echo $this->Html->link($nodeRevision->user->name, ['controller' => 'users', 'action' => 'view', $nodeRevision->user->id]); ?>
                                 <span><?php echo __('on'); ?></span>
                             <?php else: ?>
