@@ -17,6 +17,8 @@
         <h1 class="title is-1"><?php echo __('Revisions'); ?></h1>
 
         <?php if(!empty($node)): ?>
+            <hr />
+
             <nav class="level is-small">
                 <div class="level-left">
                     <div class="level-item">
@@ -37,7 +39,6 @@
 
     <?php foreach($nodeRevisions as $nodeRevision): ?>
         <div class="box" style="break-inside: avoid;">
-            <h2 class="title is-2"><?php echo $nodeRevision->name; ?></h1>
             <div class="has-text-justified content" style="break-inside: avoid;">
                 <?php echo $this->cell('Markdown', [$nodeRevision->description]); ?>
             </div>
@@ -46,11 +47,13 @@
 
             <nav class="level is-small">
                 <div class="level-left">
-                    <?php if(empty($node)): ?>
-                        <div class="level-item">
-                            <?php echo $this->Html->link(__('View ') . h($nodeRevision->node->name), ['controller' => 'nodes', 'action' => 'view', $nodeRevision->node->id]); ?>
-                        </div>
-                    <?php endif; ?>
+                    <div class="level-item">
+                        <?php if(empty($node)): ?>
+                            <?php echo $this->Html->link($nodeRevision->node->name, ['controller' => 'nodes', 'action' => 'view', $nodeRevision->node->id]); ?>
+                        <?php else: ?>
+                            <span class="has-text-weight-bold"><?php echo $nodeRevision->node->name; ?></span>
+                        <?php endif; ?>
+                    </div>
                 </div>
 
                 <div class="level-right">
