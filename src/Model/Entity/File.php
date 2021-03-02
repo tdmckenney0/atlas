@@ -155,6 +155,11 @@ class File extends Entity
         return (strpos($this->mime_type, 'video/') !== false);
     }
 
+    public function isPdf()
+    {
+        return $this->mime_type === 'application/pdf' && substr($this->magic, 0, 4) == '%PDF';
+    }
+
     public function readlineCSV(int $length = 0, string $delimiter = ",", string $enclosure = '"', string $escape = "\\")
     {
         return fgetcsv($this->openFile()->handle, $length, $delimiter, $enclosure, $escape);
