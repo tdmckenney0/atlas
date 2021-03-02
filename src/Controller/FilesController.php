@@ -128,7 +128,15 @@ class FilesController extends AppController
     public function get($id = null)
     {
         $file = $this->Files->get($id);
-        return $this->response->withFile($file->File->path);
+
+        $this->response = $this->response->withHeader('Cache-Control', 'private, immutable')
+                ->withFile($file->File->path)
+                ->withModified($file->modified)
+                ->withType($file->mime_type);
+
+        $this->response->checkNotModified($this->request);
+
+        return $this->response;
     }
 
     /**
@@ -142,7 +150,15 @@ class FilesController extends AppController
     {
         $file = $this->Files->get($id);
         $thumbnail = $file->getThumbnail();
-        return $this->response->withFile($thumbnail->path);
+
+        $this->response = $this->response->withHeader('Cache-Control', 'private, immutable')
+                                          ->withFile($thumbnail->path)
+                                          ->withModified($file->modified)
+                                          ->withType($file->mime_type);
+
+        $this->response->checkNotModified($this->request);
+
+        return $this->response;
     }
 
     /**
