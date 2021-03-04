@@ -16,7 +16,7 @@
     <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-trash', 'text' => 'Delete File', 'postLink' => ['action' => 'delete', $file->id, (!empty($node->id) ? $node->id : null)], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $file->name)]]); ?>
 <?php $this->end(); ?>
 
-<div class="container">
+<div class="container-fluid">
     <section class="section box">
         <div class="content">
             <h1 class="title is-1"><?= h($file->name) ?></h1>

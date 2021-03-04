@@ -56,7 +56,7 @@
         </nav>
     </header>
     <section class="section">
-        <main class="container has-background-white" style="">
+        <main class="container-fluid">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
             <?php echo $this->element('thinking'); ?>
