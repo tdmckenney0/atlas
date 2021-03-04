@@ -221,4 +221,14 @@ class File extends Entity
 
         return $thumbnail;
     }
+
+    /**
+     * Can this file be embedded in the browser? 
+     * 
+     * @return bool
+     */
+    public function canEmbed(): bool
+    {
+        return $this->isImageEmbeddable() || $this->isText() || $this->isAudio() || $this->isVideo(); 
+    }
 }
