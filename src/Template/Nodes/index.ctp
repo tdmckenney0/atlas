@@ -15,17 +15,7 @@
         <?php echo $this->element('search'); ?>
     </div> 
 
-    <?php $size = $nodes->count(); ?>
-
-    <div class="tile is-ancestor is-align-items-start">
-        <?php foreach ($nodes->chunk(ceil($size / 3)) as $column): ?>
-            <div class="tile is-vertical is-align-items-start">
-                <?php foreach ($column as $node): ?>
-                    <?php echo $this->element('Nodes/tile', compact('node') + ['linkName' => __("View ") . $node->name, 'linkUrl' => ['controller' => 'nodes', 'action' => 'view', $node->id]]); ?>
-                <?php endforeach; ?>
-            </div>
-        <?php endforeach; ?>
-    </div>
+    <?php echo $this->cell('NodeTile::tesselate', [$nodes]); ?>
 
     <?php echo $this->element('pager'); ?>
 </div>

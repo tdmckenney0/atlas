@@ -32,77 +32,7 @@
                 </article>
             <?php endif; ?>
 
-            <?php if(!$images->isEmpty()): ?>
-                <?php echo $this->element('accordion', [
-                    'id' => 'images',
-                    'title' => __('Images')
-                ]); ?>
-
-                <div id="images" style="margin-bottom: 1em;">
-                    <?php foreach($images as $row): ?>
-                        <div class="tile is-ancestor">
-                            <?php foreach($row as $file): ?>
-                                <div class="tile is-parent is-4">
-                                    <article class="tile is-child box">
-                                        <h2 class="title is-5"><?php echo h($file->name); ?></h2>
-                                        <a href="<?php echo $this->Url->build(['controller' => 'files', 'action' => 'view', $file->id, $node->id]); ?>">
-                                            <?php echo $this->cell('File', [$file, 'thumbnail']); ?>
-                                        </a>
-                                    </article>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if(!$audio->isEmpty()): ?>
-                <?php echo $this->element('accordion', [
-                    'id' => 'audio',
-                    'title' => __('Audio')
-                ]); ?>
-
-                <div id="audio">
-                    <?php foreach($audio as $clip): ?>
-                        <div class="audio box">
-                            <h2 class="title is-5"><?php echo h($clip->name); ?></h2>
-                            <?php $cell = $this->cell('File', [$clip]); $cell->viewBuilder()->setTemplate('audio'); echo $cell; ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if(!$videos->isEmpty()): ?>
-                <?php echo $this->element('accordion', [
-                    'id' => 'videos',
-                    'title' => __('Videos')
-                ]); ?>
-
-                <div id="videos">
-                    <?php foreach($videos as $video): ?>
-                        <div class="video box">
-                            <h2 class="title is-5"><?php echo h($video->name); ?></h2>
-                            <?php $cell = $this->cell('File', [$video]); $cell->viewBuilder()->setTemplate('video'); echo $cell; ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if(!$charts->isEmpty()): ?>
-                <?php echo $this->element('accordion', [
-                    'id' => 'charts',
-                    'title' => __('Charts')
-                ]); ?>
-
-                <div id="charts">
-                    <?php foreach($charts as $chart): ?>
-                        <div class="video box">
-                            <h2 class="title is-5"><?php echo h($chart->name); ?></h2>
-                            <?php $cell = $this->cell('File', [$chart]); $cell->viewBuilder()->setTemplate('csv'); echo $cell; ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+            <?php echo $this->cell('FileTile::tesselate', [$node->files, 3]); ?>
 
             <?php if(count($comments) > 0): ?>
                 <div class="box">

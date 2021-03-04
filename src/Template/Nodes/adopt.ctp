@@ -38,17 +38,9 @@
         </nav>
     </section>    
 
-    <?php $size = $nodes->count(); ?>
-
-    <div class="tile is-ancestor is-align-items-start">
-        <?php foreach ($nodes->chunk(ceil($size / 3)) as $column): ?>
-            <div class="tile is-vertical is-align-items-start">
-                <?php foreach ($column as $node): ?>
-                    <?php echo $this->element('Nodes/tile', compact('node') + ['postLink' => true, 'linkName' => "Change to " . $node->name, 'linkUrl' => ['action' => 'adopt', $adoptee->id, $node->id]]); ?>
-                <?php endforeach; ?>
-            </div>
-        <?php endforeach; ?>
-    </div>
+    <?php echo $this->cell('NodeTile::tesselate', [$nodes, 4, "Change to {0}", function ($node) use ($adoptee): array {
+        return ['controller' => 'nodes', 'action' => 'adopt', $adoptee->id, $node->id];
+    }, true]); ?>
 
     <?php echo $this->element('pager'); ?>
 </div>

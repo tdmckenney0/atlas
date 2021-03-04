@@ -86,26 +86,7 @@ class NodesController extends AppController
             'contain' => ['Users']
         ])->all();
 
-        // Seperate the Files out.
-        $files = collection($node->files);
-
-        $images = $files->filter(function($file, $key) {
-            return $file->isImageEmbeddable();
-        })->chunk(3);
-
-        $videos = $files->filter(function($file, $key) {
-            return $file->isVideo();
-        });
-
-        $audio = $files->filter(function($file, $key) {
-            return $file->isAudio();
-        });
-
-        $charts = $files->filter(function($file, $key) {
-            return $file->isCSV();
-        });
-
-        $this->set(compact('node', 'nodeComment', 'nodeRevision', 'comments', 'images', 'videos', 'audio', 'charts'));
+        $this->set(compact('node', 'nodeComment', 'nodeRevision', 'comments'));
         $this->set('_serialize', 'node');
     }
 
