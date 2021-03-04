@@ -11,46 +11,14 @@
 <?php $this->end(); ?>
 
 <div class="container-fluid">
-    <h1 class="title is-1"><?php echo __('Detach File from Node'); ?></h1>
+    <div class="box">
+        <h1 class="title is-1"><?php echo __('Detach File from Node'); ?></h1>
+        <?php echo $this->element('search'); ?>
+    </div> 
 
-    <?php if(!empty($node)): ?>
-        <div class="modal is-active" id="confirmAdoption">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <article class="message is-primary" style="margin: 1em;">
-                    <div class="message-header">
-                        <?php echo __('Detach from "{0}"?', $node->name); ?>
-                    </div>
-                    <div class="message-body">
-                        <?php echo $this->Form->create(null); ?>
-                            <div class="columns">
-                                <div class="column is-half">
-                                    <input class="button is-primary is-fullwidth" type="submit" value="Yes" />
-                                </div>
-                                <div class="column is-half">
-                                    <button class="button is-fullwidth" onclick="document.getElementById('confirmAdoption').remove(); ">No</button>
-                                </div>
-                            </div>
-                        <?php echo $this->Form->end(); ?>
-                    </div>
-                </article>
-            </div>
-        </div>
-    <?php endif; ?>
-
-    <?php echo $this->element('search'); ?>
-
-    <?php echo $this->cell('Browser', [function() use (&$nodes, $file) {
-        foreach($nodes as $node) {
-            $entry = new stdClass;
-            $entry->title = $node->name;
-            $entry->subtitle = $node->created;
-            $entry->icon = 'fa-book';
-            $entry->href = $this->Url->build(['action' => 'detach', $file->id, $node->id]);
-
-            yield $entry;
-        }
-    }]); ?>
+    <?php echo $this->cell('NodeTile::tesselate', [$nodes, 4, "Detach from {0}", function ($node) use ($file): array {
+        return ['controller' => 'files', 'action' => 'detach', $file->id, $node->id];
+    }, true]); ?>
 
     <?php echo $this->element('pager'); ?>
 </div>
