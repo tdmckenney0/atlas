@@ -1,10 +1,10 @@
-<p class="title"><?php echo h($node->name); ?></p>
-<div class="content">
+<p class="title is-clipped"><?php echo h($node->name); ?></p>
+<div class="content is-clipped">
     <?php echo $this->cell('Markdown', [$node->description]); ?>                            
 </div>
 
 <?php if (!empty($linkName) && !empty($linkUrl)): ?>
-    <div class="block has-text-centered">
+    <div class="block has-text-centered is-clipped">
         <?php if(empty($postLink)): ?>
             <?php echo $this->Html->link($linkName, $linkUrl); ?>
         <?php else: ?>
