@@ -32,7 +32,9 @@
                 </article>
             <?php endif; ?>
 
-            <?php echo $this->cell('FileTile::tesselate', [$node->files, 3]); ?>
+            <?php echo $this->cell('FileTile::tesselate', [$node->files, 3, 'View {0}', function ($file) use (&$node): array {
+                return ['controller' => 'files', 'action' => 'view', $file->id, $node->id];
+            }]); ?>
 
             <?php if(count($comments) > 0): ?>
                 <div class="box">
