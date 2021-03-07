@@ -28,14 +28,15 @@
         <nav class="level">
             <div class="level-left">
                 <div class="level-item">
-                    <?php echo $this->cell('Breadcrumb::fromNode', [$node]); ?>
+                    <?php echo $this->cell('Breadcrumb::fromNode', [$node, [$file->name]]); ?>
                 </div>
             </div>
 
             <div class="level-right">
                 <div class="level-item">
-                    <small class="text-muted"> <?= __('Created: ') . h($file->created) ?></small>&nbsp;
-                    <small class="text-muted"> <?= __('Updated: ') . h($file->modified) ?></small>
+                    <div class="is-italic">
+                        <span><?= __('Type: {0}; Created: {1}; Modified: {2}', $file->mime_type, $file->created, $file->modified); ?></span>
+                    </div>
                 </div>
             </div>
         </nav>   
