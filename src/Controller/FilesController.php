@@ -173,7 +173,7 @@ class FilesController extends AppController
         if ($this->request->is('post') && !empty($data['file']['tmp_name']) && is_uploaded_file($data['file']['tmp_name'])) {
             $temp = new CakeFile($data['file']['tmp_name']);
             $file = $this->Files->importFromFile($temp, $node, [
-                'name' => $data['file']['name']
+                'name' => pathinfo($data['file']['name'], PATHINFO_FILENAME)
             ]);
             if (!empty($file)) {
                 $this->Flash->success(__('The file has been saved.'));
@@ -181,7 +181,7 @@ class FilesController extends AppController
                 if(!empty($node->id)) {
                     return $this->redirect(['controller' => 'Nodes', 'action' => 'view', $node->id]);
                 }
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $file->id]);
             }
             $this->Flash->error(__('The file could not be saved. Please, try again.'));
         }
@@ -283,7 +283,7 @@ class FilesController extends AppController
 
                 $this->Flash->success(__('The File has been attached to "{0}"', $node->name));
 
-                return $this->redirect(['action' => 'view', $file->id]);
+                return $this->redirect(['action' => 'view', $file->id, $node->id]);
             } else {
                 $this->Flash->error(__('The File could not be attached. Please, try again.'));
             }
