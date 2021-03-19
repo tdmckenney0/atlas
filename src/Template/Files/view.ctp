@@ -5,27 +5,16 @@
  */
 ?>
 <?php $this->start('navbar'); ?>
-    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-file-medical', 'text' => 'New File', 'link' => ['controller' => 'Files', 'action' => 'add', (!empty($node->id) ? $node->id : null)]]); ?>
-    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-file-download', 'text' => 'Download File', 'link' => ['controller' => 'Files', 'action' => 'get', $file->id], 'linkOptions' => ['download' => (\Cake\Utility\Text::slug(strtolower($file->name)) . '.' . $file->file_extension)]]); ?>
-    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-link', 'text' => 'Attach', 'link' => ['controller' => 'Files', 'action' => 'attach', $file->id]]); ?>
-    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-unlink', 'text' => 'Detach', 'link' => ['controller' => 'Files', 'action' => 'detach', $file->id, (!empty($node->id) ? $node->id : null)]]); ?>
-    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-edit', 'text' => 'Edit File', 'link' => ['controller' => 'Files', 'action' => 'edit', $file->id, (!empty($node->id) ? $node->id : null)]]); ?>
-    <?php if($file->isCompressed()): ?>
-        <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-file-archive', 'text' => 'Extract File', 'link' => ['controller' => 'Files', 'action' => 'extract', (!empty($node->id) ? $node->id : null)]]); ?>
-    <?php endif; ?>
-    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-trash', 'text' => 'Delete File', 'postLink' => ['action' => 'delete', $file->id, (!empty($node->id) ? $node->id : null)], 'linkOptions' => ['confirm' => __('Are you sure you want to delete {0}?', $file->name)]]); ?>
+    <?php echo $this->element('Files/actions', compact('file', 'node')); ?>
 <?php $this->end(); ?>
 
 <div class="container-fluid">
     <section class="section box">
-        <div class="content">
-            <h1 class="title is-1"><?= h($file->name) ?></h1>
-            <?php echo $this->cell('File', [$file]); ?>
-        </div>
+        <h1 class="title is-1"><?= h($file->name) ?></h1>
 
         <hr />
 
-        <nav class="level">
+        <nav class="level is-clipped">
             <div class="level-left">
                 <div class="level-item">
                     <?php echo $this->cell('Breadcrumb::fromNode', [$node, [$file->name]]); ?>
@@ -39,6 +28,29 @@
                     </div>
                 </div>
             </div>
-        </nav>   
+        </nav>
     </section>
+
+    <div class="columns">
+        <div class="column">
+            <div class="box">
+                <?php echo $this->cell('File', [$file]); ?>
+            </div>
+        </div>
+
+        <?php if (!empty($file->nodes)): ?>
+            <div class="column is-one-third">
+                <aside class="menu box">
+                    <p class="menu-label">
+                        Nodes
+                    </p>
+                    <ul class="menu-list">
+                        <?php foreach($file->nodes as $node): ?>
+                            <?php echo $this->element('Menu/link', ['name' => $node->name, 'icon' => 'fas fa-book', 'url' => ['controller' => 'nodes', 'action' => 'view', $node->id] ]); ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </aside>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>

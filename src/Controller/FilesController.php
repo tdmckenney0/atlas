@@ -247,7 +247,10 @@ class FilesController extends AppController
     /**
      * Extract method
      *
-     *
+     * @param string The File ID
+     * @param string The Node ID
+     * 
+     * @return Response
      */
     public function extract($id = null, $node_id = null)
     {
