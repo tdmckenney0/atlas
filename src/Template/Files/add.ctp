@@ -5,11 +5,14 @@
  */
 ?>
 
-<?php if(!empty($node)): ?>
-    <?php $this->start('navbar'); ?>
+<?php $this->start('navbar'); ?>
+    <?php if(!empty($node)): ?>
         <?php echo $this->element('Nodes/actions', ['node' => $node]); ?>
-    <?php $this->end(); ?>
-<?php endif; ?>
+    <?php else: ?>
+        <?php echo $this->element('Files/actions', compact('file', 'node')); ?>
+    <?php endif; ?>
+<?php $this->end(); ?>
+
 
 <?php echo $this->cell('Breadcrumb::fromNode', [$node, [__('Add File')]]); ?>
 <div class="container-fluid box">

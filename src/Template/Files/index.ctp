@@ -5,7 +5,7 @@
  */
 ?>
 <?php $this->start('navbar'); ?>
-    <?php echo $this->element('Navbar/linkitem', ['icon' => 'fas fa-file-medical', 'text' => 'Add File', 'link' => ['action' => 'add']]); ?>
+    <?php echo $this->element('Files/actions', compact('file', 'node')); ?>
 <?php $this->end(); ?>
 
 <div class="container-fluid">
