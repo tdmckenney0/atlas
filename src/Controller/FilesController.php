@@ -172,9 +172,9 @@ class FilesController extends AppController
         $data = $this->request->getData();
         if ($this->request->is('post') && !empty($data['file']['tmp_name']) && is_uploaded_file($data['file']['tmp_name'])) {
             $temp = new CakeFile($data['file']['tmp_name']);
-            $file = $this->Files->importFromFile($temp, $node, [
-                'name' => pathinfo($data['file']['name'], PATHINFO_FILENAME)
-            ]);
+            $name = !empty($data['name']) ? $data['name'] : pathinfo($data['file']['name'], PATHINFO_FILENAME);
+            $file = $this->Files->importFromFile($temp, $node, compact('name'));
+
             if (!empty($file)) {
                 $this->Flash->success(__('The file has been saved.'));
 
@@ -183,6 +183,7 @@ class FilesController extends AppController
                 }
                 return $this->redirect(['action' => 'view', $file->id]);
             }
+            
             $this->Flash->error(__('The file could not be saved. Please, try again.'));
         }
         $file = $this->Files->newEntity();
