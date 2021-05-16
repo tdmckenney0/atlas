@@ -1,24 +1,14 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 
 # get this script's directory path
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR=`dirname ${BASH_SOURCE[0]-$0}`;
+DIR=`cd $DIR && pwd`;
 
-at-cake() {
-    pushd $DIR;
-    docker-compose run --rm atlas bin/cake $*;
-    popd;
-}
+# Run Composer
+alias at-composer='docker exec -it atlas_atlas_1 composer --working-dir=/var/www/html';
 
-at-composer() {
-    pushd $DIR;
-    docker-compose run --rm atlas composer $*;
-    popd;
-}
+# Run CakePHP
+alias at-cake='docker exec -it atlas_atlas_1 bin/cake';
 
-at-mysql() {
-    pushd $DIR;
-    docker exec -it atlas_mysql_1 mysql $*;
-    popd;
-}
-
-alias at-serveo='ssh -R 80:localhost:4000 serveo.net'
+# Run MySQL
+alias at-mysql='docker exec -it atlas_mysql_1 mysql';
