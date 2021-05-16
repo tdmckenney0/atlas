@@ -50,8 +50,5 @@ COPY . $APP_HOME
 # Get the INI file installed.
 COPY ./php.ini /usr/local/etc/php
 
-# install all PHP dependencies
-RUN composer install --no-interaction
-
 #change ownership of our applications
 RUN chown -R www-data:www-data $APP_HOME
