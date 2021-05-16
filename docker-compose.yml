@@ -1,0 +1,48 @@
+version: '2'
+# define all services
+services:
+  # our service is called atlas
+  atlas:
+    # Build directory. 
+    build: 
+      context: .
+      # Dockerfile location
+      dockerfile: ./docker/atlas/Dockerfile
+    # apache is running on port 80 but we want to expose this to port 4000 on our local machine
+    ports:
+      - "4000:80"
+    # we depending on the mysql backend
+    depends_on:
+      - mysql
+    # we mount the working dir into the container, handy for development
+    volumes:
+      - .:/var/www/html/
+    environment:
+      - MYSQL_URL=mysql
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+  mysql:
+    # we use the mysql base image, version 5.6.36
+    image: mysql:5.6.36
+
+    # Expose the ports
+    ports:
+      - "3306:3306"
+
+    # we mount a datavolume to make sure we don't loose data
+    volumes:
+       - mysql_data:/var/lib/mysql
+    # setting some envvars to create the DB
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=atlas
+  sass:
+    build: 
+      context: .
+      # Dockerfile location
+      dockerfile: ./docker/sass/Dockerfile
+    volumes:
+      - ./webroot:/src
+      - ./node_modules:/node_modules
+volumes:
+    mysql_data:
