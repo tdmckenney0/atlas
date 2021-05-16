@@ -22,7 +22,7 @@
         <?php echo __('Atlas: Collaboration System'); ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon', '/img/xenolith_icon_white.png') ?>
+    <?= $this->Html->meta('icon', '/img/atlas_icon_white.png') ?>
 
     <?php $this->Html->script('navbar', ['block' => true]); ?>
 

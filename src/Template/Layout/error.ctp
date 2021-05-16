@@ -22,7 +22,7 @@
         <?php echo __('Atlas: Collaboration System'); ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon', '/img/xenolith_icon_white.png') ?>
+    <?= $this->Html->meta('icon', '/img/atlas_icon_white.png') ?>
 
     <?php echo $this->Html->css(['default', 'fontawesome', 'microgramma'], ['block' => true]); ?>
 
@@ -40,7 +40,7 @@
                             Atlas
                         </h1>
                         <h2 class="subtitle">
-                            Xenolith Collaboration System
+                            Collaboration System
                         </h2>
                     </div>
                     <div class="column">

@@ -21,7 +21,7 @@ class UsersSeed extends AbstractSeed
         $data = [
             [
                 'id' => 'f912015f-1ba4-4a25-964e-86174b88e763',
-                'email' => 'root@xenolithgames.com',
+                'email' => 'root@example.com',
                 'password' => (new DefaultPasswordHasher)->hash('root'),
                 'created' => '2019-01-29 08:26:00',
                 'modified' => '2019-01-29 08:26:00',

@@ -1,7 +1,7 @@
 <article class="media">
     <figure class="media-left">
         <!-- <p class="image is-32x32">
-            <img src="/img/xenolith_icon_clear_black.png">
+            <img src="/img/atlas_icon_clear_black.png">
         </p> -->
     </figure>
     <div class="media-content">
