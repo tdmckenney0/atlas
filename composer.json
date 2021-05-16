@@ -1,7 +1,7 @@
 {
-    "name": "xenolithgames/atlas",
-    "description": "Xenolith Atlas",
-    "homepage": "https://xenolith-games.com",
+    "name": "tdmckenney0/atlas",
+    "description": "Atlas",
+    "homepage": "https://tmckenney.com",
     "type": "project",
     "license": "MIT",
     "require": {
