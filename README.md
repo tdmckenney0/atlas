@@ -7,7 +7,8 @@ The Atlas system is designed to facilitate ease of asynchronous collaboration on
 1. `docker-compose up -d --build`
 2. `. shell-env.sh`
 3. `at-cake migrations migrate` and `at-cake migrations seed`
-4. Navigate to `http://localhost:4000`
+4. `at-npm install`
+5. Navigate to `http://localhost:4000`
 
 ### Passwords
 
