@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
       zlib1g-dev \
       zip \
       unzip \
+      libjpeg-dev \
+      libpng-dev \
     && rm -r /var/lib/apt/lists/* \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && pecl install mcrypt-1.0.2 \
@@ -27,6 +29,7 @@ RUN apt-get update && apt-get install -y \
       pdo_pgsql \
       pgsql \
       zip \
+      gd \
       opcache
 
 #install composer
