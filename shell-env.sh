@@ -15,3 +15,6 @@ alias at-mysql='docker exec -it atlas_mysql_1 mysql';
 
 # Run NPM
 alias at-npm='docker run -it -w /src --rm -v '$DIR':/src node npm';
+
+# Run Console
+alias at-bash='docker exec -it atlas_atlas_1 bash'
