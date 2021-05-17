@@ -26,7 +26,7 @@ class File extends Entity
     /**
      * Absolute path to file storage.
      */
-    const THUMBNAILS = (self::STORAGE . DS . 'thumbnails' . DS);
+    const THUMBNAILS = (self::STORAGE . 'thumbnails' . DS);
 
     /**
      * Image Types that can be displayed by a web browser.
