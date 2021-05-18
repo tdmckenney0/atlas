@@ -8,6 +8,21 @@ The Atlas system is designed to facilitate ease of asynchronous collaboration on
 
 Atlas leaves most of the work to CakePHP, and uses Bulma to craft an easy to use interface around that. Combined with Pandoc and EasyMDE, Atlas provides powerful document processing capabilities. Atlas tries to follow the rule that "everything is markdown", with comments and nodes having a full Markdown-based editor for formatting text. 
 
+- Static HTML + CSS first, JavaScript second. Only use Javascript to augment the user experience.
+    + Lightweight. No JS frameworks. Browser API only. 
+    + No Ajax requests. 
+    + Ability to use app without JS completely. 
+    + Interface must work at all resolutions (desktop + mobile); Bulma takes good care of this.
+- Server-side rendering.
+    + HTML is all built with CakePHP's template engine. 
+- Let CakePHP do the work
+    + Stricly adhere to the CakePHP API and Cookbook when possible. 
+- Modularity and Reuse
+    + Reduce components down to atomic levels.
+- Focus on Readability
+    + Text must be easy to read for long intervals, and accessible. 
+    + The interface must be not be jarring for the user. 
+    
 ### Nodes
 
  - Ability to Created, Edit, and Delete nodes. 
