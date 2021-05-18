@@ -1,7 +1,3 @@
-## Installer
-* Ensure initial logins are created.
-* Ensure that files are copied and directories are created. 
-
 ## UserNotifications
 
 * Push Notifications
