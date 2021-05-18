@@ -26,13 +26,16 @@ Atlas leaves most of the work to CakePHP, and uses Bulma to craft an easy to use
  - The "Read" capability allows previewing the entire structure of a node.
     + Acts like a preview for exported documents. 
     + All files go into full view mode. 
+ - Full Search capabilities.
 
 ### Revisions
  - All nodes generate revisions when edited.
  - Revisions are signed by user, with date and time stamps. 
  - Revisions can be traced back and forth in a list like a timeline. 
-
+ - Timeline interface for quickly seeing what has changed. 
+ - Full search capabilities. 
 ### Files
+ - Full File browser interface with search capabilities. 
  - Can upload any file.
  - Formats are detected automatically, and given special capabilties.
  - Audio and Video both play.
@@ -47,6 +50,11 @@ Atlas leaves most of the work to CakePHP, and uses Bulma to craft an easy to use
 ### Users
  - Can create multiple users. 
  - Can assign a time zone, and see indicator of what time each person is at during the day. 
+ - About section has full markdown support. 
+
+## Screenshots
+
+You can view more screenshots at [screenshots/README.md](screenshots/README.md)
 ## Local Environment Setup
 
 1. `. shell-env.sh`
