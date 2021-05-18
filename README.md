@@ -6,7 +6,7 @@ The Atlas system is designed to facilitate ease of asynchronous collaboration on
 
 ## Work in Progress
 
-Atlas originally started as scaffolding for another project. There is a TODO list located here: [TODO.md](TODO.md). Pull Requests are welcome. I may push updated from time to time.
+Atlas originally started as scaffolding for another project. There is a TODO list located here: [TODO.md](TODO.md). Pull Requests are welcome. I may push updates from time to time.
 
 ## Features
 
@@ -26,7 +26,7 @@ Atlas leaves most of the work to CakePHP, and uses Bulma to craft an easy to use
 - Focus on Readability
     + Text must be easy to read for long intervals, and accessible. 
     + The interface must be not be jarring for the user. 
-    
+
 ### Nodes
 
  - Ability to Created, Edit, and Delete nodes. 
