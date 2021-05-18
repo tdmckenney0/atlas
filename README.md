@@ -4,6 +4,10 @@ The Atlas system is designed to facilitate ease of asynchronous collaboration on
 
 ![Welcome Node](screenshots/node1.png "Welcome Node")
 
+## Work in Progress
+
+Atlas originally started as scaffolding for another project. There is a TODO list located here: [TODO.md](TODO.md). Pull Requests are welcome. I may push updated from time to time.
+
 ## Features
 
 Atlas leaves most of the work to CakePHP, and uses Bulma to craft an easy to use interface around that. Combined with Pandoc and EasyMDE, Atlas provides powerful document processing capabilities. Atlas tries to follow the rule that "everything is markdown", with comments and nodes having a full Markdown-based editor for formatting text. 
