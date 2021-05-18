@@ -6,6 +6,8 @@
 
 ![Welcome Node](node1.png)
 
+![Node with CSV and Video](node2.png)
+
 ## Revisions
 
 ![Revisions Index](revisions.png)
