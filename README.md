@@ -37,10 +37,13 @@ Atlas leaves most of the work to CakePHP, and uses Bulma to craft an easy to use
 ### Files
  - Full File browser interface with search capabilities. 
  - Can upload any file.
+ - Files can be attached and detached from multiple Nodes.
+    + Files not attached to any node can be found in the Recycle Bin. 
  - Formats are detected automatically, and given special capabilties.
- - Audio and Video both play.
- - Images generate thumbnails and display inline.
- - CSV files become tables automatically. 
+    + Audio and Video both play in the browser.
+    + Images generate thumbnails and display inline.
+    + CSV files become tables automatically. 
+ - Compressed files (zips) can be uploaded and extracted to any node, multiple times. 
 
 ### Comments
  - Full comment threads are supported.
