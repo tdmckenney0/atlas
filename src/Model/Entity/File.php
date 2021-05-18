@@ -184,42 +184,51 @@ class File extends Entity
 
     public function getThumbnail()
     {
-        $thumbnail = new CakeFile(self::THUMBNAILS . $this->id . '.jpg', false);
+        $thumbnail = new CakeFile(self::THUMBNAILS . $this->id . '.gif', false);
 
         if (!$thumbnail->exists()) {
-            $thumbnail->create();
             $image = null;
 
             switch($this->mime_type) {
-
                 case 'image/png':
-                    $image = imagecreatefrompng($this->openFile()->path);
+                    if (function_exists('imagecreatefrompng')) {
+                        $image = imagecreatefrompng($this->openFile()->path);
+                    }
                     break;
 
                 case 'image/jpeg':
-                    $image = imagecreatefromjpeg($this->openFile()->path);
+                    if (function_exists('imagecreatefromjpeg')) {
+                        $image = imagecreatefromjpeg($this->openFile()->path);
+                    }
                     break;
 
                 case 'image/gif':
-                    $image = imagecreatefromgif($this->openFile()->path);
+                    if (function_exists('imagecreatefromgif')) {
+                        $image = imagecreatefromgif($this->openFile()->path);
+                    }
                     break;
 
                 case 'image/bmp':
                 case 'image/x-bmp':
-                    $image = imagecreatefrombmp($this->openFile()->path);
+                    if (function_exists('imagecreatefrombmp')) {
+                        $image = imagecreatefrombmp($this->openFile()->path);
+                    }
                     break;
-            }
+            }         
 
             if (!empty($image)) {
                 $size = getimagesize($this->openFile()->path);
-                imagejpeg($image, $thumbnail->path, 25);
+
+                $thumbnail->create();
+
+                imagegif($image, $thumbnail->path);
                 imagedestroy($image);
             } else {
                 return $this->openFile();
             }
         }
 
-        return $thumbnail;
+        return $thumbnail;        
     }
 
     /**
