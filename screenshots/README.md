@@ -14,6 +14,8 @@
 
 ## Comments
 
+![Comments History](comments.png)
+
 ![Comment Demo](comment1.png)
 
 ![Comment Close up](comment2.png)
