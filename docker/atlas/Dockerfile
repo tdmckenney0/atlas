@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y \
       texlive-latex-recommended \
       texlive-fonts-recommended \
       libmcrypt-dev \
-      default-mysql-client \
       git \
       zlib1g-dev \
       zip \
@@ -18,16 +17,12 @@ RUN apt-get update && apt-get install -y \
       libjpeg-dev \
       libpng-dev \
     && rm -r /var/lib/apt/lists/* \
-    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && pecl install mcrypt-1.0.2 \
     && docker-php-ext-enable mcrypt \
     && docker-php-ext-install \
       intl \
       mbstring \
       pcntl \
-      pdo_mysql \
-      pdo_pgsql \
-      pgsql \
       zip \
       gd \
       opcache
@@ -46,9 +41,6 @@ RUN sed -i -e "s/html/html\/webroot/g" /etc/apache2/sites-enabled/000-default.co
 
 # enable apache module rewrite
 RUN a2enmod rewrite
-
-#copy source files and run composer
-COPY . $APP_HOME
 
 # Get the INI file installed.
 COPY ./php.ini /usr/local/etc/php
