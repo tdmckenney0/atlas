@@ -41,6 +41,7 @@ nbproject/*
 
 # Databases
 *.sqlite
+*.db
 
 # Package Managers
 /node_modules/*

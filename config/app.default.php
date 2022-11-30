@@ -246,18 +246,18 @@ return [
     'Datasources' => [
         'default' => [
             'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => env('MYSQL_URL', null),
+            'driver' => 'Cake\Database\Driver\Sqlite',
+            // 'persistent' => false,
+            // 'host' => env('MYSQL_URL', null),
             /*
              * CakePHP will use the default DB port based on the driver selected
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => env('MYSQL_USERNAME', null),
-            'password' => env('MYSQL_PASSWORD', null),
-            'database' => 'atlas',
+            //'username' => env('MYSQL_USERNAME', null),
+            //'password' => env('MYSQL_PASSWORD', null),
+            'database' => ROOT . DS . "atlas.db",
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
              */
@@ -286,7 +286,7 @@ return [
              */
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
 
-            'url' => env('DATABASE_URL', null),
+            // 'url' => env('DATABASE_URL', null),
         ],
 
         /**
@@ -294,20 +294,20 @@ return [
          */
         'test' => [
             'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
-            //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'test_myapp',
+            'driver' => 'Cake\Database\Driver\Sqlite',
+            // 'persistent' => false,
+            // 'host' => 'localhost',
+            // 'port' => 'non_standard_port_number',
+            // 'username' => 'my_app',
+            // 'password' => 'secret',
+            'database' => ROOT . DS . "atlas_test.db",
             //'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
             'quoteIdentifiers' => false,
             'log' => false,
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
-            'url' => env('DATABASE_TEST_URL', null),
+            // 'url' => env('DATABASE_TEST_URL', null),
         ],
     ],
 
