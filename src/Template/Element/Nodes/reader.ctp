@@ -1,10 +1,4 @@
-<section class="box section" style="break-inside: avoid;">
-    <?php printf('<h%1$s class="title is-%1$s">%2$s</h%1$s>', $level, $node->name); ?>
-    
-    <div class="has-text-justified content" style="break-inside: avoid;">
-        <?php echo $this->cell('Markdown', [$node->description]); ?>
-    </div>
-</section>
+<?php echo $this->element('Nodes/section', ['level' => $level + 1, 'node' => $node, 'append' => [__("Read")]]); ?>
 
 <?php if(!empty($node->children)): ?>
     <?php foreach($node->children as $child): ?>
@@ -25,7 +19,7 @@
                         <?php echo $this->Html->link($file->name, ['controller' => 'files', 'action' => 'view', $file->id]); ?>
                     </div>
                 </div>
-            </nav> 
+            </nav>
         </div>
     <?php endforeach; ?>
 <?php endif; ?>

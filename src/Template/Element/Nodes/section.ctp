@@ -1,12 +1,12 @@
 <section class="section box node-view">
     <div class="block">
-        <h1 class="title is-1"><?= h($node->name) ?></h1>
+        <?php printf('<h%1$s class="title is-%1$s">%2$s</h%1$s>', $level ?? 1, $node->name); ?>
     </div>
 
     <div class="has-text-justified content block">
         <?php echo $this->cell('Markdown', [$node->description]); ?>
     </div>
-    
+
     <hr />
 
     <nav class="level is-small">
@@ -27,11 +27,11 @@
                         <?php else: ?>
                             <span><?php echo __('Revised on '); ?></span>
                         <?php endif; ?>
-                        
+
                         <?php echo $this->Html->link($nodeRevision->created->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]), ['controller' => 'node_revisions', 'action' => 'view', $nodeRevision->id]); ?>
                     </div>
                 <?php endif; ?>
             </div>
         </div>
-    </nav>   
+    </nav>
 </section>
