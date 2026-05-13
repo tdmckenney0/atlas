@@ -20,7 +20,7 @@ class NodesSeed extends AbstractSeed
     {
         $data = [
             [
-                'id' => 'cf3df853-6bec-4f7a-bdd4-32a3b96b0731',
+                'id' => \Cake\Utility\Text::uuid(),
                 'parent_id' => NULL,
                 'lft' => '1',
                 'rght' => '2',

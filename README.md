@@ -79,14 +79,48 @@ Atlas leaves most of the work to CakePHP, and uses Bulma to craft an easy to use
 You can view more screenshots at [screenshots/README.md](screenshots/README.md)
 ## Local Environment Setup
 
-1. `. shell-env.sh`
-2. `at-npm install`
-3. `docker-compose up -d --build`
-4. `at-composer install`
-5. Copy `config/app.default.php` to `config/app.php` and update the value of `SECURITY_SALT`.
-6. `at-cake migrations migrate` and `at-cake migrations seed`
-7. Navigate to `http://localhost:4000`
-8. Login with `root@example.com` using password `root`
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) and Docker Compose
+- [Node.js](https://nodejs.org/) (only needed if not using the `at-npm` alias)
+
+### Steps
+
+1. **Source the shell environment** to load the `at-*` helper aliases into your shell:
+   ```sh
+   . shell-env.sh
+   ```
+
+2. **Install frontend dependencies** (runs npm inside a temporary Node container):
+   ```sh
+   at-npm install
+   ```
+
+3. **Build and start the Docker containers**:
+   ```sh
+   docker-compose up -d --build
+   ```
+
+4. **Install PHP dependencies** via Composer (runs inside the running container):
+   ```sh
+   at-composer install
+   ```
+
+5. **Configure the application** by copying the default config and setting a unique security salt:
+   ```sh
+   cp config/app.default.php config/app.php
+   ```
+   Then open `config/app.php` and update the `Security.salt` value to a random string.
+
+6. **Run database migrations and seed initial data**:
+   ```sh
+   at-cake migrations migrate
+   at-cake migrations seed
+   ```
+
+7. Navigate to [http://localhost:4000](http://localhost:4000).
+
+8. Login with email `root@example.com` and password `root`.
 
 ## Dependencies
 ### CakePHP 3.x

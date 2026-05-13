@@ -1,6 +1,6 @@
 <?php
 use Migrations\AbstractSeed;
-use \Cake\Auth\DefaultPasswordHasher;
+use Cake\Auth\DefaultPasswordHasher;
 /**
  * Users seed.
  */
@@ -18,17 +18,20 @@ class UsersSeed extends AbstractSeed
      */
     public function run()
     {
+        $hasher = new DefaultPasswordHasher();
+
         $data = [
             [
-                'id' => 'f912015f-1ba4-4a25-964e-86174b88e763',
-                'email' => 'root@example.com',
-                'password' => (new DefaultPasswordHasher)->hash('root'),
-                'created' => '2019-01-29 08:26:00',
-                'modified' => '2019-01-29 08:26:00',
+                "id" => \Cake\Utility\Text::uuid(),
+                "email" => "root@example.com",
+                "password" => $hasher->hash("root"),
+                "created" => "2019-01-29 08:26:00",
+                "modified" => "2019-01-29 08:26:00",
+                "about" => "",
             ],
         ];
 
-        $table = $this->table('users');
+        $table = $this->table("users");
         $table->insert($data)->save();
     }
 }
