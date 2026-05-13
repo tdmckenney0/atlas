@@ -1,5 +1,4 @@
-#start with our base image (the foundation) - version 7.1.5
-FROM php:7.2-apache
+FROM php:7.4-apache-bullseye
 
 #install all the system dependencies and enable PHP modules
 RUN apt-get update && apt-get install -y \
@@ -9,16 +8,16 @@ RUN apt-get update && apt-get install -y \
       texlive-latex-base \
       texlive-latex-recommended \
       texlive-fonts-recommended \
-      libmcrypt-dev \
       git \
       zlib1g-dev \
       zip \
       unzip \
       libjpeg-dev \
       libpng-dev \
+      libonig-dev \
+      libzip-dev \
     && rm -r /var/lib/apt/lists/* \
-    && pecl install mcrypt-1.0.2 \
-    && docker-php-ext-enable mcrypt \
+    && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install \
       intl \
       mbstring \

@@ -1,4 +1,3 @@
-version: '2'
 # define all services
 services:
   # our service is called atlas
