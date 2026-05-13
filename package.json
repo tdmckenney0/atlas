@@ -12,7 +12,7 @@
   "author": "Tanner Mckenney",
   "license": "MIT",
   "dependencies": {
-    "bulma": "^0.9.1",
+    "bulma": "^1.0.4",
     "easymde": "^2.13.0"
   }
 }
